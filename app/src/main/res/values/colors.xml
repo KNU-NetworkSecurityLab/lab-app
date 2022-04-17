@@ -17,6 +17,8 @@
     <color name="main_color_10">#F4E6FF</color>
 
 
-
+    <!-- Gray Colors -->
+    <color name="gray_10">#10000000</color>
+    <color name="gray_20">#20000000</color>
 
 </resources>
