@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">NSL_app</string>
+    <string name="app_name">네트워크 보안랩</string>
 
     <!-- Global -->
     <string name="glb_title_kor">네트워크 보안 연구실</string>
@@ -7,9 +7,8 @@
 
     <!-- LoginActivity -->
     <string name="obj_login">학번으로 로그인</string>
-
-
-
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>
