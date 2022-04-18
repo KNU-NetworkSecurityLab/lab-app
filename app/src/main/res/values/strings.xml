@@ -4,6 +4,10 @@
     <!-- Global -->
     <string name="glb_title_kor">네트워크 보안 연구실</string>
     <string name="glb_title_eng">Network Security Lab.</string>
+    <string name="glb_slogan">미래를 향한 꿈 세계를 향한 도전</string>
+    <string name="glb_slider">|</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- bottom_menu -->
     <string name="nav_menu_home">홈</string>
@@ -13,7 +17,8 @@
 
     <!-- LoginActivity -->
     <string name="obj_login">학번으로 로그인</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="obj_forgot_password">비밀번호 찾기</string>
+    <string name="obj_sign_up">회원가입</string>
 
     <!-- HomeFragment -->
     <string name="obj_welcome">네트워크 보안 연구실에 오신 것을 환영합니다.</string>
