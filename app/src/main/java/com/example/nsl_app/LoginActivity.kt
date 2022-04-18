@@ -16,6 +16,7 @@ class LoginActivity : AppCompatActivity() {
         binding.btnLogin.setOnClickListener {
             val intent = Intent(applicationContext, MainBaseActivity::class.java)
             startActivity(intent)
+            overridePendingTransition(0,0)
         }
     }
 }
