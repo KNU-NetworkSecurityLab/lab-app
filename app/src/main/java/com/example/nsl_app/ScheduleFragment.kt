@@ -9,13 +9,13 @@ import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.example.nsl_app.Utils.FragmentPagerAdapter
 import com.example.nsl_app.databinding.FragmentScheduleBinding
+import com.google.android.material.tabs.TabLayoutMediator
 
 class ScheduleFragment : Fragment() {
     private lateinit var binding: FragmentScheduleBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
@@ -39,12 +39,15 @@ class ScheduleFragment : Fragment() {
 
                 }
             })
+
+            TabLayoutMediator(tabLayoutSchedule, viewPagerSchedule) { tab, position ->
+                tab.text = when(position) {
+                    0 -> getString(R.string.obj_sch_tab0)
+                    1 -> getString(R.string.obj_sch_tab1)
+                    else -> ""
+                }
+            }.attach()
         }
-
-
-
         return binding.root
     }
-
-
 }
