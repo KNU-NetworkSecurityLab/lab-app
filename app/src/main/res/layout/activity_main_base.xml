@@ -18,6 +18,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
+        app:itemIconTint="@drawable/nav_selected_color"
+        app:itemTextColor="@drawable/nav_selected_color"
         app:labelVisibilityMode="selected"
         app:menu="@menu/bottom_menu" />
 

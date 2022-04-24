@@ -17,6 +17,7 @@
         android:foregroundTint="@color/main_color_100"
         app:tabIconTint="@color/main_color_100"
         app:tabIndicatorColor="@color/main_color_100"
+        app:tabIndicatorHeight="4dp"
         app:tabSelectedTextColor="@color/main_color_100" />
 
     <androidx.viewpager2.widget.ViewPager2
