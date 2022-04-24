@@ -1,13 +1,26 @@
 package com.example.nsl_app
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebViewClient
+import com.example.nsl_app.Utils.notionAPI.NotionAPI
+import com.example.nsl_app.Utils.notionAPI.ResponseNotionDatabaseQuery
+import com.example.nsl_app.databinding.FragmentScheduleBinding
+import com.example.nsl_app.databinding.FragmentScheduleMeetingBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import java.text.SimpleDateFormat
 
 
 class ScheduleMeetingFragment : Fragment() {
+    private lateinit var binding:FragmentScheduleMeetingBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,7 +31,55 @@ class ScheduleMeetingFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_schedule_meeting, container, false)
+        binding = FragmentScheduleMeetingBinding.inflate(inflater, container, false)
+
+        return binding.root
     }
+
+    override fun onStart() {
+        super.onStart()
+        test_getNotionSchdules()
+    }
+
+
+    fun test_getNotionSchdules() {
+        val dbId = "1f12850f91f74bc8ac6fcc68f289ec09"
+        val token = "secret_b2JNnSCmvb8fFVy4IZDWjgm83AEyVyQEFfYHcgGUFVP"
+        val baseUri = "https://api.notion.com/"
+        val notionVersion = "2022-02-22"
+
+        val retrofit = Retrofit.Builder().baseUrl(baseUri).addConverterFactory(GsonConverterFactory.create())
+
+        val notionAPI = retrofit.build().create(NotionAPI::class.java)
+
+        val call = notionAPI.notionDataBaseAll(dbId,notionVersion,token)
+
+        call.enqueue(object : Callback<ResponseNotionDatabaseQuery> {
+            override fun onResponse(
+                call: Call<ResponseNotionDatabaseQuery>,
+                response: Response<ResponseNotionDatabaseQuery>
+            ) {
+
+                if(response.isSuccessful) {
+                    val dateFormat = SimpleDateFormat("yyyy-MM-dd")
+                    val body = response.body() as ResponseNotionDatabaseQuery
+                    Log.d("devvv",body.results[0].properties.이름.title[0].text.content)
+
+                    body.results.forEach {
+                        var text = it.properties.이름.title[0].text.content
+                        var date = it.properties.날짜.date.start
+                        var tvText = binding.tvNotion.text.toString()
+                        binding.tvNotion.text = "$tvText\n$date $text"
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseNotionDatabaseQuery>, t: Throwable) {
+
+            }
+        })
+    }
+
+
+
 }
