@@ -14,13 +14,9 @@ class HomeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         val display = activity?.windowManager?.defaultDisplay
@@ -28,7 +24,7 @@ class HomeFragment : Fragment() {
         display?.getRealSize(size)
 
         val deviceWidth = size.x
-        val containerSize = (deviceWidth * 0.35).toInt()
+        val containerSize = (deviceWidth * 0.4).toInt()
 
         binding.run {
             containerSmartDoor.layoutParams.run {
@@ -51,6 +47,4 @@ class HomeFragment : Fragment() {
 
         return binding.root
     }
-
-
 }
