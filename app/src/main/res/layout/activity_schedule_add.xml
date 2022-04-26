@@ -4,9 +4,131 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context=".ScheduleAddActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_schedule_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:elevation="3dp"
+        app:title="@string/obj_sch_add_appbar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="@dimen/margin_20"
+            android:layout_marginTop="@dimen/margin_20"
+            android:orientation="vertical">
 
 
+            <EditText
+                android:id="@+id/et_sch_add_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="@string/obj_sch_add_title_hint"
+                android:textSize="@dimen/title_size"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_20"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/icon_calendar"
+                    android:drawableTint="@color/gray_80"
+                    android:gravity="center"
+                    android:text="@string/obj_sch_add_cal"
+                    android:textColor="@color/gray_80"
+                    android:textSize="@dimen/text_size_15"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/margin_10"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_cal_add_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/obj_sch_add_cal_add"
+                        android:textSize="@dimen/text_size_15" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_20"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/icon_menu"
+                    android:drawableTint="@color/gray_80"
+                    android:gravity="center"
+                    android:text="@string/obj_sch_add_tag"
+                    android:textColor="@color/gray_80"
+                    android:textSize="@dimen/text_size_15"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/margin_10"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_cal_tag_add"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/obj_sch_add_tag_add"
+                        android:textSize="@dimen/text_size_15" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginVertical="@dimen/margin_20"
+                android:background="@color/gray_80" />
+
+            <EditText
+                android:id="@+id/et_sch_add_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:gravity="top"
+                android:hint="@string/obj_sch_add_content_hint"
+                android:minLines="10" />
+        </LinearLayout>
+    </ScrollView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_cal_add_finish"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/btn_full_height"
+        android:background="@drawable/btn_default_square"
+        android:text="@string/glb_add_finish"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
 </LinearLayout>

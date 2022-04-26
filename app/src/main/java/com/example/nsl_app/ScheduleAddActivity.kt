@@ -2,6 +2,8 @@ package com.example.nsl_app
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import com.example.nsl_app.databinding.ActivityScheduleAddBinding
 
 class ScheduleAddActivity : AppCompatActivity() {
@@ -13,9 +15,24 @@ class ScheduleAddActivity : AppCompatActivity() {
         binding = ActivityScheduleAddBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setSupportActionBar(binding.toolbarScheduleAdd)
         supportActionBar?.run {
-            show()
-            title = getString(R.string.obj_sch_add_title)
+            // 앱 바 뒤로가기 버튼 설정
+            setDisplayHomeAsUpEnabled(true)
         }
+
+
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // 앱 바 클릭 이벤트
+        when(item.itemId) {
+            android.R.id.home -> {
+                finish()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
