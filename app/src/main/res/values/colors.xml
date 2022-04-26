@@ -16,6 +16,9 @@
     <color name="main_color_60">#C779FF</color>
     <color name="main_color_10">#F4E6FF</color>
 
+    <!-- Secondary Colors -->
+    <color name="secondary_color_30">#D5DCFF</color>
+    <color name="secondary_color_70">#6A82FF</color>
 
     <!-- Gray Colors -->
     <color name="gray_10">#10000000</color>

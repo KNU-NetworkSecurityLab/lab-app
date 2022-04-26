@@ -1,4 +1,4 @@
-package com.example.nsl_app.Utils
+package com.example.nsl_app.utils
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity

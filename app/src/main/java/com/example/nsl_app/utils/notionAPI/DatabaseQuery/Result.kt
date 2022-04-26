@@ -1,9 +1,4 @@
-package com.example.nsl_app.Utils.notionAPI.DatabaseQuery
-
-import com.example.nsl_app.Utils.notionAPI.DatabaseQuery.CreatedBy
-import com.example.nsl_app.Utils.notionAPI.DatabaseQuery.LastEditedBy
-import com.example.nsl_app.Utils.notionAPI.DatabaseQuery.Parent
-import com.example.nsl_app.Utils.notionAPI.DatabaseQuery.Properties
+package com.example.nsl_app.utils.notionAPI.DatabaseQuery
 
 data class Result(
     val archived: Boolean,

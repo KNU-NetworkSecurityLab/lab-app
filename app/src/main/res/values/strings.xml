@@ -44,11 +44,12 @@
     <string name="obj_home_smart_light_off">불이 꺼져있어요!</string>
 
 
-
     <!-- ScheduleFragment-->
     <string name="obj_sch_tab0">랩실 일정</string>
     <string name="obj_sch_tab1">회의 일정</string>
 
+    <!-- ScheduleAddActivity -->
+    <string name="obj_sch_add_title">신규 일정 추가</string>
 
 
 </resources>

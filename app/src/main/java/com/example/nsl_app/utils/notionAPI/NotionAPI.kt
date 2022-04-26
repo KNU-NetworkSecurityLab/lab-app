@@ -1,4 +1,4 @@
-package com.example.nsl_app.Utils.notionAPI
+package com.example.nsl_app.utils.notionAPI
 
 import retrofit2.Call
 import retrofit2.http.Header
