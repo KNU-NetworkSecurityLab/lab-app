@@ -23,5 +23,6 @@
     <!-- Gray Colors -->
     <color name="gray_10">#10000000</color>
     <color name="gray_20">#20000000</color>
+    <color name="gray_80">#80000000</color>
 
 </resources>
