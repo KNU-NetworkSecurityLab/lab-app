@@ -26,7 +26,7 @@
         android:elevation="5dp"
         android:src="@drawable/icon_add"
         android:tint="@color/black"
-        app:backgroundTint="@color/secondary_color_70"
+        app:backgroundTint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

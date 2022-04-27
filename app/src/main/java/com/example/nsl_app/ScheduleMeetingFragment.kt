@@ -14,11 +14,12 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.lang.Exception
 import java.text.SimpleDateFormat
 
 
 class ScheduleMeetingFragment : Fragment() {
-    private lateinit var binding:FragmentScheduleMeetingBinding
+    private lateinit var binding: FragmentScheduleMeetingBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,11 +47,12 @@ class ScheduleMeetingFragment : Fragment() {
         val baseUri = "https://api.notion.com/"
         val notionVersion = "2022-02-22"
 
-        val retrofit = Retrofit.Builder().baseUrl(baseUri).addConverterFactory(GsonConverterFactory.create())
+        val retrofit =
+            Retrofit.Builder().baseUrl(baseUri).addConverterFactory(GsonConverterFactory.create())
 
         val notionAPI = retrofit.build().create(NotionAPI::class.java)
 
-        val call = notionAPI.notionDataBaseAll(dbId,notionVersion,token)
+        val call = notionAPI.notionDataBaseAll(dbId, notionVersion, token)
 
         call.enqueue(object : Callback<ResponseNotionDatabaseQuery> {
             override fun onResponse(
@@ -58,16 +60,17 @@ class ScheduleMeetingFragment : Fragment() {
                 response: Response<ResponseNotionDatabaseQuery>
             ) {
 
-                if(response.isSuccessful) {
+                if (response.isSuccessful) {
                     val dateFormat = SimpleDateFormat("yyyy-MM-dd")
                     val body = response.body() as ResponseNotionDatabaseQuery
-                    Log.d("devvv",body.results[0].properties.이름.title[0].text.content)
 
                     body.results.forEach {
-                        var text = it.properties.이름.title[0].text.content
-                        var date = it.properties.날짜.date.start
-                        var tvText = binding.tvNotion.text.toString()
-                        binding.tvNotion.text = "$tvText\n$date $text"
+                        if (it.properties.이름.title.isNotEmpty()) {
+                            val text = it.properties.이름.title[0].text.content
+                            val date = it.properties.날짜.date.start
+                            val tvText = binding.tvNotion.text.toString()
+                            binding.tvNotion.text = "$tvText\n$date $text"
+                        }
                     }
                 }
             }
@@ -77,7 +80,6 @@ class ScheduleMeetingFragment : Fragment() {
             }
         })
     }
-
 
 
 }
