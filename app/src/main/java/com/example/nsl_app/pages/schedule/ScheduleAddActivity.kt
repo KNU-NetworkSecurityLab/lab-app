@@ -1,8 +1,7 @@
-package com.example.nsl_app
+package com.example.nsl_app.pages.schedule
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
 import android.view.MenuItem
 import com.example.nsl_app.databinding.ActivityScheduleAddBinding
 

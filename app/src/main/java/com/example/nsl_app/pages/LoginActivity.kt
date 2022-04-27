@@ -1,4 +1,4 @@
-package com.example.nsl_app
+package com.example.nsl_app.pages
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

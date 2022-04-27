@@ -13,7 +13,7 @@
         android:theme="@style/Theme.NSL_app"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".ScheduleAddActivity"
+            android:name=".pages.schedule.ScheduleAddActivity"
             android:exported="false" />
         <activity
             android:name=".CommunityActivity"
@@ -22,10 +22,10 @@
             android:name=".HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".MainBaseActivity"
+            android:name=".pages.MainBaseActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".pages.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

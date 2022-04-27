@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context=".ScheduleFragment">
+    tools:context=".pages.schedule.ScheduleFragment">
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout_schedule"

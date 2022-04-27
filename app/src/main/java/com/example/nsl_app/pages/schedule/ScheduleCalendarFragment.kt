@@ -1,4 +1,4 @@
-package com.example.nsl_app
+package com.example.nsl_app.pages.schedule
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.nsl_app.databinding.FragmentScheduleCalendarBinding
-import com.example.nsl_app.databinding.FragmentScheduleMeetingBinding
 
 class ScheduleCalendarFragment : Fragment() {
     private lateinit var binding:FragmentScheduleCalendarBinding

@@ -1,11 +1,10 @@
-package com.example.nsl_app
+package com.example.nsl_app.pages
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MenuItem
+import com.example.nsl_app.R
 import com.example.nsl_app.databinding.ActivityMainBaseBinding
-import com.google.android.material.navigation.NavigationBarView
-import java.util.zip.Inflater
+import com.example.nsl_app.pages.schedule.ScheduleFragment
 
 class MainBaseActivity : AppCompatActivity() {
     private lateinit var binding:ActivityMainBaseBinding
@@ -18,7 +17,7 @@ class MainBaseActivity : AppCompatActivity() {
 
         binding.run {
 
-            supportFragmentManager.beginTransaction().add(R.id.container_main,HomeFragment()).commit()
+            supportFragmentManager.beginTransaction().add(R.id.container_main, HomeFragment()).commit()
             navMain.setOnItemSelectedListener {
                 when(it.itemId) {
                     R.id.nav_home -> {
