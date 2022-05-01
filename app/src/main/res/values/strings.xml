@@ -57,7 +57,9 @@
     <string name="obj_sch_add_title_hint">제목을 입력해주세요</string>
     <string name="obj_sch_add_cal">날짜</string>
     <string name="obj_sch_add_cal_add">+ 날짜 추가</string>
-    <string name="obj_sch_add_cal_time_add">+ 시간 추가</string>
+    <string name="obj_sch_add_cal_time_add">+ 시작일 시간 추가</string>
+    <string name="obj_sch_add_cal_end_add">+ 종료일 추가</string>
+    <string name="obj_sch_add_cal_end_time_add">+ 종료일 시간 추가</string>
     <string name="obj_sch_add_tag">태그</string>
     <string name="obj_sch_add_tag_add">+ 태그 추가하기</string>
     <string name="obj_sch_add_content_hint">내용을 입력해주세요</string>

@@ -20,6 +20,9 @@
     <color name="secondary_color_30">#D5DCFF</color>
     <color name="secondary_color_70">#6A82FF</color>
 
+    <!-- etc Colors -->
+    <color name="bright_blue">#DBE1FF</color>
+
     <!-- Gray Colors -->
     <color name="gray_10">#10000000</color>
     <color name="gray_20">#20000000</color>
