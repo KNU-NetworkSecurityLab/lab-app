@@ -62,6 +62,7 @@
     <string name="obj_sch_add_tag_add">+ 태그 추가하기</string>
     <string name="obj_sch_add_content_hint">내용을 입력해주세요</string>
     <string name="obj_sch_add_tag_title">태그 추가하기</string>
+    <string name="obj_sch_add_no_tags">추가 가능한 태그가 없어요</string>
 
 
 </resources>

@@ -1,4 +1,4 @@
-package com.example.nsl_app.pages.schedule.scheduleAdd
+package com.example.nsl_app.pages.schedule.scheduleAdd.tagAddPopup
 
 import android.os.Bundle
 import android.util.DisplayMetrics
@@ -15,13 +15,13 @@ import com.example.nsl_app.databinding.FragmentSchduleAddTagDialogBinding
 
 class ScheduleAddTagDialogFragment : DialogFragment() {
     private lateinit var binding:FragmentSchduleAddTagDialogBinding
-    lateinit var tagClickListener: TagClickListener
+    lateinit var tagAddClickListener: TagAddClickListener
     lateinit var tags: ArrayList<String>
 
-    fun newInstance(tags: ArrayList<String>, tagClickListener: TagClickListener) : ScheduleAddTagDialogFragment {
+    fun newInstance(tags: ArrayList<String>, tagAddClickListener: TagAddClickListener) : ScheduleAddTagDialogFragment {
         val scheduleAddTagDialogFragment = ScheduleAddTagDialogFragment()
         this.tags = tags
-        this.tagClickListener = tagClickListener
+        this.tagAddClickListener = tagAddClickListener
         return scheduleAddTagDialogFragment
     }
 
@@ -55,14 +55,21 @@ class ScheduleAddTagDialogFragment : DialogFragment() {
     ): View? {
         binding = FragmentSchduleAddTagDialogBinding.inflate(inflater, container, false)
 
-        val adapter = SchTagAdapter(requireContext(), tags)
+        val adapter = SchTagAddAdapter(requireContext(), tags)
 
-        adapter.tagClickListener = tagClickListener
+        adapter.tagAddClickListener = tagAddClickListener
 
         binding.run {
-            listSchTags.adapter = adapter
-            listSchTags.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
+
+            listSchTagsAdd.adapter = adapter
+            listSchTagsAdd.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
             adapter.notifyDataSetChanged()
+
+
+            if(tags.isEmpty()) {
+                listSchTagsAdd.visibility = View.GONE
+                tvSchAddNoTags.visibility = View.VISIBLE
+            }
         }
 
         return binding.root

@@ -4,19 +4,37 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.nsl_app.databinding.ActivityScheduleAddBinding
+import com.example.nsl_app.pages.schedule.scheduleAdd.tagAddPopup.ScheduleAddTagDialogFragment
+import com.example.nsl_app.pages.schedule.scheduleAdd.tagAddPopup.TagAddClickListener
 
 class ScheduleAddActivity : AppCompatActivity() {
     private lateinit var binding: ActivityScheduleAddBinding
+    private lateinit var tagAdapter: SchTagAdapter
     private val tags = ArrayList<String>()
     private val selectedTags = ArrayList<String>()
     private val scheduleAddTagDialogFragment = ScheduleAddTagDialogFragment()
 
-    private val tagClickListener = object : TagClickListener {
+    private val tagClickListener = object : TagAddClickListener {
         override fun onTagClick(tag: String) {
-            Toast.makeText(applicationContext,"$tag 선택됨",Toast.LENGTH_SHORT).show()
-
             scheduleAddTagDialogFragment.dismiss()
+
+            selectedTags.add(tag)
+            tagAdapter.notifyDataSetChanged()
+
+            tags.remove(tag)
+        }
+    }
+
+    private val tagRemoveClickListener = object : SchTagAdapter.TagRemoveClickListener {
+        override fun onRemoveClick(tag: String) {
+            tags.add(tag)
+            tags.sort()
+
+            selectedTags.remove(tag)
+            tagAdapter.notifyDataSetChanged()
         }
     }
 
@@ -35,16 +53,21 @@ class ScheduleAddActivity : AppCompatActivity() {
         tags.add("태그1")
         tags.add("태그2")
         tags.add("태그3")
+        tags.add("태그4")
 
-
+        tagAdapter = SchTagAdapter(applicationContext, selectedTags)
+        tagAdapter.tagRemoveClickListener = tagRemoveClickListener
 
         binding.run {
             tvCalTagAdd.setOnClickListener {
                 scheduleAddTagDialogFragment.tags = tags
-                scheduleAddTagDialogFragment.tagClickListener = tagClickListener
-
+                scheduleAddTagDialogFragment.tagAddClickListener = tagClickListener
                 scheduleAddTagDialogFragment.show(supportFragmentManager,"NewCalendarTagAdd")
             }
+
+            listSchTags.adapter = tagAdapter
+            listSchTags.layoutManager = LinearLayoutManager(applicationContext, RecyclerView.VERTICAL, false)
+            tagAdapter.notifyDataSetChanged()
         }
     }
 

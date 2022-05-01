@@ -45,9 +45,7 @@ class ScheduleMeetingFragment : Fragment() {
         val baseUri = "https://api.notion.com/"
         val notionVersion = "2022-02-22"
 
-        val retrofit =
-            Retrofit.Builder().baseUrl(baseUri).addConverterFactory(GsonConverterFactory.create())
-
+        val retrofit = Retrofit.Builder().baseUrl(baseUri).addConverterFactory(GsonConverterFactory.create())
         val notionAPI = retrofit.build().create(NotionAPI::class.java)
 
         val call = notionAPI.notionDataBaseAll(dbId, notionVersion, token)

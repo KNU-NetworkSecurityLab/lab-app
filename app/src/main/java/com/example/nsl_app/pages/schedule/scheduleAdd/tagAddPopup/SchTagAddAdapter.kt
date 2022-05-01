@@ -1,4 +1,4 @@
-package com.example.nsl_app.pages.schedule.scheduleAdd
+package com.example.nsl_app.pages.schedule.scheduleAdd.tagAddPopup
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,30 +8,26 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nsl_app.R
 
-class SchTagAdapter(val context: Context, private val selectedTags: ArrayList<String>) :
-    RecyclerView.Adapter<SchTagAdapter.Holder>() {
+class SchTagAddAdapter(val context: Context, private val tags: ArrayList<String>) :
+    RecyclerView.Adapter<SchTagAddAdapter.Holder>() {
 
-    var tagRemoveClickListener: TagRemoveClickListener? = null
-
-    interface TagRemoveClickListener {
-        fun onRemoveClick(tag: String)
-    }
+    var tagAddClickListener: TagAddClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val view: View = inflater.inflate(R.layout.item_sch_tag, parent, false)
+        val view: View = inflater.inflate(R.layout.item_sch_tag_add, parent, false)
 
         return Holder(view)
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
         holder.run {
-            tv_item_tag!!.text = selectedTags[position]
+            tv_item_tag!!.text = tags[position]
         }
     }
 
     override fun getItemCount(): Int {
-        return selectedTags.size
+        return tags.size
     }
 
     inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -40,7 +36,7 @@ class SchTagAdapter(val context: Context, private val selectedTags: ArrayList<St
         init {
             tv_item_tag = itemView.findViewById<TextView>(R.id.tv_item_tag)
             itemView.setOnClickListener {
-                tagRemoveClickListener?.onRemoveClick(selectedTags[adapterPosition])
+                tagAddClickListener?.onTagClick(tags[adapterPosition])
             }
         }
     }
