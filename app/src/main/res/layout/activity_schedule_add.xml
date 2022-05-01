@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
     android:background="@color/white"
     android:orientation="vertical"
     tools:context=".pages.schedule.scheduleAdd.ScheduleAddActivity">
@@ -26,6 +27,7 @@
             android:layout_height="match_parent"
             android:layout_marginHorizontal="@dimen/margin_20"
             android:layout_marginTop="@dimen/margin_20"
+            android:animateLayoutChanges="true"
             android:orientation="vertical">
 
 
@@ -42,33 +44,120 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_20"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/icon_calendar"
-                    android:drawableTint="@color/gray_80"
-                    android:gravity="center"
-                    android:text="@string/obj_sch_add_cal"
-                    android:textColor="@color/gray_80"
-                    android:textSize="@dimen/text_size_15"
-                    android:textStyle="bold" />
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:drawableLeft="@drawable/icon_calendar"
+                        android:drawablePadding="@dimen/margin_5"
+                        android:drawableTint="@color/gray_80"
+                        android:gravity="center_vertical|left"
+                        android:text="@string/obj_sch_add_cal"
+                        android:textColor="@color/gray_80"
+                        android:textSize="@dimen/text_size_15"
+                        android:textStyle="bold" />
+
+                    <CheckBox
+                        android:id="@+id/ck_sch_entire_day"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:text="하루종일" />
+                </LinearLayout>
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/margin_10"
-                    android:orientation="horizontal">
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:animateLayoutChanges="true"
+                    android:background="@drawable/round_bright_blue_10"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="@dimen/margin_10"
+                    android:paddingVertical="@dimen/margin_20">
 
-                    <TextView
-                        android:id="@+id/tv_cal_add_date"
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_weight="1"
+                        android:animateLayoutChanges="true"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_cal_add_start_day"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:text="2022년 4월 22일"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_size_15"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_cal_add_start_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_10"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:text="오전 8:00"
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:text="@string/obj_sch_add_cal_add"
-                        android:textSize="@dimen/text_size_15" />
+                        android:layout_marginHorizontal="@dimen/margin_20"
+                        android:rotation="180"
+                        android:src="@drawable/icon_arrow_tail" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_weight="1"
+                        android:animateLayoutChanges="true"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_cal_add_end_day"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:text="2022년 4월 22일"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_size_15"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_cal_add_end_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_10"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:text="오전 8:00"
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
 
@@ -76,12 +165,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_20"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/icon_menu"
+                    android:drawablePadding="@dimen/margin_5"
                     android:drawableTint="@color/gray_80"
                     android:gravity="center"
                     android:text="@string/obj_sch_add_tag"
@@ -93,14 +183,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/margin_10"
                     android:orientation="vertical">
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/list_sch_tags"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp" />
+                        android:layout_marginTop="@dimen/margin_10" />
 
                     <TextView
                         android:id="@+id/tv_cal_tag_add"
