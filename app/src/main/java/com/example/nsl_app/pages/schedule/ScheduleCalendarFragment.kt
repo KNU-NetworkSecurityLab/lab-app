@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.nsl_app.databinding.FragmentScheduleCalendarBinding
+import com.example.nsl_app.pages.schedule.scheduleAdd.ScheduleAddActivity
 
 class ScheduleCalendarFragment : Fragment() {
     private lateinit var binding:FragmentScheduleCalendarBinding

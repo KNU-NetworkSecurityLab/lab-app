@@ -13,7 +13,7 @@
         android:theme="@style/Theme.NSL_app"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".pages.schedule.ScheduleAddActivity"
+            android:name=".pages.schedule.scheduleAdd.ScheduleAddActivity"
             android:exported="false" />
         <activity
             android:name=".CommunityActivity"
