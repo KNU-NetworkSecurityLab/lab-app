@@ -3,10 +3,7 @@ package com.example.nsl_app.utils.notionAPI
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface NotionAPI {
 
@@ -37,5 +34,12 @@ interface NotionAPI {
         @Header("Authorization") token:String
     ): Call<NotionRetrieveDatabaseResponse>
 
+
+    @POST("v1/pages")
+    fun registerSchedule(
+        @Header("Notion-Version") notionVersion: String,
+        @Header("Authorization") token:String,
+        @Body notionCreateScheduleData: NotionCreateScheduleData
+    ): Call<NotionScheduleCreateResponse>
 
 }
