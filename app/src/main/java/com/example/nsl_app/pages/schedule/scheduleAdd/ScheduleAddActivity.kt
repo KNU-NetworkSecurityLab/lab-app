@@ -9,6 +9,7 @@ import android.widget.DatePicker
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.nsl_app.R
 import com.example.nsl_app.databinding.ActivityScheduleAddBinding
 import com.example.nsl_app.pages.schedule.scheduleAdd.tagAddPopup.ScheduleAddTagDialogFragment
 import com.example.nsl_app.pages.schedule.scheduleAdd.tagAddPopup.TagAddClickListener
@@ -107,6 +108,7 @@ class ScheduleAddActivity : AppCompatActivity() {
 
             tvCalAddStartDay.setOnClickListener {
                 val datePickerDialog = DatePickerDialog(this@ScheduleAddActivity,
+                    R.style.customDatePickerTheme,
                     DatePickerDialog.OnDateSetListener { datePicker, year, month, day ->
                         startDay[Calendar.YEAR] = year
                         startDay[Calendar.MONTH] = month
@@ -120,6 +122,7 @@ class ScheduleAddActivity : AppCompatActivity() {
 
             tvCalAddStartTime.setOnClickListener {
                 val timePickerDialog = TimePickerDialog(this@ScheduleAddActivity,
+                    R.style.customTimePickerTheme,
                     TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
                         startDay[Calendar.HOUR] = hour
                         startDay[Calendar.MINUTE] = minute
@@ -132,6 +135,7 @@ class ScheduleAddActivity : AppCompatActivity() {
 
             tvCalAddEndDay.setOnClickListener {
                 val datePickerDialog = DatePickerDialog(this@ScheduleAddActivity,
+                    R.style.customDatePickerTheme,
                     DatePickerDialog.OnDateSetListener { datePicker, year, month, day ->
                         endDay[Calendar.YEAR] = year
                         endDay[Calendar.MONTH] = month
@@ -145,6 +149,7 @@ class ScheduleAddActivity : AppCompatActivity() {
 
             tvCalAddEndTime.setOnClickListener {
                 val timePickerDialog = TimePickerDialog(this@ScheduleAddActivity,
+                    R.style.customTimePickerTheme,
                     TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
                         endDay[Calendar.HOUR] = hour
                         endDay[Calendar.MINUTE] = minute
