@@ -32,7 +32,7 @@ class ScheduleAddActivity : AppCompatActivity() {
     private val scheduleAddTagDialogFragment = ScheduleAddTagDialogFragment()
 
     private val dateFormat = SimpleDateFormat("yyyy년 M월 d일")
-    private val timeFormat = SimpleDateFormat("a HH:mm")
+    private val timeFormat = SimpleDateFormat("a hh:mm")
 
     private val startDay = Calendar.getInstance()
     private val endDay = Calendar.getInstance()
@@ -124,7 +124,7 @@ class ScheduleAddActivity : AppCompatActivity() {
 
             tvCalAddStartTime.setOnClickListener {
                 val timePickerDialog = TimePickerDialog(this@ScheduleAddActivity,
-                    R.style.customTimePickerTheme,
+                    android.R.style.Theme_Holo_Light_Dialog_NoActionBar,
                     TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
                         startDay[Calendar.HOUR] = hour
                         startDay[Calendar.MINUTE] = minute
@@ -151,7 +151,7 @@ class ScheduleAddActivity : AppCompatActivity() {
 
             tvCalAddEndTime.setOnClickListener {
                 val timePickerDialog = TimePickerDialog(this@ScheduleAddActivity,
-                    R.style.customTimePickerTheme,
+                    android.R.style.Theme_Holo_Light_Dialog_NoActionBar,
                     TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
                         endDay[Calendar.HOUR] = hour
                         endDay[Calendar.MINUTE] = minute
