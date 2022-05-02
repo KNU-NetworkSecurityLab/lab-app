@@ -70,9 +70,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
+                        android:buttonTint="@color/main_color_100"
+                        android:layoutDirection="rtl"
                         android:text="하루종일" />
                 </LinearLayout>
-
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -97,12 +98,12 @@
                             android:id="@+id/tv_cal_add_start_day"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:autoSizeTextType="uniform"
                             android:clickable="true"
                             android:focusable="true"
                             android:foreground="?android:attr/selectableItemBackground"
                             android:text="2022년 4월 22일"
                             android:textColor="@color/black"
-                            android:textSize="@dimen/text_size_15"
                             android:textStyle="bold" />
 
                         <TextView
@@ -110,6 +111,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_10"
+                            android:autoSizeTextType="uniform"
                             android:clickable="true"
                             android:focusable="true"
                             android:foreground="?android:attr/selectableItemBackground"
@@ -138,12 +140,12 @@
                             android:id="@+id/tv_cal_add_end_day"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:autoSizeTextType="uniform"
                             android:clickable="true"
                             android:focusable="true"
                             android:foreground="?android:attr/selectableItemBackground"
                             android:text="2022년 4월 22일"
                             android:textColor="@color/black"
-                            android:textSize="@dimen/text_size_15"
                             android:textStyle="bold" />
 
                         <TextView
@@ -151,6 +153,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_10"
+                            android:autoSizeTextType="uniform"
                             android:clickable="true"
                             android:focusable="true"
                             android:foreground="?android:attr/selectableItemBackground"

@@ -14,4 +14,13 @@
         <item name="android:windowLightStatusBar">true</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="customDatePickerTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/main_color_100</item>
+    </style>
+
+    <style name="customTimePickerTheme" parent="android:Widget.Material.Light.TimePicker">
+        <item name="colorAccent">@color/main_color_100</item>
+        <item name="android:timePickerMode">spinner</item>
+    </style>
 </resources>
