@@ -14,9 +14,10 @@ import com.example.nsl_app.R
 import com.example.nsl_app.databinding.ActivityScheduleAddBinding
 import com.example.nsl_app.pages.schedule.scheduleAdd.tagAddPopup.ScheduleAddTagDialogFragment
 import com.example.nsl_app.pages.schedule.scheduleAdd.tagAddPopup.TagAddClickListener
-import com.example.nsl_app.utils.notionAPI.NotionAPI
-import com.example.nsl_app.utils.notionAPI.NotionDatabaseQueryResponse
-import com.example.nsl_app.utils.notionAPI.NotionRetrieveDatabaseResponse
+import com.example.nsl_app.utils.notionAPI.*
+import com.example.nsl_app.utils.notionAPI.dataDTO.*
+import com.example.nsl_app.utils.notionAPI.dataDTO.Properties
+import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -32,10 +33,13 @@ class ScheduleAddActivity : AppCompatActivity() {
     private val scheduleAddTagDialogFragment = ScheduleAddTagDialogFragment()
 
     private val dateFormat = SimpleDateFormat("yyyy년 M월 d일")
+    private val dateSliderFormat = SimpleDateFormat("yyyy-MM-dd")
     private val timeFormat = SimpleDateFormat("a hh:mm")
 
     private val startDay = Calendar.getInstance()
     private val endDay = Calendar.getInstance()
+
+    val notionAPI by lazy { NotionAPI.create() }
 
     private val tagClickListener = object : TagAddClickListener {
         override fun onTagClick(tag: String) {
@@ -161,11 +165,54 @@ class ScheduleAddActivity : AppCompatActivity() {
                     },endDay[Calendar.HOUR], endDay[Calendar.MINUTE],false)
                 timePickerDialog.show()
             }
+
+            btnCalAddFinish.setOnClickListener {
+                registerSchedule()
+            }
         }
     }
 
+    private fun registerSchedule() {
+        // Json data 상 한글 변수 / 클래스명이 사용됨
+
+        val title = List<Title>(1){ Title(Text(content = binding.etSchAddTitle.text.toString())) }
+        val date = 날짜(start = dateSliderFormat.format(startDay.timeInMillis), end = dateSliderFormat.format(endDay.timeInMillis))
+        val tags = List<태그>(selectedTags.size) { it -> 태그(selectedTags[it])}
+
+        val notionCreateScheduleData = NotionCreateScheduleData(
+            parent = Parent(NotionAPI.NOTION_DB_SCHEDULE_ID),
+            com.example.nsl_app.utils.notionAPI.dataDTO.Properties(
+                title = title,
+                날짜 = date,
+                태그 = tags
+                )
+            )
+
+        val registerScheduleCall = notionAPI.registerSchedule(NotionAPI.notionVersion,
+            getString(R.string.secret_notion_key),
+            notionCreateScheduleData)
+
+        registerScheduleCall.enqueue(object : Callback<NotionScheduleCreateResponse>{
+                override fun onResponse(
+                    call: Call<NotionScheduleCreateResponse>,
+                    response: Response<NotionScheduleCreateResponse>
+                ) {
+                    if(response.isSuccessful) {
+                        finish()
+                    } else {
+                        Toast.makeText(applicationContext, response.errorBody()!!.string(),Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<NotionScheduleCreateResponse>, t: Throwable) {
+
+                }
+            })
+    }
+
+
+
     private fun getTags() {
-        val notionAPI = NotionAPI.create()
         val tagCall = notionAPI.getNotionRetrieveData(
             NotionAPI.NOTION_DB_SCHEDULE_ID,
             NotionAPI.notionVersion,
