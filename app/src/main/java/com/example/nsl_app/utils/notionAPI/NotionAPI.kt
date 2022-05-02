@@ -3,6 +3,7 @@ package com.example.nsl_app.utils.notionAPI
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.Path
@@ -22,11 +23,19 @@ interface NotionAPI {
     }
 
     @POST("v1/databases/{DATABASE_ID}/query")
-    fun notionDataBaseAll(
+    fun queryNotionDataBaseAll(
         @Path("DATABASE_ID") databaseId: String,
         @Header("Notion-Version") notionVersion: String,
         @Header("Authorization") token:String
-    ): Call<ResponseNotionDatabaseQuery>
+    ): Call<NotionDatabaseQueryResponse>
+
+
+    @GET("v1/databases/{DATABASE_ID}")
+    fun getNotionRetrieveData(
+        @Path("DATABASE_ID") databaseId: String,
+        @Header("Notion-Version") notionVersion: String,
+        @Header("Authorization") token:String
+    ): Call<NotionRetrieveDatabaseResponse>
 
 
 }
