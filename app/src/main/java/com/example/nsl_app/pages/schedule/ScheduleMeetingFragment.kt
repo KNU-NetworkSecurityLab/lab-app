@@ -7,15 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.nsl_app.R
 import com.example.nsl_app.utils.notionAPI.NotionAPI
-import com.example.nsl_app.utils.notionAPI.ResponseNotionDatabaseQuery
+import com.example.nsl_app.utils.notionAPI.NotionDatabaseQueryResponse
 import com.example.nsl_app.databinding.FragmentScheduleMeetingBinding
 import com.google.gson.Gson
-import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import java.text.SimpleDateFormat
 
 
@@ -47,16 +44,16 @@ class ScheduleMeetingFragment : Fragment() {
         val token = getString(R.string.secret_notion_key)
 
         val notionAPI = NotionAPI.create()
-        val call = notionAPI.notionDataBaseAll(NotionAPI.NOTION_DB_SCHEDULE_ID, NotionAPI.notionVersion, token)
+        val call = notionAPI.queryNotionDataBaseAll(NotionAPI.NOTION_DB_SCHEDULE_ID, NotionAPI.notionVersion, token)
 
-        call.enqueue(object : Callback<ResponseNotionDatabaseQuery> {
+        call.enqueue(object : Callback<NotionDatabaseQueryResponse> {
             override fun onResponse(
-                call: Call<ResponseNotionDatabaseQuery>,
-                response: Response<ResponseNotionDatabaseQuery>
+                call: Call<NotionDatabaseQueryResponse>,
+                response: Response<NotionDatabaseQueryResponse>
             ) {
                 if (response.isSuccessful) {
                     val dateFormat = SimpleDateFormat("yyyy-MM-dd")
-                    val body = response.body() as ResponseNotionDatabaseQuery
+                    val body = response.body() as NotionDatabaseQueryResponse
 
                     body.results.forEach {
                         if (it.properties.이름.title.isNotEmpty()) {
@@ -69,7 +66,7 @@ class ScheduleMeetingFragment : Fragment() {
                 }
             }
 
-            override fun onFailure(call: Call<ResponseNotionDatabaseQuery>, t: Throwable) {
+            override fun onFailure(call: Call<NotionDatabaseQueryResponse>, t: Throwable) {
 
             }
         })

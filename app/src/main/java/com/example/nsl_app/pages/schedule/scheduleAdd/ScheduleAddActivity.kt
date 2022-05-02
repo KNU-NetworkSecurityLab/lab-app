@@ -3,9 +3,10 @@ package com.example.nsl_app.pages.schedule.scheduleAdd
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
-import android.widget.DatePicker
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,9 +14,13 @@ import com.example.nsl_app.R
 import com.example.nsl_app.databinding.ActivityScheduleAddBinding
 import com.example.nsl_app.pages.schedule.scheduleAdd.tagAddPopup.ScheduleAddTagDialogFragment
 import com.example.nsl_app.pages.schedule.scheduleAdd.tagAddPopup.TagAddClickListener
+import com.example.nsl_app.utils.notionAPI.NotionAPI
+import com.example.nsl_app.utils.notionAPI.NotionDatabaseQueryResponse
+import com.example.nsl_app.utils.notionAPI.NotionRetrieveDatabaseResponse
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.text.SimpleDateFormat
-import java.time.Month
-import java.time.Year
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -65,10 +70,7 @@ class ScheduleAddActivity : AppCompatActivity() {
             setDisplayHomeAsUpEnabled(true)
         }
 
-        tags.add("태그1")
-        tags.add("태그2")
-        tags.add("태그3")
-        tags.add("태그4")
+        getTags()
 
         startDay[Calendar.MINUTE] = 0
         startDay[Calendar.MILLISECOND] = 0
@@ -159,9 +161,36 @@ class ScheduleAddActivity : AppCompatActivity() {
                     },endDay[Calendar.HOUR], endDay[Calendar.MINUTE],false)
                 timePickerDialog.show()
             }
-
-
         }
+    }
+
+    private fun getTags() {
+        val notionAPI = NotionAPI.create()
+        val tagCall = notionAPI.getNotionRetrieveData(
+            NotionAPI.NOTION_DB_SCHEDULE_ID,
+            NotionAPI.notionVersion,
+            getString(R.string.secret_notion_key))
+
+        tagCall.enqueue(object : Callback<NotionRetrieveDatabaseResponse> {
+            override fun onResponse(
+                call: Call<NotionRetrieveDatabaseResponse>,
+                response: Response<NotionRetrieveDatabaseResponse>
+            ) {
+
+                if(response.isSuccessful) {
+                    val body = response.body() as NotionRetrieveDatabaseResponse
+                    body.properties.태그.multi_select.options.forEach {
+                        tags.add(it.name)
+                    }
+                } else {
+                    Toast.makeText(applicationContext, response.errorBody()!!.string(),Toast.LENGTH_SHORT).show()
+                    Log.d("devvv",response.errorBody()!!.string())
+                }
+            }
+
+            override fun onFailure(call: Call<NotionRetrieveDatabaseResponse>, t: Throwable) {
+            }
+        })
     }
 
 
