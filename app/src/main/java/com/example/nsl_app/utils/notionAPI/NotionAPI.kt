@@ -42,4 +42,10 @@ interface NotionAPI {
         @Body notionCreateScheduleData: NotionCreateScheduleData
     ): Call<NotionScheduleCreateResponse>
 
+    @POST("v1/pages")
+    fun registerScheduleWithContent(
+        @Header("Notion-Version") notionVersion: String,
+        @Header("Authorization") token:String,
+        @Body notionCreateScheduleWithContentData: NotionCreateScheduleWithContentData
+    ): Call<NotionScheduleCreateResponse>
 }
