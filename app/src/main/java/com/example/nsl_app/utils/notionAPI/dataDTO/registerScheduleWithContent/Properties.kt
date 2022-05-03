@@ -1,4 +1,4 @@
-package com.example.nsl_app.utils.notionAPI.dataDTO
+package com.example.nsl_app.utils.notionAPI.dataDTO.registerScheduleWithContent
 
 data class Properties(
     val title: List<Title>,
