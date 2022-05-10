@@ -4,15 +4,47 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".pages.schedule.ScheduleFragment">
 
-    <CalendarView
-        android:id="@+id/cv_calendar"
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.applandeo.materialcalendarview.CalendarView
+                android:id="@+id/cv_lab_schedule"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:eventsEnabled="true"
+                app:headerColor="@color/main_color_100"
+                app:headerLabelColor="@color/white"
+                app:highlightedDaysLabelsColor="@color/main_color_100"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:selectionColor="@color/main_color_80"
+                app:selectionLabelColor="@color/white"
+                app:type="one_day_picker">
+
+            </com.applandeo.materialcalendarview.CalendarView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/list_schedule"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+    </ScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_cal_add"
