@@ -18,6 +18,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="3월 1일\n오전 7:00"
+            android:lineSpacingExtra="2dp"
             android:textColor="@color/nsl_green"
             android:textStyle="bold" />
 
@@ -25,8 +26,9 @@
             android:id="@+id/tv_item_sch_date_end"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_20"
+            android:layout_marginTop="15dp"
             android:gravity="center"
+            android:lineSpacingExtra="2dp"
             android:text="3월 2일\n오전 7:00"
             android:textColor="@color/nsl_green"
             android:textStyle="bold" />
