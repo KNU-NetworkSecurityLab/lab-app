@@ -7,10 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.applandeo.materialcalendarview.EventDay
 import com.example.nsl_app.R
 import com.example.nsl_app.databinding.FragmentScheduleBinding
 import com.example.nsl_app.pages.schedule.scheduleAdd.ScheduleAddActivity
+import com.example.nsl_app.pages.schedule.scheduleList.ScheduleAdapter
+import com.example.nsl_app.utils.Utils
 import com.example.nsl_app.utils.notionAPI.NotionAPI
 import com.example.nsl_app.utils.notionAPI.NotionDatabaseQueryResponse
 import retrofit2.Call
@@ -23,11 +27,18 @@ import kotlin.collections.ArrayList
 
 class ScheduleFragment : Fragment() {
 
-    data class ScheduleData (val title: String, var startDate: Date?, var endDate: Date?)
+    data class ScheduleData (
+        val title: String,
+        var startDate: Date?,
+        var startIsIncludeTime: Boolean,
+        var endDate: Date?,
+        var endIsIncludeTime: Boolean)
 
     private lateinit var binding: FragmentScheduleBinding
     private val notionAPI by lazy { NotionAPI.create() }
     private val scheduleDataList = ArrayList<ScheduleData>()
+    private val targetEventList = ArrayList<ScheduleData>()
+    private lateinit var scheduleAdapter: ScheduleAdapter
     private val dateFormat = SimpleDateFormat("yyyy-MM-dd")
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,11 +52,76 @@ class ScheduleFragment : Fragment() {
     ): View? {
         binding = FragmentScheduleBinding.inflate(inflater, container, false)
 
+        scheduleAdapter = ScheduleAdapter(requireContext(), targetEventList)
+
         binding.run {
             btnCalAdd.setOnClickListener {
                 val intent = Intent(requireContext(), ScheduleAddActivity::class.java)
                 startActivity(intent)
             }
+
+            cvLabSchedule.setOnDayClickListener { selectedDay ->
+                targetEventList.clear()
+
+
+                // 데이터 필터링
+
+                // 1일 일정 (끝나는 날이 없을때) -> 같은날인것만 필터링
+                val filteredData1 = scheduleDataList.filter { scheduleData ->
+                    (scheduleData.endDate == null) && Utils.isEqualDate(scheduleData.startDate!!.time, selectedDay.calendar.timeInMillis)
+                }
+
+                val filteredData2 = scheduleDataList.filter { scheduleData ->
+                    if(scheduleData.endDate != null) {
+                        val startDate = Calendar.getInstance().apply {
+                            timeInMillis = scheduleData.startDate!!.time
+                            set(Calendar.HOUR, 0)
+                            set(Calendar.MINUTE, 0)
+                            set(Calendar.SECOND, 0)
+                            set(Calendar.MILLISECOND, 0)
+                        }
+                        val endDate = Calendar.getInstance().apply {
+                            timeInMillis = scheduleData.endDate!!.time
+                            set(Calendar.HOUR, 23)
+                            set(Calendar.MINUTE, 59)
+                            set(Calendar.SECOND, 59)
+                        }
+                        //true
+
+                        val tempFormat = SimpleDateFormat("yyyy-MM-dd hh:mm:ss")
+                        Log.d("${scheduleData.title}","${tempFormat.format(startDate.timeInMillis)},  ${tempFormat.format(selectedDay.calendar.timeInMillis)},    ${tempFormat.format(endDate.timeInMillis)}")
+
+                        startDate.timeInMillis <= selectedDay.calendar.timeInMillis && selectedDay.calendar.timeInMillis <= endDate.timeInMillis
+                    } else false
+                }
+                // 2일 이상 일정
+
+
+
+                targetEventList.addAll(filteredData1)
+                targetEventList.addAll(filteredData2)
+
+
+
+//                scheduleDataList.forEach { schedule ->
+//                    if(schedule.endDate == null) {
+//                        if (Utils.isEqualDate(schedule.startDate!!.time, selectedDay.calendar.timeInMillis)) {
+//                            targetEventList.add(schedule)
+//                        }
+//                    } else {
+//
+//                    }
+//                }
+
+                scheduleAdapter.notifyDataSetChanged()
+            }
+
+            listSchedule.adapter = scheduleAdapter
+            listSchedule.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
+            scheduleAdapter.notifyDataSetChanged()
+
+            cvLabSchedule.setDate(Calendar.getInstance())
+
         }
 
         return binding.root
@@ -58,7 +134,7 @@ class ScheduleFragment : Fragment() {
     }
 
 
-    private fun addEvent() {
+    private fun addEventOnCalendar() {
         val events: MutableList<EventDay> = ArrayList()
 
         scheduleDataList.forEach { it ->
@@ -117,34 +193,34 @@ class ScheduleFragment : Fragment() {
                             val dateStart = it.properties.날짜.date.start
                             val dateEnd = it.properties.날짜.date.end
 
-                            Log.d("responseDevvv","${text}   $dateStart     $dateEnd")
-
-                            val tempScheduleData = ScheduleData(text, null, null)
+                            val tempScheduleData = ScheduleData(text, null, false,null, false)
 
                             if(dateStart.trim().length == 10) {
                                 // 2022-05-06 (시간 미포함)
                                 tempScheduleData.startDate = dateFormat.parse(dateStart)
+                                tempScheduleData.startIsIncludeTime = false
                             } else {
                                 // 2022-05-06T20:00:00.000+09:00 (시간 포함)
                                 tempScheduleData.startDate = dateTimeFormat.parse(dateStart)
+                                tempScheduleData.startIsIncludeTime = true
                             }
 
                             if(dateEnd != null) {
                                 if(dateEnd.trim().length == 10) {
                                     // 2022-05-06 (시간 미포함)
                                     tempScheduleData.endDate = dateFormat.parse(dateEnd)
+                                    tempScheduleData.endIsIncludeTime = false
                                 } else {
                                     // 2022-05-06T20:00:00.000+09:00 (시간 포함)
                                     tempScheduleData.endDate = dateTimeFormat.parse(dateEnd)
+                                    tempScheduleData.endIsIncludeTime = true
                                 }
                             }
 
                             scheduleDataList.add(tempScheduleData)
-
                         }
                     }
-
-                    addEvent()
+                    addEventOnCalendar()
                 }
             }
 
