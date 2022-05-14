@@ -29,4 +29,9 @@
     <color name="gray_50">#50000000</color>
     <color name="gray_80">#80000000</color>
 
+
+    <!-- Green Color -->
+    <color name="nsl_green_light">#e4f8f3</color>
+    <color name="nsl_green">#4BD0B2</color>
+
 </resources>
