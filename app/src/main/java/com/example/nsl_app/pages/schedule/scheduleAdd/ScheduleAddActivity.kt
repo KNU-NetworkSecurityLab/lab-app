@@ -14,6 +14,7 @@ import com.example.nsl_app.R
 import com.example.nsl_app.databinding.ActivityScheduleAddBinding
 import com.example.nsl_app.pages.schedule.scheduleAdd.tagAddPopup.ScheduleAddTagDialogFragment
 import com.example.nsl_app.pages.schedule.scheduleAdd.tagAddPopup.TagAddClickListener
+import com.example.nsl_app.utils.Utils
 import com.example.nsl_app.utils.notionAPI.*
 import com.example.nsl_app.utils.notionAPI.dataDTO.registerScheduleWithContent.*
 import com.example.nsl_app.utils.notionAPI.dataDTO.registerScheduleWithContent.Properties
@@ -94,15 +95,16 @@ class ScheduleAddActivity : AppCompatActivity() {
             tagAdapter.notifyDataSetChanged()
 
 
-            ckSchEntireDay.setOnCheckedChangeListener { compoundButton, isChecked ->
+            ckIncludeTime.setOnCheckedChangeListener { compoundButton, isChecked ->
                 if (isChecked) {
-                    tvCalAddStartTime.visibility = View.GONE
-                    tvCalAddEndTime.visibility = View.GONE
-                } else {
                     tvCalAddStartTime.visibility = View.VISIBLE
                     tvCalAddEndTime.visibility = View.VISIBLE
+                } else {
+                    tvCalAddStartTime.visibility = View.GONE
+                    tvCalAddEndTime.visibility = View.GONE
                 }
             }
+            ckIncludeTime.isChecked = false
 
 
             tvCalAddStartDay.text = dateFormat.format(startDay.timeInMillis)
@@ -128,7 +130,8 @@ class ScheduleAddActivity : AppCompatActivity() {
                 val timePickerDialog = TimePickerDialog(this@ScheduleAddActivity,
                     android.R.style.Theme_Holo_Light_Dialog_NoActionBar,
                     TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
-                        startDay[Calendar.HOUR] = hour
+                        Toast.makeText(applicationContext,hour.toString(),Toast.LENGTH_SHORT).show()
+                        startDay[Calendar.HOUR_OF_DAY] = timePicker.hour
                         startDay[Calendar.MINUTE] = minute
 
                         tvCalAddStartTime.text = timeFormat.format(startDay.timeInMillis)
@@ -155,7 +158,7 @@ class ScheduleAddActivity : AppCompatActivity() {
                 val timePickerDialog = TimePickerDialog(this@ScheduleAddActivity,
                     android.R.style.Theme_Holo_Light_Dialog_NoActionBar,
                     TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
-                        endDay[Calendar.HOUR] = hour
+                        endDay[Calendar.HOUR_OF_DAY] = hour
                         endDay[Calendar.MINUTE] = minute
 
                         tvCalAddEndTime.text = timeFormat.format(endDay.timeInMillis)
@@ -174,7 +177,13 @@ class ScheduleAddActivity : AppCompatActivity() {
         // Json data 상 한글 변수 / 클래스명이 사용됨
 
         val title = List<Title>(1){ Title(Text(content = binding.etSchAddTitle.text.toString())) }
-        val date = 날짜(start = dateSliderFormat.format(startDay.timeInMillis), end = dateSliderFormat.format(endDay.timeInMillis))
+        val date = if(binding.ckIncludeTime.isChecked) {
+            날짜(start = Utils.notionDateTimeFormat.format(startDay.timeInMillis), end = Utils.notionDateTimeFormat.format(endDay.timeInMillis))
+        } else {
+            날짜(start = dateSliderFormat.format(startDay.timeInMillis), end = dateSliderFormat.format(endDay.timeInMillis))
+        }
+
+        Log.d("devvvv","${date}")
         val tags = List<태그>(selectedTags.size) { it -> 태그(selectedTags[it]) }
 
         val content = binding.etSchAddContent.text.toString()

@@ -66,13 +66,13 @@
                         android:textStyle="bold" />
 
                     <CheckBox
-                        android:id="@+id/ck_sch_entire_day"
+                        android:id="@+id/ck_include_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
                         android:buttonTint="@color/main_color_100"
                         android:layoutDirection="rtl"
-                        android:text="하루종일" />
+                        android:text="@string/obj_sch_add_include_time" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -112,6 +112,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_10"
                             android:autoSizeTextType="uniform"
+                            android:visibility="gone"
                             android:clickable="true"
                             android:focusable="true"
                             android:foreground="?android:attr/selectableItemBackground"
@@ -158,6 +159,7 @@
                             android:focusable="true"
                             android:foreground="?android:attr/selectableItemBackground"
                             android:text="오전 8:00"
+                            android:visibility="gone"
                             android:textColor="@color/black"
                             android:textStyle="bold" />
                     </LinearLayout>

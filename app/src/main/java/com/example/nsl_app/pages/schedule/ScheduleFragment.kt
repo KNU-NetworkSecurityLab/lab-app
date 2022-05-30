@@ -86,11 +86,6 @@ class ScheduleFragment : Fragment() {
                             set(Calendar.MINUTE, 59)
                             set(Calendar.SECOND, 59)
                         }
-                        //true
-
-                        val tempFormat = SimpleDateFormat("yyyy-MM-dd hh:mm:ss")
-                        Log.d("${scheduleData.title}","${tempFormat.format(startDate.timeInMillis)},  ${tempFormat.format(selectedDay.calendar.timeInMillis)},    ${tempFormat.format(endDate.timeInMillis)}")
-
                         startDate.timeInMillis <= selectedDay.calendar.timeInMillis && selectedDay.calendar.timeInMillis <= endDate.timeInMillis
                     } else false
                 }
@@ -183,6 +178,8 @@ class ScheduleFragment : Fragment() {
                 response: Response<NotionDatabaseQueryResponse>
             ) {
                 if (response.isSuccessful) {
+                    scheduleDataList.clear()
+
                     val dateTimeFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
                     val dateFormat = SimpleDateFormat("yyyy-MM-dd")
                     val body = response.body() as NotionDatabaseQueryResponse
