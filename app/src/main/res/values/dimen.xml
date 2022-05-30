@@ -9,7 +9,8 @@
     <dimen name="margin_10">10dp</dimen>
     <dimen name="margin_15">15dp</dimen>
     <dimen name="margin_20">20dp</dimen>
-    <dimen name="margin_30">30dp</dimen>
+    <dimen name="gap_horizontal">30dp</dimen>
+    <dimen name="gap_vertical">30dp</dimen>
 
     <dimen name="btn_full_height">50dp</dimen>
 

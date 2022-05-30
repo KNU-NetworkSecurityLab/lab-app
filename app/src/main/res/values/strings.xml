@@ -24,6 +24,16 @@
     <string name="obj_forgot_password">비밀번호 찾기</string>
     <string name="obj_sign_up">회원가입</string>
 
+    <!-- RegisterActivity -->
+    <string name="obj_reg_title">회원 가입</string>
+    <string name="obj_reg_number">학번</string>
+    <string name="obj_reg_number_hint">학번을 입력해주세요</string>
+    <string name="obj_reg_pw">비밀번호</string>
+    <string name="ogj_reg_pw_hint">비밀번호를 입력해주세요</string>
+    <string name="obj_reg_pw_check">비밀번호 확인</string>
+    <string name="obj_reg_pw_check_hint">비밀번호를 다시 한번 입력해주세요</string>
+    <string name="obj_reg_finish">회원 가입</string>
+
     <!-- HomeFragment -->
     <string name="obj_welcome">네트워크 보안 연구실에 오신 것을 환영합니다.</string>
     <string name="obj_home_lab_show">연구실 소개</string>
