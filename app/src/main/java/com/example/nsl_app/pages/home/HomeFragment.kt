@@ -1,5 +1,6 @@
-package com.example.nsl_app.pages
+package com.example.nsl_app.pages.home
 
+import android.content.Intent
 import android.graphics.Point
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.nsl_app.databinding.FragmentHomeBinding
+import com.example.nsl_app.pages.home.bookPage.BookActivity
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
@@ -41,6 +43,11 @@ class HomeFragment : Fragment() {
             containerSmartPaper.layoutParams.run {
                 height = containerSize
                 width = containerSize
+            }
+
+            btnHomeBooks.setOnClickListener {
+                val intent = Intent(requireActivity(), BookActivity::class.java)
+                startActivity(intent)
             }
         }
 
