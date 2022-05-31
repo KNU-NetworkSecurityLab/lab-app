@@ -98,7 +98,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:gravity="right"
+            android:drawableRight="@drawable/icon_arrow_bottom"
+            android:gravity="right|center_vertical"
             android:text="@string/obj_my_page_theme_light"
             android:textStyle="bold" />
     </LinearLayout>
