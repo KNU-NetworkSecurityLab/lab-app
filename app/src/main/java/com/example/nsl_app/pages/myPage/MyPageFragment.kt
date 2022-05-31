@@ -10,9 +10,7 @@ import android.widget.Button
 import android.widget.Toast
 import com.example.nsl_app.R
 import com.example.nsl_app.databinding.FragmentMyPageBinding
-import com.example.nsl_app.databinding.FragmentScheduleMeetingBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class MyPageFragment : Fragment() {
     private lateinit var binding: FragmentMyPageBinding
@@ -57,7 +55,6 @@ class MyPageFragment : Fragment() {
                 }
             }
         }
-
 
         return binding.root
     }
