@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.nsl_app.R
 import com.example.nsl_app.databinding.ActivityMainBaseBinding
+import com.example.nsl_app.pages.home.HomeFragment
 import com.example.nsl_app.pages.myPage.MyPageFragment
 import com.example.nsl_app.pages.schedule.ScheduleFragment
 

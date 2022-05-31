@@ -16,8 +16,9 @@
 
         <item name="android:textColor">@color/black</item>
         <item name="android:buttonStyle">@style/customBtnStyle</item>
+        <item name="android:windowBackground">@color/white</item>
 
-<!--        <item name="bottomSheetDialogTheme">@style/CustomBottomSheetDialog</item>-->
+        <!--        <item name="bottomSheetDialogTheme">@style/CustomBottomSheetDialog</item>-->
     </style>
 
     <style name="customBtnStyle" parent="TextAppearance.AppCompat.Button">
