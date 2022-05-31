@@ -1,16 +1,11 @@
-package com.example.nsl_app.utils.notUse
+package com.example.nsl_app.utils.testRoom
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.viewpager2.widget.ViewPager2
-import com.example.nsl_app.R
 import com.example.nsl_app.databinding.FragmentScheduleBinding
-import com.example.nsl_app.pages.schedule.ScheduleCalendarFragment
-import com.example.nsl_app.pages.schedule.ScheduleMeetingFragment
-import com.google.android.material.tabs.TabLayoutMediator
 
 class ViewPageSample : Fragment() {
     private lateinit var binding: FragmentScheduleBinding

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".pages.schedule.ScheduleMeetingFragment">
+    tools:context=".utils.testRoom.ScheduleMeetingFragment">
 
     <TextView
         android:layout_width="match_parent"

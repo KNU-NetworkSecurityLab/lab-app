@@ -1,4 +1,4 @@
-package com.example.nsl_app.pages.schedule
+package com.example.nsl_app.utils.testRoom
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

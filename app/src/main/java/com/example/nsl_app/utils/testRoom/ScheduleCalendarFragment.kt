@@ -1,4 +1,4 @@
-package com.example.nsl_app.pages.schedule
+package com.example.nsl_app.utils.testRoom
 
 import android.content.Intent
 import android.os.Bundle
