@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">네트워크 보안랩</string>
+    <string name="app_version">ver. alpha 1.0</string>
 
     <!-- Global -->
     <string name="glb_title_kor">네트워크 보안 연구실</string>
@@ -10,6 +11,9 @@
     <string name="glb_add_finish">추가 완료</string>
     <string name="glb_finish">완료</string>
     <string name="glb_cancel">취소</string>
+    
+    <string name="glb_sample_number">201700000</string>
+    <string name="glb_sample_permission">연구실 부원</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
@@ -78,6 +82,18 @@
     <string name="obj_sch_add_include_time">시간 포함</string>
 
     <string name="msg_sch_add_finish">일정 등록이 완료되었어요</string>
-
+    
+    
+    <!-- MyPageFragment -->
+    <string name="obj_my_page_number">학번</string>
+    <string name="obj_my_page_noti">알람</string>
+    <string name="obj_my_page_noti_item_empty">비품 소진 시 알림</string>
+    <string name="obj_my_page_noti_meeting">회의 알림</string>
+    <string name="obj_my_page_theme">화면 테마</string>
+    <string name="obj_my_page_theme_light">라이트 모드</string>
+    <string name="obj_my_page_account">계정</string>
+    <string name="obj_my_page_password_change">비밀번호 변경</string>
+    <string name="obj_my_page_withdrawal">회원탈퇴</string>
+    <string name="obj_my_page_app_version">앱 버전</string>
 
 </resources>
