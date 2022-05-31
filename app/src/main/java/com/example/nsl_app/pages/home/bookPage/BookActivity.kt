@@ -23,9 +23,8 @@ class BookActivity : AppCompatActivity() {
         val bookList = ArrayList<BookItem>()
         val tempTags = ArrayList<String>()
 
-        tempTags.add("자바")
+        tempTags.add("Java")
         tempTags.add("안드로이드")
-        tempTags.add("C++")
 
         bookList.add(BookItem("Do it! 안드로이드","강XX",tempTags))
         bookList.add(BookItem("월급 두배로 받는 법","전XX",tempTags))

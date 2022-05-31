@@ -5,8 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nsl_app.R
+import com.example.nsl_app.pages.home.bookPage.bookTags.BookTagsAdapter
+import com.google.android.flexbox.*
 
 class BookAdapter (val context: Context, private val bookItem : ArrayList<BookItem>) :
     RecyclerView.Adapter<BookAdapter.Holder>() {
@@ -22,6 +25,18 @@ class BookAdapter (val context: Context, private val bookItem : ArrayList<BookIt
         holder.run {
             tv_item_book_name!!.text = bookItem[position].bookName
             tv_item_book_author!!.text = bookItem[position].bookAuthor
+
+            val bookTagsAdapter = BookTagsAdapter(context, bookItem[position].bookTags!!)
+            list_book_tag.adapter = bookTagsAdapter
+
+            list_book_tag.layoutManager = FlexboxLayoutManager(context).apply {
+                flexWrap = FlexWrap.WRAP
+                flexDirection = FlexDirection.ROW
+                justifyContent = JustifyContent.FLEX_START
+            }
+
+            bookTagsAdapter.notifyDataSetChanged()
+
         }
     }
 
