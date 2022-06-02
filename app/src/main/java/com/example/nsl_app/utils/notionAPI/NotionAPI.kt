@@ -1,5 +1,7 @@
 package com.example.nsl_app.utils.notionAPI
 
+import okhttp3.Response
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -15,7 +17,8 @@ interface NotionAPI {
         fun create(): NotionAPI {
             return Retrofit.Builder()
                 .baseUrl(baseNotionUri)
-                .addConverterFactory(GsonConverterFactory.create()).build().create(NotionAPI::class.java)
+                .addConverterFactory(GsonConverterFactory.create()).build()
+                .create(NotionAPI::class.java)
         }
     }
 
@@ -23,7 +26,7 @@ interface NotionAPI {
     fun queryNotionDataBaseAll(
         @Path("DATABASE_ID") databaseId: String,
         @Header("Notion-Version") notionVersion: String,
-        @Header("Authorization") token:String
+        @Header("Authorization") token: String
     ): Call<NotionDatabaseQueryResponse>
 
 
@@ -31,21 +34,29 @@ interface NotionAPI {
     fun getNotionRetrieveData(
         @Path("DATABASE_ID") databaseId: String,
         @Header("Notion-Version") notionVersion: String,
-        @Header("Authorization") token:String
+        @Header("Authorization") token: String
     ): Call<NotionRetrieveDatabaseResponse>
 
-
+    // 페이지 등록
     @POST("v1/pages")
     fun registerSchedule(
         @Header("Notion-Version") notionVersion: String,
-        @Header("Authorization") token:String,
+        @Header("Authorization") token: String,
         @Body notionCreateScheduleData: NotionCreateScheduleData
     ): Call<NotionScheduleCreateResponse>
 
+    // 내용과 함께 페이지 등록
     @POST("v1/pages")
     fun registerScheduleWithContent(
         @Header("Notion-Version") notionVersion: String,
-        @Header("Authorization") token:String,
+        @Header("Authorization") token: String,
         @Body notionCreateScheduleWithContentData: NotionCreateScheduleWithContentData
     ): Call<NotionScheduleCreateResponse>
+
+    @DELETE("v1/blocks/{id}")
+    fun deleteSchedule(
+        @Path("id") pageID: String,
+        @Header("Notion-Version") notionVersion: String,
+        @Header("Authorization") token: String,
+    ): Call<ResponseBody>
 }

@@ -70,6 +70,8 @@
     <string name="obj_sch_tab0">랩실 일정</string>
     <string name="obj_sch_tab1">회의 일정</string>
 
+    <string name="msg_sch_delete_complete">일정 삭제가 완료되었어요</string>
+
     <!-- ScheduleAddActivity -->
     <string name="obj_sch_add_appbar">신규 일정 추가</string>
     <string name="obj_sch_add_title_hint">제목을 입력해주세요</string>

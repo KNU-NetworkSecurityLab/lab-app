@@ -19,6 +19,9 @@ import com.example.nsl_app.pages.schedule.scheduleList.ScheduleAdapter
 import com.example.nsl_app.utils.Utils
 import com.example.nsl_app.utils.notionAPI.NotionAPI
 import com.example.nsl_app.utils.notionAPI.NotionDatabaseQueryResponse
+import okhttp3.Request
+import okhttp3.ResponseBody
+import okio.Timeout
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -30,6 +33,7 @@ import kotlin.collections.ArrayList
 class ScheduleFragment : Fragment() {
 
     data class ScheduleData (
+        val id: String,
         val title: String,
         var startDate: Date?,
         var startIsIncludeTime: Boolean,
@@ -42,6 +46,7 @@ class ScheduleFragment : Fragment() {
     private val targetEventList = ArrayList<ScheduleData>()
     private lateinit var scheduleAdapter: ScheduleAdapter
     private val dateFormat = SimpleDateFormat("yyyy-MM-dd")
+    private val events: MutableList<EventDay> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -103,14 +108,31 @@ class ScheduleFragment : Fragment() {
                 override fun onMoreClick(v: View, scheduleData: ScheduleData) {
                     val morePopup = PopupMenu(requireContext(), v)
                     requireActivity().menuInflater.inflate(R.menu.schedule_menu, morePopup.menu)
-                    morePopup.setOnMenuItemClickListener {
-                        when(it.itemId) {
+                    morePopup.setOnMenuItemClickListener { menuItem ->
+                        when(menuItem.itemId) {
                             R.id.menu_sch_edit -> {
                                 val intent = Intent(requireContext(), ScheduleAddActivity::class.java)
                                 startActivity(intent)
                             }
                             R.id.menu_sch_delete -> {
-                                Toast.makeText(context, "삭제",Toast.LENGTH_SHORT).show()
+                                val call = notionAPI.deleteSchedule(scheduleData.id, NotionAPI.notionVersion, getString(R.string.secret_notion_key))
+                                call.enqueue(object : Callback<ResponseBody> {
+                                    override fun onResponse(
+                                        call: Call<ResponseBody>,
+                                        response: Response<ResponseBody>
+                                    ) {
+                                        if(response.isSuccessful) {
+                                            Toast.makeText(context, getString(R.string.msg_sch_delete_complete),Toast.LENGTH_SHORT).show()
+                                            scheduleDataList.removeIf { it.id == scheduleData.id }
+                                            scheduleAdapter.scheduleItemList.removeIf { it.id == scheduleData.id}
+                                            scheduleAdapter.notifyDataSetChanged()
+                                            addEventOnCalendar()
+                                            
+                                        }
+                                    }
+
+                                    override fun onFailure(call: Call<ResponseBody>, t: Throwable) {}
+                                })
                             }
                         }
                         false
@@ -139,7 +161,7 @@ class ScheduleFragment : Fragment() {
 
 
     private fun addEventOnCalendar() {
-        val events: MutableList<EventDay> = ArrayList()
+        events.clear()
 
         scheduleDataList.forEach { it ->
 
@@ -195,11 +217,12 @@ class ScheduleFragment : Fragment() {
 
                     body.results.forEach {
                         if (it.properties.이름.title.isNotEmpty()) {
+                            val id = it.id
                             val text = it.properties.이름.title[0].text.content
                             val dateStart = it.properties.날짜.date.start
                             val dateEnd = it.properties.날짜.date.end
 
-                            val tempScheduleData = ScheduleData(text, null, false,null, false)
+                            val tempScheduleData = ScheduleData(id ,text, null, false,null, false)
 
                             if(dateStart.trim().length == 10) {
                                 // 2022-05-06 (시간 미포함)

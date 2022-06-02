@@ -12,7 +12,7 @@ import com.example.nsl_app.R
 import com.example.nsl_app.pages.schedule.ScheduleFragment
 import java.text.SimpleDateFormat
 
-class ScheduleAdapter (val context: Context, private val scheduleItemList: ArrayList<ScheduleFragment.ScheduleData>) :
+class ScheduleAdapter (val context: Context, val scheduleItemList: ArrayList<ScheduleFragment.ScheduleData>) :
     RecyclerView.Adapter<ScheduleAdapter.Holder>() {
 
     interface ScheduleListener { fun onMoreClick(view: View, scheduleData: ScheduleFragment.ScheduleData) }
