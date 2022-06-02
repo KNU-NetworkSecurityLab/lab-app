@@ -10,6 +10,7 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
         android:orientation="vertical">
 
         <TextView
@@ -17,8 +18,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="3월 1일\n오전 7:00"
             android:lineSpacingExtra="2dp"
+            android:text="3월 1일\n오전 7:00"
             android:textColor="@color/nsl_green"
             android:textStyle="bold" />
 
@@ -37,12 +38,22 @@
 
     <TextView
         android:id="@+id/tv_item_sch_date_title"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="@dimen/margin_20"
+        android:layout_weight="1"
         android:text="랩실 회의"
         android:textColor="@color/nsl_green"
         android:textStyle="bold" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btn_item_sch_option"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/icon_more"
+        android:tint="@color/nsl_green" />
 
 </LinearLayout>

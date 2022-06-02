@@ -4,6 +4,8 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nsl_app.R
@@ -13,6 +15,9 @@ import java.text.SimpleDateFormat
 class ScheduleAdapter (val context: Context, private val scheduleItemList: ArrayList<ScheduleFragment.ScheduleData>) :
     RecyclerView.Adapter<ScheduleAdapter.Holder>() {
 
+    interface ScheduleListener { fun onMoreClick(view: View, scheduleData: ScheduleFragment.ScheduleData) }
+
+    lateinit var scheduleListener: ScheduleListener
     val dateFormat = SimpleDateFormat("M월 d일")
     val dateTimeFormat = SimpleDateFormat("M월 d일\na h:mm")
 
@@ -58,6 +63,12 @@ class ScheduleAdapter (val context: Context, private val scheduleItemList: Array
         val tv_item_date_start = itemView.findViewById<TextView>(R.id.tv_item_sch_date_start)
         val tv_item_date_end = itemView.findViewById<TextView>(R.id.tv_item_sch_date_end)
         val tv_item_date_title = itemView.findViewById<TextView>(R.id.tv_item_sch_date_title)
+        val btn_item_sch_option = itemView.findViewById<ImageButton>(R.id.btn_item_sch_option)
 
+        init {
+            btn_item_sch_option.setOnClickListener {
+                scheduleListener.onMoreClick(it, scheduleItemList[adapterPosition])
+            }
+        }
     }
 }

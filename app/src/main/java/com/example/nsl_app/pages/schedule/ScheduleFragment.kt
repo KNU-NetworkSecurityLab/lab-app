@@ -6,6 +6,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -90,25 +92,32 @@ class ScheduleFragment : Fragment() {
                     } else false
                 }
                 // 2일 이상 일정
-
-
-
                 targetEventList.addAll(filteredData1)
                 targetEventList.addAll(filteredData2)
 
-
-
-//                scheduleDataList.forEach { schedule ->
-//                    if(schedule.endDate == null) {
-//                        if (Utils.isEqualDate(schedule.startDate!!.time, selectedDay.calendar.timeInMillis)) {
-//                            targetEventList.add(schedule)
-//                        }
-//                    } else {
-//
-//                    }
-//                }
-
                 scheduleAdapter.notifyDataSetChanged()
+            }
+
+            // 일정 아이템의 More 버튼 클릭 시 이벤트 처리
+            scheduleAdapter.scheduleListener = object : ScheduleAdapter.ScheduleListener {
+                override fun onMoreClick(v: View, scheduleData: ScheduleData) {
+                    val morePopup = PopupMenu(requireContext(), v)
+                    requireActivity().menuInflater.inflate(R.menu.schedule_menu, morePopup.menu)
+                    morePopup.setOnMenuItemClickListener {
+                        when(it.itemId) {
+                            R.id.menu_sch_edit -> {
+                                val intent = Intent(requireContext(), ScheduleAddActivity::class.java)
+                                startActivity(intent)
+                            }
+                            R.id.menu_sch_delete -> {
+                                Toast.makeText(context, "삭제",Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                        false
+                    }
+
+                    morePopup.show()
+                }
             }
 
             listSchedule.adapter = scheduleAdapter
