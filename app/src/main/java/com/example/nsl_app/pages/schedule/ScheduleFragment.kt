@@ -64,6 +64,7 @@ class ScheduleFragment : Fragment() {
         binding.run {
             btnCalAdd.setOnClickListener {
                 val intent = Intent(requireContext(), ScheduleAddActivity::class.java)
+                intent.putExtra(getString(R.string.glb_intent_write_edit_mode), getString(R.string.glb_intent_write_mode))
                 startActivity(intent)
             }
 
@@ -112,6 +113,8 @@ class ScheduleFragment : Fragment() {
                         when(menuItem.itemId) {
                             R.id.menu_sch_edit -> {
                                 val intent = Intent(requireContext(), ScheduleAddActivity::class.java)
+                                intent.putExtra(getString(R.string.glb_intent_write_edit_mode), getString(R.string.glb_intent_edit_mode))
+                                intent.putExtra(getString(R.string.glb_intetn_page_id), scheduleData.id)
                                 startActivity(intent)
                             }
                             R.id.menu_sch_delete -> {

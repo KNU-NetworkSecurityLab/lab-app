@@ -14,3 +14,7 @@ data class NotionCreateScheduleWithContentData(
     val properties: Properties,
     val children: List<Children>
 )
+
+data class NotionEditSchedule(
+    val properties: Properties
+)

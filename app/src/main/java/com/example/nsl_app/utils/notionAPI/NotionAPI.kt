@@ -53,6 +53,15 @@ interface NotionAPI {
         @Body notionCreateScheduleWithContentData: NotionCreateScheduleWithContentData
     ): Call<NotionScheduleCreateResponse>
 
+    // 페이지 수정
+    @PATCH("v1/pages/{id}")
+    fun editSchedule(
+        @Path("id") pageID: String,
+        @Header("Notion-Version") notionVersion: String,
+        @Header("Authorization") token: String,
+        @Body notionEditSchedule: NotionEditSchedule
+    ): Call<ResponseBody>
+
     @DELETE("v1/blocks/{id}")
     fun deleteSchedule(
         @Path("id") pageID: String,

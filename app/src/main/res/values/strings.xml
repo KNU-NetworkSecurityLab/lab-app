@@ -8,13 +8,21 @@
     <string name="glb_slogan">미래를 향한 꿈 세계를 향한 도전</string>
     <string name="glb_slider">|</string>
 
+    <!-- Global Select -->
     <string name="glb_add_finish">추가 완료</string>
+    <string name="glb_edit_finish">수정 완료</string>
     <string name="glb_finish">완료</string>
     <string name="glb_cancel">취소</string>
 
+    <!-- Global Intent -->
+    <string name="glb_intent_write_edit_mode">WRITE EDIT MODE</string>
+    <string name="glb_intent_write_mode">WRITE MODE</string>
+    <string name="glb_intent_edit_mode">EDIT MODE</string>
+    <string name="glb_intetn_page_id">PAGE ID</string>
+
+    <!-- Global Sample -->
     <string name="glb_sample_number">201700000</string>
     <string name="glb_sample_permission">연구실 부원</string>
-
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- bottom_menu -->

@@ -210,6 +210,7 @@
             </LinearLayout>
 
             <View
+                android:id="@+id/line_et_sch_add_content"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:layout_marginVertical="@dimen/margin_20"

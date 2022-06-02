@@ -18,6 +18,7 @@ import com.example.nsl_app.utils.Utils
 import com.example.nsl_app.utils.notionAPI.*
 import com.example.nsl_app.utils.notionAPI.dataDTO.registerScheduleWithContent.*
 import com.example.nsl_app.utils.notionAPI.dataDTO.registerScheduleWithContent.Properties
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -171,6 +172,76 @@ class ScheduleAddActivity : AppCompatActivity() {
                 registerSchedule()
             }
         }
+
+
+        if(intent.getStringExtra(getString(R.string.glb_intent_write_edit_mode)) == getString(R.string.glb_intent_edit_mode)) {
+            // 수정모드
+            initEditMode()
+        }
+    }
+
+    private fun initEditMode() {
+        binding.run {
+            btnCalAddFinish.text = getString(R.string.glb_edit_finish)
+
+            // 노션 API 상 내용 수정은 불가능함
+            etSchAddContent.visibility = View.GONE
+            lineEtSchAddContent.visibility = View.GONE
+
+            btnCalAddFinish.setOnClickListener { editSchedule() }
+        }
+    }
+
+    private fun editSchedule() {
+        val title = List<Title>(1){ Title(Text(content = binding.etSchAddTitle.text.toString())) }
+        val date = if(binding.ckIncludeTime.isChecked) {
+            // 시간 포함
+            날짜(start = Utils.notionDateTimeFormat.format(startDay.timeInMillis), end = Utils.notionDateTimeFormat.format(endDay.timeInMillis))
+        } else {
+            // 날짜만
+            if(startDay.timeInMillis == endDay.timeInMillis) {
+                날짜(
+                    start = dateSliderFormat.format(startDay.timeInMillis),
+                    end = null
+                )
+            } else {
+                날짜(
+                    start = dateSliderFormat.format(startDay.timeInMillis),
+                    end = dateSliderFormat.format(endDay.timeInMillis)
+                )
+            }
+        }
+
+        val tags = List<태그>(selectedTags.size) { it -> 태그(selectedTags[it]) }
+
+        val notionEditSchedule = NotionEditSchedule(
+            Properties(
+                title = title,
+                날짜 = date,
+                태그 = tags
+            )
+        )
+
+        val editScheduleCall = notionAPI.editSchedule(intent.getStringExtra(getString(R.string.glb_intetn_page_id))!!, NotionAPI.notionVersion, getString(R.string.secret_notion_key), notionEditSchedule)
+
+        editScheduleCall.enqueue(object : Callback<ResponseBody>{
+            override fun onResponse(
+                call: Call<ResponseBody>,
+                response: Response<ResponseBody>
+            ) {
+                if(response.isSuccessful) {
+                    Toast.makeText(applicationContext, getString(R.string.msg_sch_add_finish),Toast.LENGTH_SHORT).show()
+                    finish()
+                } else {
+                    Log.d("Devvv",response.errorBody()!!.string())
+                    Toast.makeText(applicationContext, response.errorBody()!!.string(),Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+
+            }
+        })
     }
 
     private fun registerSchedule() {
@@ -195,15 +266,12 @@ class ScheduleAddActivity : AppCompatActivity() {
             }
         }
 
-        Log.d("devvvv","${date}")
         val tags = List<태그>(selectedTags.size) { it -> 태그(selectedTags[it]) }
 
         val content = binding.etSchAddContent.text.toString()
 
         val richText = RichText(Text(content),"text")
         val paragraph = Paragraph(List<RichText>(1){richText})
-
-
 
         val children = List<Children>(1) {Children(`object` = "block", paragraph = paragraph, type = "paragraph")}
 
