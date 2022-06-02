@@ -40,6 +40,7 @@ class ScheduleAddActivity : AppCompatActivity() {
     private val endDay = Calendar.getInstance()
 
     val notionAPI by lazy { NotionAPI.create() }
+    val editPageID by lazy { intent.getStringExtra(getString(R.string.glb_intetn_page_id)) }
 
     private val tagClickListener = object : TagAddClickListener {
         override fun onTagClick(tag: String) {
@@ -189,6 +190,69 @@ class ScheduleAddActivity : AppCompatActivity() {
             lineEtSchAddContent.visibility = View.GONE
 
             btnCalAddFinish.setOnClickListener { editSchedule() }
+
+            val getScheduleCall = notionAPI.getScheduleInfo(editPageID!!, NotionAPI.notionVersion, getString(R.string.secret_notion_key))
+            getScheduleCall.enqueue(object : Callback<NotionScheduleCreateResponse> {
+                override fun onResponse(
+                    call: Call<NotionScheduleCreateResponse>,
+                    response: Response<NotionScheduleCreateResponse>
+                ) {
+                    if(response.isSuccessful) {
+                        val body = response.body()!!
+                        body.properties.태그.multi_select.forEach {
+                            selectedTags.add(it.name)
+                        }
+                        tagAdapter.notifyDataSetChanged()
+
+
+                        binding.run {
+                            etSchAddTitle.setText(body.properties.이름.title[0].text.content)
+//                            val responseStartTime = body.properties.날짜.date.start
+//                            val responseEndTime = body.properties.날짜.date.end
+//
+//                            if(responseStartTime.length == 10) {
+//                                ckIncludeTime.isChecked = false
+//
+//                                startDay.timeInMillis = dateFormat.parse(body.properties.날짜.date.start).time
+//                                etSchAddTitle.setText(body.properties.이름.title[0].text.content)
+//                                tvCalAddStartDay.text = dateFormat.format(startDay.timeInMillis)
+//                            } else {
+//                                ckIncludeTime.isChecked = true
+//
+//                                startDay.timeInMillis = Utils.notionDateTimeFormat.parse(body.properties.날짜.date.start).time
+//                                etSchAddTitle.setText(body.properties.이름.title[0].text.content)
+//                                tvCalAddStartDay.text = dateFormat.format(startDay.timeInMillis)
+//                                tvCalAddStartTime.text = timeFormat.format(startDay.timeInMillis)
+//                            }
+//
+//                            if(responseEndTime != null) {
+//                                if(responseEndTime.length == 10) {
+//                                    startDay.timeInMillis = dateFormat.parse(body.properties.날짜.date.start).time
+//                                    etSchAddTitle.setText(body.properties.이름.title[0].text.content)
+//                                    tvCalAddStartDay.text = dateFormat.format(startDay.timeInMillis)
+//                                } else {
+//                                    startDay.timeInMillis = Utils.notionDateTimeFormat.parse(body.properties.날짜.date.start).time
+//                                    etSchAddTitle.setText(body.properties.이름.title[0].text.content)
+//                                    tvCalAddStartDay.text = dateFormat.format(startDay.timeInMillis)
+//                                    tvCalAddStartTime.text = timeFormat.format(startDay.timeInMillis)
+//                                }
+//
+//                                endDay.timeInMillis = Utils.notionDateTimeFormat.parse(body.properties.날짜.date.end).time
+//                                tvCalAddEndDay.text = dateFormat.format(endDay.timeInMillis)
+//                                tvCalAddEndTime.text = timeFormat.format(endDay.timeInMillis)
+//                            } else {
+//                                endDay.timeInMillis = startDay.timeInMillis
+//                                tvCalAddEndTime.text = tvCalAddStartTime.text
+//                                tvCalAddEndDay.text = tvCalAddStartDay.text
+//                            }
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<NotionScheduleCreateResponse>, t: Throwable) {
+
+                }
+            })
         }
     }
 
@@ -222,7 +286,7 @@ class ScheduleAddActivity : AppCompatActivity() {
             )
         )
 
-        val editScheduleCall = notionAPI.editSchedule(intent.getStringExtra(getString(R.string.glb_intetn_page_id))!!, NotionAPI.notionVersion, getString(R.string.secret_notion_key), notionEditSchedule)
+        val editScheduleCall = notionAPI.editSchedule(editPageID!!, NotionAPI.notionVersion, getString(R.string.secret_notion_key), notionEditSchedule)
 
         editScheduleCall.enqueue(object : Callback<ResponseBody>{
             override fun onResponse(
