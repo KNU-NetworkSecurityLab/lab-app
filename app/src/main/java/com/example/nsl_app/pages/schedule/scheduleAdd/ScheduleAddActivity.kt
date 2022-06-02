@@ -178,9 +178,21 @@ class ScheduleAddActivity : AppCompatActivity() {
 
         val title = List<Title>(1){ Title(Text(content = binding.etSchAddTitle.text.toString())) }
         val date = if(binding.ckIncludeTime.isChecked) {
+            // 시간 포함
             날짜(start = Utils.notionDateTimeFormat.format(startDay.timeInMillis), end = Utils.notionDateTimeFormat.format(endDay.timeInMillis))
         } else {
-            날짜(start = dateSliderFormat.format(startDay.timeInMillis), end = dateSliderFormat.format(endDay.timeInMillis))
+            // 날짜만
+            if(startDay.timeInMillis == endDay.timeInMillis) {
+                날짜(
+                    start = dateSliderFormat.format(startDay.timeInMillis),
+                    end = null
+                )
+            } else {
+                날짜(
+                    start = dateSliderFormat.format(startDay.timeInMillis),
+                    end = dateSliderFormat.format(endDay.timeInMillis)
+                )
+            }
         }
 
         Log.d("devvvv","${date}")
