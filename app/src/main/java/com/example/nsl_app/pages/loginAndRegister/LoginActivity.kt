@@ -3,10 +3,12 @@ package com.example.nsl_app.pages.loginAndRegister
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import com.example.nsl_app.R
 import com.example.nsl_app.databinding.ActivityLoginBinding
 import com.example.nsl_app.pages.MainBaseActivity
+import com.example.nsl_app.utils.SharedPreferenceHelper
 import com.example.nsl_app.utils.nslAPI.LoginRequestDTO
 import com.example.nsl_app.utils.nslAPI.NslAPI
 import okhttp3.ResponseBody
@@ -46,6 +48,11 @@ class LoginActivity : AppCompatActivity() {
                     ) {
                         if(response.isSuccessful) {
                             Toast.makeText(applicationContext,response.body()!!.string(),Toast.LENGTH_SHORT).show()
+
+                            val authorizationToken = response.headers()[getString(R.string.glb_authorization)].toString()
+                            SharedPreferenceHelper.setAuthorizationToken(applicationContext, authorizationToken)
+
+                            
                             val intent = Intent(this@LoginActivity, MainBaseActivity::class.java)
                             startActivity(intent)
                             overridePendingTransition(0, 0)
@@ -60,7 +67,7 @@ class LoginActivity : AppCompatActivity() {
                 })
             }
 
-            
+
             tvSignUp.setOnClickListener {
                 val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
                 startActivity(intent)

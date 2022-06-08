@@ -8,6 +8,8 @@
     <string name="glb_slogan">미래를 향한 꿈 세계를 향한 도전</string>
     <string name="glb_slider">|</string>
 
+    <string name="glb_authorization">Authorization</string>
+
     <!-- Global Select -->
     <string name="glb_add_finish">추가 완료</string>
     <string name="glb_edit_finish">수정 완료</string>
