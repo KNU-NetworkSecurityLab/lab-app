@@ -2,12 +2,22 @@ package com.example.nsl_app.pages.loginAndRegister
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
+import android.widget.Toast
 import com.example.nsl_app.R
 import com.example.nsl_app.databinding.ActivityRegisterBinding
+import com.example.nsl_app.utils.nslAPI.NslAPI
+import com.example.nsl_app.utils.nslAPI.SignUpRequestDTO
+import okhttp3.ResponseBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class RegisterActivity : AppCompatActivity() {
     private val binding by lazy { ActivityRegisterBinding.inflate(layoutInflater) }
+    private val nslAPI by lazy { NslAPI.create() }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -19,12 +29,62 @@ class RegisterActivity : AppCompatActivity() {
                 setDisplayHomeAsUpEnabled(true)
             }
 
+            btnRegFinish.setOnClickListener {
+//                if (binding.etRegPw.text.toString() != binding.etRegPwCheck.text.toString()) {
+//                    Toast.makeText(
+//                        applicationContext,
+//                        getString(R.string.msg_sign_up_pw_not_checked),
+//                        Toast.LENGTH_SHORT
+//                    ).show()
+//                    return@setOnClickListener
+//                }
 
-            btnRegFinish.setOnClickListener { finish() }
+                val signUpRequestDTO = SignUpRequestDTO(
+                    userId = binding.etRegNumber.toString(), // id
+                    name = binding.etRegName.text.toString(), // name
+                    password = binding.etRegPw.text.toString(), // pw
+                    mail = binding.etRegEmail.text.toString(), // email
+                    phone = binding.etRegPhone.text.toString() // phone number
+                )
+
+                Log.d("devvv", "userid = ${signUpRequestDTO.userId}" +
+                        "name = ${signUpRequestDTO.name}" +
+                        "pw =  ${signUpRequestDTO.password}" +
+                        "mail = ${signUpRequestDTO.mail}" +
+                        "phone = ${signUpRequestDTO.phone}")
+
+
+                val signCall = nslAPI.signUpCall(signUpRequestDTO)
+
+                signCall.enqueue(object : Callback<ResponseBody> {
+                    override fun onResponse(
+                        call: Call<ResponseBody>,
+                        response: Response<ResponseBody>
+                    ) {
+                        if (response.isSuccessful) {
+                            val str = response.body()!!.string()
+                            Toast.makeText(applicationContext,str,Toast.LENGTH_SHORT).show()
+
+                            if (str == "SignUp Success") {
+                                Toast.makeText(applicationContext, getString(R.string.msg_sign_up_success), Toast.LENGTH_SHORT).show()
+                            } else {
+                                Toast.makeText(applicationContext, str, Toast.LENGTH_SHORT).show()
+                            }
+                        } else {
+                            val str = response.errorBody()!!.string()
+                            Log.d("dev",str)
+                            Toast.makeText(applicationContext,str,Toast.LENGTH_SHORT).show()
+                        }
+                    }
+
+                    override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+
+                    }
+                })
+            }
         }
     }
 
-    
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // 앱 바 클릭 이벤트
         when (item.itemId) {

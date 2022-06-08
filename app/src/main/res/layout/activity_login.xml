@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/gap_horizontal"
+    android:paddingVertical="@dimen/gap_vertical"
     tools:context=".pages.loginAndRegister.LoginActivity">
 
     <TextView
-        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/gap_vertical"
         android:text="@string/glb_title_kor"
         android:textColor="@color/main_color_100"
         android:textColorHighlight="@color/white"
@@ -38,7 +42,8 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
         android:src="@drawable/img_nsl_logo"
         app:layout_constraintBottom_toTopOf="@+id/btn_login"
         app:layout_constraintEnd_toEndOf="parent"
@@ -49,6 +54,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/gap_vertical"
         android:text="@string/glb_slogan"
         android:textColor="@color/main_color_100"
         android:textSize="20sp"
@@ -59,11 +65,56 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView"
         app:layout_constraintVertical_bias="0.3" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|bottom"
+            android:layout_weight="1"
+            android:text="@string/obj_login_number"
+            android:textStyle="bold" />
+
+        <CheckBox
+            android:id="@+id/ck_login_auto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/obj_auto_login" />
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/et_login_number"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/btn_full_height"
+        android:layout_marginTop="@dimen/gap_line"
+        android:background="@drawable/et_gray_10"
+        android:gravity="center_vertical" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginTop="@dimen/gap_line"
+        android:text="@string/obj_login_pw"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/et_login_pw"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/btn_full_height"
+        android:layout_marginTop="@dimen/gap_line"
+        android:layout_marginBottom="@dimen/gap_vertical"
+        android:background="@drawable/et_gray_10"
+        android:gravity="center_vertical"
+        android:inputType="textPassword" />
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_login"
         android:layout_width="match_parent"
         android:layout_height="@dimen/btn_full_height"
-        android:layout_marginHorizontal="50dp"
         android:background="@drawable/btn_gradient_purple_blue_10"
         android:text="@string/obj_login"
         android:textColor="@color/white"
@@ -78,6 +129,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:layout_marginBottom="@dimen/gap_vertical"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="@+id/btn_login"
         app:layout_constraintStart_toStartOf="@+id/btn_login"
@@ -109,4 +161,4 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

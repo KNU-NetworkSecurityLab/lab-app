@@ -3,10 +3,19 @@ package com.example.nsl_app.pages.loginAndRegister
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import com.example.nsl_app.R
 import com.example.nsl_app.databinding.ActivityLoginBinding
 import com.example.nsl_app.pages.MainBaseActivity
+import com.example.nsl_app.utils.nslAPI.LoginRequestDTO
+import com.example.nsl_app.utils.nslAPI.NslAPI
+import okhttp3.ResponseBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class LoginActivity : AppCompatActivity() {
+    private val nslAPI by lazy { NslAPI.create() }
     private lateinit var binding: ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,11 +25,42 @@ class LoginActivity : AppCompatActivity() {
 
         binding.run {
             btnLogin.setOnClickListener {
-                val intent = Intent(this@LoginActivity, MainBaseActivity::class.java)
-                startActivity(intent)
-                overridePendingTransition(0, 0)
+
+                if(binding.etLoginNumber.text.toString().isEmpty()) {
+                    Toast.makeText(applicationContext,getString(R.string.msg_login_need_id),Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
+                if(binding.etLoginPw.text.toString().isEmpty()) {
+                    Toast.makeText(applicationContext,getString(R.string.msg_login_need_pw),Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
+                val loginRequestDTO = LoginRequestDTO(binding.etLoginNumber.text.toString(), binding.etLoginPw.text.toString())
+                val loginCall = nslAPI.loginCall(loginRequestDTO)
+
+                loginCall.enqueue(object : Callback<ResponseBody> {
+                    override fun onResponse(
+                        call: Call<ResponseBody>,
+                        response: Response<ResponseBody>
+                    ) {
+                        if(response.isSuccessful) {
+                            Toast.makeText(applicationContext,response.body()!!.string(),Toast.LENGTH_SHORT).show()
+                            val intent = Intent(this@LoginActivity, MainBaseActivity::class.java)
+                            startActivity(intent)
+                            overridePendingTransition(0, 0)
+                        } else {
+                            Toast.makeText(applicationContext, getString(R.string.msg_login_fail), Toast.LENGTH_SHORT).show()
+                        }
+                    }
+
+                    override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+
+                    }
+                })
             }
 
+            
             tvSignUp.setOnClickListener {
                 val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
                 startActivity(intent)
