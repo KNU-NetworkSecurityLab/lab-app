@@ -9,7 +9,7 @@ import retrofit2.http.*
 interface NslAPI {
 
     companion object {
-        private const val baseUrl = NSlUrl.NSL_URL
+        private const val baseUrl = NSLUrl.NSL_URL
 
         fun create(): NslAPI {
             return Retrofit.Builder()

@@ -29,6 +29,10 @@ class RegisterActivity : AppCompatActivity() {
                 setDisplayHomeAsUpEnabled(true)
             }
 
+            // 오직 숫자만 받기 위해 edittext inputtype을 numberPassword로 해놨음
+            // 패스워드라 검은 동그라미로 마스킹 되기 때문에 마스킹을 해제하는 코드 추가
+            etRegPhone.transformationMethod = null
+
             btnRegFinish.setOnClickListener {
 //                if (binding.etRegPw.text.toString() != binding.etRegPwCheck.text.toString()) {
 //                    Toast.makeText(
@@ -40,19 +44,12 @@ class RegisterActivity : AppCompatActivity() {
 //                }
 
                 val signUpRequestDTO = SignUpRequestDTO(
-                    userId = binding.etRegNumber.toString(), // id
+                    userId = binding.etRegNumber.text.toString(), // id
                     name = binding.etRegName.text.toString(), // name
                     password = binding.etRegPw.text.toString(), // pw
                     mail = binding.etRegEmail.text.toString(), // email
                     phone = binding.etRegPhone.text.toString() // phone number
                 )
-
-                Log.d("devvv", "userid = ${signUpRequestDTO.userId}" +
-                        "name = ${signUpRequestDTO.name}" +
-                        "pw =  ${signUpRequestDTO.password}" +
-                        "mail = ${signUpRequestDTO.mail}" +
-                        "phone = ${signUpRequestDTO.phone}")
-
 
                 val signCall = nslAPI.signUpCall(signUpRequestDTO)
 
@@ -63,10 +60,10 @@ class RegisterActivity : AppCompatActivity() {
                     ) {
                         if (response.isSuccessful) {
                             val str = response.body()!!.string()
-                            Toast.makeText(applicationContext,str,Toast.LENGTH_SHORT).show()
 
                             if (str == "SignUp Success") {
                                 Toast.makeText(applicationContext, getString(R.string.msg_sign_up_success), Toast.LENGTH_SHORT).show()
+                                finish()
                             } else {
                                 Toast.makeText(applicationContext, str, Toast.LENGTH_SHORT).show()
                             }
