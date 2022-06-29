@@ -48,7 +48,9 @@ class RegisterActivity : AppCompatActivity() {
                     name = binding.etRegName.text.toString(), // name
                     password = binding.etRegPw.text.toString(), // pw
                     mail = binding.etRegEmail.text.toString(), // email
-                    phone = binding.etRegPhone.text.toString() // phone number
+                    phone = binding.etRegPhone.text.toString(), // phone number
+                    studentId = binding.etRegNumber.text.toString(), //학번
+                    position = "부원" // 직책. 임시적으로 부원으로 넣어둠
                 )
 
                 val signCall = nslAPI.signUpCall(signUpRequestDTO)
