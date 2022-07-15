@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="150dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/margin_10"
+    app:cardCornerRadius="15dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black"
+        android:orientation="vertical"
+        android:padding="15dp">
+
+        <TextView
+            android:id="@+id/tv_item_repo_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BoT"
+            android:textColor="@color/white"
+            android:textSize="@dimen/title_size"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_item_repo_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="5dp"
+            android:textStyle="bold"
+            android:textSize="13dp"
+            android:paddingVertical="2dp"
+            android:layout_marginTop="@dimen/margin_10"
+            android:background="@drawable/round_white_5"
+            android:text="Java | C++" />
+
+        <TextView
+            android:id="@+id/tv_item_repo_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="5dp"
+            android:textStyle="bold"
+            android:layout_marginTop="@dimen/margin_10"
+            android:text="블록체인 기반의 IoT 고도화 시스템"
+            android:textColor="#B0FFFFFF" />
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
