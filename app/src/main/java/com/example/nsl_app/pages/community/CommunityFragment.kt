@@ -35,15 +35,7 @@ class CommunityFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding.rvRepos.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
-
-        val tags = ArrayList<String>()
-        tags.add("Java")
-        tags.add("Kotlin")
-        repoCardItemList.add(RepoCardItem("BoT",tags,"블록체인 기반 IoT 고도화 시스템"))
-        repoCardItemList.add(RepoCardItem("BoT",tags,"블록체인 기반 IoT 고도화 시스템"))
-        repoCardItemList.add(RepoCardItem("BoT",tags,"블록체인 기반 IoT 고도화 시스템"))
-
+        binding.rvRepos.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
 
         repoAdapter = RepoCardAdapter(requireContext(), repoCardItemList)
         binding.rvRepos.adapter = repoAdapter
@@ -54,26 +46,37 @@ class CommunityFragment : Fragment() {
             override fun onResponse(call: Call<RepoListDTO>, response: Response<RepoListDTO>) {
                 if (response.isSuccessful) {
                     val body = response.body() as RepoListDTO
+                    repoCardItemList.clear()
 
                     body.forEach {
-                        val repoName = it.name
+                        val tags = ArrayList<String>()
+                        if(it.language != null) tags.add(it.language) else tags.add("")
+                        val description = it.description ?: ""
+                        // TODO API 가 가장 많이 쓰인 언어 1개만 보여주므로, 모든 언어를 표시하려면 별도의 API 요청 필요.
+                        repoCardItemList.add(RepoCardItem(it.name, tags, description))
 
-                        val getReadMeCall = githubAPI.getReadMe(accountName, repoName)
-                        getReadMeCall.enqueue(object : Callback<ReadMeDTO> {
-                            override fun onResponse(call: Call<ReadMeDTO>, response: Response<ReadMeDTO>) {
-                                if(response.isSuccessful) {
-                                    val readMeBody = response.body() as ReadMeDTO
-                                    //binding.tvReadMe.text = "${binding.tvReadMe.text}\n${repoName}\n${Utils.getBase64Decode(readMeBody.content)}"
-
-                                    Log.d("${readMeBody.name} ReadMe", Utils.getBase64Decode(readMeBody.content))
-                                }
-                            }
-
-                            override fun onFailure(call: Call<ReadMeDTO>, t: Throwable) {
-
-                            }
-                        })
+//                        val repoName = it.name
+//
+//                        val getReadMeCall = githubAPI.getReadMe(accountName, repoName)
+//                        getReadMeCall.enqueue(object : Callback<ReadMeDTO> {
+//                            override fun onResponse(call: Call<ReadMeDTO>, response: Response<ReadMeDTO>) {
+//                                if(response.isSuccessful) {
+//                                    val readMeBody = response.body() as ReadMeDTO
+//
+//
+//
+//                                    //binding.tvReadMe.text = "${binding.tvReadMe.text}\n${repoName}\n${Utils.getBase64Decode(readMeBody.content)}"
+//
+//                                    Log.d("${readMeBody.name} ReadMe", Utils.getBase64Decode(readMeBody.content))
+//                                }
+//                            }
+//
+//                            override fun onFailure(call: Call<ReadMeDTO>, t: Throwable) {
+//
+//                            }
+//                        })
                     }
+                    repoAdapter.notifyDataSetChanged()
                 }
             }
 
