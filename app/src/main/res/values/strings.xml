@@ -20,7 +20,7 @@
     <string name="glb_intent_write_edit_mode">WRITE EDIT MODE</string>
     <string name="glb_intent_write_mode">WRITE MODE</string>
     <string name="glb_intent_edit_mode">EDIT MODE</string>
-    <string name="glb_intetn_page_id">PAGE ID</string>
+    <string name="glb_intent_page_id">PAGE ID</string>
 
     <!-- Global Sample -->
     <string name="glb_sample_number">201700000</string>

@@ -72,7 +72,8 @@
                         android:layout_gravity="right"
                         android:buttonTint="@color/main_color_100"
                         android:layoutDirection="rtl"
-                        android:text="@string/obj_sch_add_include_time" />
+                        android:text="@string/obj_sch_add_include_time"
+                        android:visibility="gone" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -112,13 +113,13 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_10"
                             android:autoSizeTextType="uniform"
-                            android:visibility="gone"
                             android:clickable="true"
                             android:focusable="true"
                             android:foreground="?android:attr/selectableItemBackground"
                             android:text="오전 8:00"
                             android:textColor="@color/black"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            android:visibility="gone" />
                     </LinearLayout>
 
                     <ImageView
@@ -159,9 +160,9 @@
                             android:focusable="true"
                             android:foreground="?android:attr/selectableItemBackground"
                             android:text="오전 8:00"
-                            android:visibility="gone"
                             android:textColor="@color/black"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            android:visibility="gone" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>

@@ -40,7 +40,7 @@ class ScheduleAddActivity : AppCompatActivity() {
     private val endDay = Calendar.getInstance()
 
     val notionAPI by lazy { NotionAPI.create() }
-    val editPageID by lazy { intent.getStringExtra(getString(R.string.glb_intetn_page_id)) }
+    val editPageID by lazy { intent.getStringExtra(getString(R.string.glb_intent_page_id)) }
 
     private val tagClickListener = object : TagAddClickListener {
         override fun onTagClick(tag: String) {

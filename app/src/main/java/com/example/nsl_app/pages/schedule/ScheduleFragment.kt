@@ -2,7 +2,6 @@ package com.example.nsl_app.pages.schedule
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,9 +18,7 @@ import com.example.nsl_app.pages.schedule.scheduleList.ScheduleAdapter
 import com.example.nsl_app.utils.Utils
 import com.example.nsl_app.utils.notionAPI.NotionAPI
 import com.example.nsl_app.utils.notionAPI.NotionDatabaseQueryResponse
-import okhttp3.Request
 import okhttp3.ResponseBody
-import okio.Timeout
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -114,7 +111,7 @@ class ScheduleFragment : Fragment() {
                             R.id.menu_sch_edit -> {
                                 val intent = Intent(requireContext(), ScheduleAddActivity::class.java)
                                 intent.putExtra(getString(R.string.glb_intent_write_edit_mode), getString(R.string.glb_intent_edit_mode))
-                                intent.putExtra(getString(R.string.glb_intetn_page_id), scheduleData.id)
+                                intent.putExtra(getString(R.string.glb_intent_page_id), scheduleData.id)
                                 startActivity(intent)
                             }
                             R.id.menu_sch_delete -> {
