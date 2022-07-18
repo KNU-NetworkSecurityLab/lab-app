@@ -4,23 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/white"
+    android:orientation="vertical"
     tools:context=".pages.home.HomeFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:background="@drawable/round_bottom_main_20"
         android:orientation="vertical"
-        android:paddingHorizontal="10dp">
+        android:paddingHorizontal="@dimen/margin_20"
+        android:paddingTop="@dimen/margin_20"
+        android:paddingBottom="@dimen/margin_20">
 
         <TextView
             android:id="@+id/tv_home_user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="안녕하세요, 전윤호님"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="30sp"
             android:textStyle="bold" />
 
@@ -29,6 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="@string/obj_welcome"
+            android:textColor="#B0FFFFFF"
             android:textStyle="bold" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -41,7 +44,8 @@
                 android:id="@+id/btn_home_lab_show"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:background="@drawable/gradient_orange"
+                android:background="@drawable/round_white_tran_10"
+                android:foreground="?attr/selectableItemBackground"
                 android:src="@drawable/icon_group"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -55,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="@string/obj_home_lab_show"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/btn_home_lab_show"
                 app:layout_constraintStart_toStartOf="@+id/btn_home_lab_show"
@@ -65,7 +69,8 @@
                 android:id="@+id/btn_home_books"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:background="@drawable/gradient_blue"
+                android:background="@drawable/round_white_tran_10"
+                android:foreground="?attr/selectableItemBackground"
                 android:src="@drawable/icon_book"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -79,7 +84,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="@string/obj_home_books"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/btn_home_books"
                 app:layout_constraintStart_toStartOf="@+id/btn_home_books"
@@ -89,7 +94,8 @@
                 android:id="@+id/btn_home_lab_log"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:background="@drawable/gradient_green"
+                android:background="@drawable/round_white_tran_10"
+                android:foreground="?attr/selectableItemBackground"
                 android:src="@drawable/icon_history"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -103,7 +109,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="@string/obj_home_lab_log"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/btn_home_lab_log"
                 app:layout_constraintStart_toStartOf="@+id/btn_home_lab_log"
@@ -116,8 +122,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="20dp"
-        android:background="@color/gray_10"
         android:orientation="vertical"
         android:padding="20dp">
 
@@ -146,7 +150,7 @@
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:layout_marginRight="10dp"
-                    android:background="@drawable/gradient_blue"
+                    android:background="@drawable/round_main_light_10"
                     android:orientation="vertical"
                     android:padding="10dp">
 
@@ -181,7 +185,7 @@
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:layout_marginLeft="10dp"
-                    android:background="@drawable/gradient_red_purple"
+                    android:background="@drawable/round_main_light_10"
                     android:orientation="vertical"
                     android:padding="10dp">
 
@@ -224,7 +228,7 @@
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:layout_marginRight="10dp"
-                    android:background="@drawable/gradient_green"
+                    android:background="@drawable/round_main_light_10"
                     android:orientation="vertical"
                     android:padding="10dp">
 
@@ -259,7 +263,7 @@
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:layout_marginLeft="10dp"
-                    android:background="@drawable/gradient_orange"
+                    android:background="@drawable/round_main_light_10"
                     android:orientation="vertical"
                     android:padding="10dp">
 
