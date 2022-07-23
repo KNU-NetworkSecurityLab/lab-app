@@ -162,6 +162,7 @@
         android:id="@+id/btn_reg_finish"
         android:layout_width="match_parent"
         android:layout_height="@dimen/btn_full_height"
+        android:foreground="?selectableItemBackground"
         android:background="@drawable/btn_default_square"
         android:text="@string/obj_reg_finish"
         app:layout_constraintBottom_toBottomOf="parent"
