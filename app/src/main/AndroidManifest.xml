@@ -13,10 +13,10 @@
         android:theme="@style/Theme.NSL_app"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".pages.home.bookPage.bookAdd.BookAddActivity"
+            android:name="com.example.nsl_app.pages.book.BookAddActivity"
             android:exported="false" />
         <activity
-            android:name=".pages.home.bookPage.BookActivity"
+            android:name="com.example.nsl_app.pages.book.BookActivity"
             android:exported="false" />
         <activity
             android:name=".pages.myPage.MyPageActivity"

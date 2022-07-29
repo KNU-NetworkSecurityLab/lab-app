@@ -1,14 +1,13 @@
-package com.example.nsl_app.pages.home.bookPage
+package com.example.nsl_app.pages.book
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nsl_app.R
-import com.example.nsl_app.pages.home.bookPage.bookTags.BookTagsAdapter
+import com.example.nsl_app.pages.book.bookTags.BookTagsAdapter
 import com.google.android.flexbox.*
 
 class BookAdapter (val context: Context, private val bookItem : ArrayList<BookItem>) :

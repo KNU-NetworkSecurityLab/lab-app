@@ -1,4 +1,4 @@
-package com.example.nsl_app.pages.home.bookPage.bookTags
+package com.example.nsl_app.pages.book.bookTags
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,8 +7,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nsl_app.R
-import com.example.nsl_app.pages.home.bookPage.BookAdapter
-import com.example.nsl_app.pages.home.bookPage.BookItem
 
 class BookTagsAdapter (val context: Context, private val bookTags : ArrayList<String>) :
     RecyclerView.Adapter<BookTagsAdapter.Holder>() {

@@ -1,4 +1,4 @@
-package com.example.nsl_app.pages.home.bookPage
+package com.example.nsl_app.pages.book
 
 data class BookItem(
     val bookName: String?,

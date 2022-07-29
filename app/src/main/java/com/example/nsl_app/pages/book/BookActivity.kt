@@ -1,4 +1,4 @@
-package com.example.nsl_app.pages.home.bookPage
+package com.example.nsl_app.pages.book
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,7 +7,6 @@ import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nsl_app.databinding.ActivityBookBinding
-import com.example.nsl_app.pages.home.bookPage.bookAdd.BookAddActivity
 
 class BookActivity : AppCompatActivity() {
     private val binding by lazy { ActivityBookBinding.inflate(layoutInflater) }

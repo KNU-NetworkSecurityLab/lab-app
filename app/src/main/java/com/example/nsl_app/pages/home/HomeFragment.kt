@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.nsl_app.databinding.FragmentHomeBinding
-import com.example.nsl_app.pages.home.bookPage.BookActivity
+import com.example.nsl_app.pages.book.BookActivity
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding

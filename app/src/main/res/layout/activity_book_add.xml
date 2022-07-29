@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".pages.home.bookPage.bookAdd.BookAddActivity">
+    tools:context=".pages.book.BookAddActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_book_add"
@@ -20,11 +20,18 @@
         android:orientation="vertical"
         android:paddingHorizontal="@dimen/margin_20">
 
+        <ImageView
+            android:id="@+id/iv_sample"
+            android:layout_width="50dp"
+            android:layout_height="50dp"/>
+
         <Button
             android:id="@+id/btn_book_add_picture"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_vertical"
             android:drawableLeft="@drawable/ic_image"
+            android:foreground="?attr/selectableItemBackground"
             android:text="@string/obj_book_add_picture"
             android:textColor="@color/black" />
 
@@ -34,9 +41,9 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 androidid="@+id/et_book_title"
-                android:hint="@string/obj_book_title_hint"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:hint="@string/obj_book_title_hint" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
