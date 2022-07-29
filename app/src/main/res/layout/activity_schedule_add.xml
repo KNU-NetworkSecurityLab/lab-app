@@ -7,7 +7,7 @@
     android:animateLayoutChanges="true"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context=".pages.schedule.scheduleAdd.ScheduleAddActivity">
+    tools:context=".pages.schedule.ScheduleAddActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_schedule_add"

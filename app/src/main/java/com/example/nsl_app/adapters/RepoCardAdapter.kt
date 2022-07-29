@@ -1,4 +1,4 @@
-package com.example.nsl_app.pages.community
+package com.example.nsl_app.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nsl_app.R
+import com.example.nsl_app.models.RepoCardItem
 
 class RepoCardAdapter (val context: Context, private val repoItem : ArrayList<RepoCardItem>) :
     RecyclerView.Adapter<RepoCardAdapter.Holder>() {

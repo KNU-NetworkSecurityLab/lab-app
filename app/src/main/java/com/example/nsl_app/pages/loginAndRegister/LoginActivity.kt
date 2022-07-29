@@ -3,21 +3,20 @@ package com.example.nsl_app.pages.loginAndRegister
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import com.example.nsl_app.R
 import com.example.nsl_app.databinding.ActivityLoginBinding
 import com.example.nsl_app.pages.MainBaseActivity
 import com.example.nsl_app.utils.SharedPreferenceHelper
 import com.example.nsl_app.utils.nslAPI.LoginRequestDTO
-import com.example.nsl_app.utils.nslAPI.NslAPI
+import com.example.nsl_app.utils.nslAPI.NSLAPI
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class LoginActivity : AppCompatActivity() {
-    private val nslAPI by lazy { NslAPI.create() }
+    private val nslAPI by lazy { NSLAPI.create() }
     private lateinit var binding: ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -6,7 +6,9 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.nsl_app.adapters.BookAdapter
 import com.example.nsl_app.databinding.ActivityBookBinding
+import com.example.nsl_app.models.BookItem
 
 class BookActivity : AppCompatActivity() {
     private val binding by lazy { ActivityBookBinding.inflate(layoutInflater) }

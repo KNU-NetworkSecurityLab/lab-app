@@ -17,3 +17,4 @@ local.properties
 app/src/main/res/values/secret_notion_key.xml
 app/src/main/res/values/secret_notion_token.xml
 app/src/main/java/com/example/nsl_app/utils/nslAPI/NSlUrl.kt
+app/src/main/java/com/example/nsl_app/utils/SecretConstants.kt

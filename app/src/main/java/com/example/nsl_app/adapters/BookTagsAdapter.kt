@@ -1,4 +1,4 @@
-package com.example.nsl_app.pages.book.bookTags
+package com.example.nsl_app.adapters
 
 import android.content.Context
 import android.view.LayoutInflater

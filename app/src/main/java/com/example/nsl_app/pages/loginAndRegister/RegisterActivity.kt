@@ -7,7 +7,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import com.example.nsl_app.R
 import com.example.nsl_app.databinding.ActivityRegisterBinding
-import com.example.nsl_app.utils.nslAPI.NslAPI
+import com.example.nsl_app.utils.nslAPI.NSLAPI
 import com.example.nsl_app.utils.nslAPI.SignUpRequestDTO
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -16,7 +16,7 @@ import retrofit2.Response
 
 class RegisterActivity : AppCompatActivity() {
     private val binding by lazy { ActivityRegisterBinding.inflate(layoutInflater) }
-    private val nslAPI by lazy { NslAPI.create() }
+    private val nslAPI by lazy { NSLAPI.create() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

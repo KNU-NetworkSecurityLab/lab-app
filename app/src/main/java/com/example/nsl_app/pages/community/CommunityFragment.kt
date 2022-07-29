@@ -1,17 +1,16 @@
 package com.example.nsl_app.pages.community
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.nsl_app.adapters.RepoCardAdapter
 import com.example.nsl_app.databinding.FragmentCommunityBinding
-import com.example.nsl_app.utils.Utils
+import com.example.nsl_app.models.RepoCardItem
 import com.example.nsl_app.utils.githubAPI.GithubAPI
-import com.example.nsl_app.utils.githubAPI.responseDTO.ReadMeDTO
 import com.example.nsl_app.utils.githubAPI.responseDTO.RepoListDTO
 import retrofit2.Call
 import retrofit2.Callback
@@ -22,7 +21,7 @@ class CommunityFragment : Fragment() {
     private val binding by lazy { FragmentCommunityBinding.inflate(layoutInflater) }
     private val githubAPI by lazy { GithubAPI.create() }
     private val accountName = GithubAPI.githubAccountName
-    private lateinit var repoAdapter:RepoCardAdapter
+    private lateinit var repoAdapter: RepoCardAdapter
     private var repoCardItemList = ArrayList<RepoCardItem>()
 
     override fun onCreate(savedInstanceState: Bundle?) {

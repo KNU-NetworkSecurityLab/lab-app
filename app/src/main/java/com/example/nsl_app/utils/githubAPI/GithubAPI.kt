@@ -2,17 +2,10 @@ package com.example.nsl_app.utils.githubAPI
 
 import com.example.nsl_app.utils.githubAPI.responseDTO.ReadMeDTO
 import com.example.nsl_app.utils.githubAPI.responseDTO.RepoListDTO
-import com.example.nsl_app.utils.nslAPI.LoginRequestDTO
-import com.example.nsl_app.utils.nslAPI.NSLUrl
-import com.example.nsl_app.utils.nslAPI.NslAPI
-import com.example.nsl_app.utils.nslAPI.SignUpRequestDTO
-import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Body
 import retrofit2.http.GET
-import retrofit2.http.POST
 import retrofit2.http.Path
 
 interface GithubAPI {

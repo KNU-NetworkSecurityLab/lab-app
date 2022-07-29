@@ -1,4 +1,4 @@
-package com.example.nsl_app.pages.schedule.scheduleAdd
+package com.example.nsl_app.pages.schedule
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
@@ -11,9 +11,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nsl_app.R
+import com.example.nsl_app.adapters.SchTagAdapter
 import com.example.nsl_app.databinding.ActivityScheduleAddBinding
-import com.example.nsl_app.pages.schedule.scheduleAdd.tagAddPopup.ScheduleAddTagDialogFragment
-import com.example.nsl_app.pages.schedule.scheduleAdd.tagAddPopup.TagAddClickListener
+import com.example.nsl_app.adapters.TagAddClickListener
+import com.example.nsl_app.utils.Constants
+import com.example.nsl_app.utils.SecretConstants
 import com.example.nsl_app.utils.Utils
 import com.example.nsl_app.utils.notionAPI.*
 import com.example.nsl_app.utils.notionAPI.dataDTO.registerScheduleWithContent.*
@@ -40,7 +42,7 @@ class ScheduleAddActivity : AppCompatActivity() {
     private val endDay = Calendar.getInstance()
 
     val notionAPI by lazy { NotionAPI.create() }
-    val editPageID by lazy { intent.getStringExtra(getString(R.string.glb_intent_page_id)) }
+    val editPageID by lazy { intent.getStringExtra(Constants.INTENT_EXTRA_PAGE_ID) }
 
     private val tagClickListener = object : TagAddClickListener {
         override fun onTagClick(tag: String) {
@@ -175,7 +177,7 @@ class ScheduleAddActivity : AppCompatActivity() {
         }
 
 
-        if(intent.getStringExtra(getString(R.string.glb_intent_write_edit_mode)) == getString(R.string.glb_intent_edit_mode)) {
+        if(intent.getStringExtra(Constants.INTENT_EXTRA_WRITE_OR_EDIT_MODE) == Constants.INTENT_EXTRA_EDIT_MODE) {
             // 수정모드
             initEditMode()
         }
@@ -191,7 +193,7 @@ class ScheduleAddActivity : AppCompatActivity() {
 
             btnCalAddFinish.setOnClickListener { editSchedule() }
 
-            val getScheduleCall = notionAPI.getScheduleInfo(editPageID!!, NotionAPI.notionVersion, getString(R.string.secret_notion_key))
+            val getScheduleCall = notionAPI.getScheduleInfo(editPageID!!, NotionAPI.NOTION_API_VERSION, SecretConstants.SECRET_NOTION_TOKEN)
             getScheduleCall.enqueue(object : Callback<NotionScheduleCreateResponse> {
                 override fun onResponse(
                     call: Call<NotionScheduleCreateResponse>,
@@ -286,7 +288,7 @@ class ScheduleAddActivity : AppCompatActivity() {
             )
         )
 
-        val editScheduleCall = notionAPI.editSchedule(editPageID!!, NotionAPI.notionVersion, getString(R.string.secret_notion_key), notionEditSchedule)
+        val editScheduleCall = notionAPI.editSchedule(editPageID!!, NotionAPI.NOTION_API_VERSION, SecretConstants.SECRET_NOTION_TOKEN, notionEditSchedule)
 
         editScheduleCall.enqueue(object : Callback<ResponseBody>{
             override fun onResponse(
@@ -340,7 +342,7 @@ class ScheduleAddActivity : AppCompatActivity() {
         val children = List<Children>(1) {Children(`object` = "block", paragraph = paragraph, type = "paragraph")}
 
         val notionCreateScheduleWithContentData = NotionCreateScheduleWithContentData(
-            parent = Parent(NotionAPI.NOTION_DB_SCHEDULE_ID),
+            parent = Parent(NotionAPI.NOTION_SCHEDULE_DB_ID),
             Properties(
                 title = title,
                 날짜 = date,
@@ -350,8 +352,8 @@ class ScheduleAddActivity : AppCompatActivity() {
         )
 
 
-        val registerScheduleCall = notionAPI.registerScheduleWithContent(NotionAPI.notionVersion,
-            getString(R.string.secret_notion_key),
+        val registerScheduleCall = notionAPI.registerScheduleWithContent(NotionAPI.NOTION_API_VERSION,
+            SecretConstants.SECRET_NOTION_TOKEN,
             notionCreateScheduleWithContentData)
 
         registerScheduleCall.enqueue(object : Callback<NotionScheduleCreateResponse>{
@@ -376,9 +378,9 @@ class ScheduleAddActivity : AppCompatActivity() {
 
     private fun getTags() {
         val tagCall = notionAPI.getNotionRetrieveData(
-            NotionAPI.NOTION_DB_SCHEDULE_ID,
-            NotionAPI.notionVersion,
-            getString(R.string.secret_notion_key))
+            NotionAPI.NOTION_SCHEDULE_DB_ID,
+            NotionAPI.NOTION_API_VERSION,
+            SecretConstants.SECRET_NOTION_TOKEN)
 
         tagCall.enqueue(object : Callback<NotionRetrieveDatabaseResponse> {
             override fun onResponse(

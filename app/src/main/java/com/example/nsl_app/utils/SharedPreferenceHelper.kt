@@ -5,39 +5,37 @@ import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 
 
-class SharedPreferenceHelper {
-    companion object {
-        private val PREF_APP = "PREF_NSL"
+object SharedPreferenceHelper {
+    private val PREF_APP = "PREF_NSL"
 
-        private const val authorization = "SP_AUTHORIZATION" // String
-        private const val autoLogin = "SP_AUTO_LOGIN" // boolean
-
-
-        // Authorization
-        fun setAuthorizationToken(context: Context, token: String) {
-            val pref: SharedPreferences = context.getSharedPreferences(PREF_APP, MODE_PRIVATE)
-            val editor = pref.edit()
-            editor.putString(authorization, token)
-            editor.commit()
-        }
-        fun getAuthorizationToken(context: Context): String? {
-            val pref: SharedPreferences = context.getSharedPreferences(PREF_APP, MODE_PRIVATE)
-            return pref.getString(authorization, "")
-        }
+    private const val authorization = "SP_AUTHORIZATION" // String
+    private const val autoLogin = "SP_AUTO_LOGIN" // boolean
 
 
-        // 자동 로그인 체크 유무
-        fun setAutoLoginEnable(context: Context, isEnable: Boolean) {
-            val pref: SharedPreferences = context.getSharedPreferences(PREF_APP, MODE_PRIVATE)
-            val editor = pref.edit()
-            editor.putBoolean(autoLogin, isEnable)
-            editor.commit()
-        }
-        fun isAutoLoginEnable(context: Context): Boolean {
-            val pref: SharedPreferences = context.getSharedPreferences(PREF_APP, MODE_PRIVATE)
-            return pref.getBoolean(autoLogin, false)
-        }
+    // Authorization
+    fun setAuthorizationToken(context: Context, token: String) {
+        val pref: SharedPreferences = context.getSharedPreferences(PREF_APP, MODE_PRIVATE)
+        val editor = pref.edit()
+        editor.putString(authorization, token)
+        editor.commit()
+    }
+
+    fun getAuthorizationToken(context: Context): String? {
+        val pref: SharedPreferences = context.getSharedPreferences(PREF_APP, MODE_PRIVATE)
+        return pref.getString(authorization, "")
+    }
 
 
+    // 자동 로그인 체크 유무
+    fun setAutoLoginEnable(context: Context, isEnable: Boolean) {
+        val pref: SharedPreferences = context.getSharedPreferences(PREF_APP, MODE_PRIVATE)
+        val editor = pref.edit()
+        editor.putBoolean(autoLogin, isEnable)
+        editor.commit()
+    }
+
+    fun isAutoLoginEnable(context: Context): Boolean {
+        val pref: SharedPreferences = context.getSharedPreferences(PREF_APP, MODE_PRIVATE)
+        return pref.getBoolean(autoLogin, false)
     }
 }

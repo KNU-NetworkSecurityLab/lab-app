@@ -13,8 +13,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.applandeo.materialcalendarview.EventDay
 import com.example.nsl_app.R
 import com.example.nsl_app.databinding.FragmentScheduleBinding
-import com.example.nsl_app.pages.schedule.scheduleAdd.ScheduleAddActivity
-import com.example.nsl_app.pages.schedule.scheduleList.ScheduleAdapter
+import com.example.nsl_app.adapters.ScheduleAdapter
+import com.example.nsl_app.utils.Constants
+import com.example.nsl_app.utils.SecretConstants
 import com.example.nsl_app.utils.Utils
 import com.example.nsl_app.utils.notionAPI.NotionAPI
 import com.example.nsl_app.utils.notionAPI.NotionDatabaseQueryResponse
@@ -61,7 +62,7 @@ class ScheduleFragment : Fragment() {
         binding.run {
             btnCalAdd.setOnClickListener {
                 val intent = Intent(requireContext(), ScheduleAddActivity::class.java)
-                intent.putExtra(getString(R.string.glb_intent_write_edit_mode), getString(R.string.glb_intent_write_mode))
+                intent.putExtra(Constants.INTENT_EXTRA_WRITE_OR_EDIT_MODE, Constants.INTENT_EXTRA_WRITE_MODE)
                 startActivity(intent)
             }
 
@@ -110,12 +111,12 @@ class ScheduleFragment : Fragment() {
                         when(menuItem.itemId) {
                             R.id.menu_sch_edit -> {
                                 val intent = Intent(requireContext(), ScheduleAddActivity::class.java)
-                                intent.putExtra(getString(R.string.glb_intent_write_edit_mode), getString(R.string.glb_intent_edit_mode))
-                                intent.putExtra(getString(R.string.glb_intent_page_id), scheduleData.id)
+                                intent.putExtra(Constants.INTENT_EXTRA_WRITE_OR_EDIT_MODE, Constants.INTENT_EXTRA_EDIT_MODE)
+                                intent.putExtra(Constants.INTENT_EXTRA_PAGE_ID, scheduleData.id)
                                 startActivity(intent)
                             }
                             R.id.menu_sch_delete -> {
-                                val call = notionAPI.deleteSchedule(scheduleData.id, NotionAPI.notionVersion, getString(R.string.secret_notion_key))
+                                val call = notionAPI.deleteSchedule(scheduleData.id, NotionAPI.NOTION_API_VERSION, SecretConstants.SECRET_NOTION_TOKEN)
                                 call.enqueue(object : Callback<ResponseBody> {
                                     override fun onResponse(
                                         call: Call<ResponseBody>,
@@ -201,7 +202,7 @@ class ScheduleFragment : Fragment() {
     }
 
     private fun getSchedules () {
-        val call = notionAPI.queryNotionDataBaseAll(NotionAPI.NOTION_DB_SCHEDULE_ID, NotionAPI.notionVersion, getString(R.string.secret_notion_key))
+        val call = notionAPI.queryNotionDataBaseAll(NotionAPI.NOTION_SCHEDULE_DB_ID, NotionAPI.NOTION_API_VERSION, SecretConstants.SECRET_NOTION_TOKEN)
 
         call.enqueue(object : Callback<NotionDatabaseQueryResponse> {
             override fun onResponse(

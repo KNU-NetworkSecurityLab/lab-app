@@ -1,4 +1,4 @@
-package com.example.nsl_app.pages.community
+package com.example.nsl_app.models
 
 data class RepoCardItem(
     val name: String,

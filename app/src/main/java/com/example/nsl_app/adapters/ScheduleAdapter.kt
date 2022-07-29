@@ -1,10 +1,9 @@
-package com.example.nsl_app.pages.schedule.scheduleList
+package com.example.nsl_app.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView

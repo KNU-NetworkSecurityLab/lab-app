@@ -1,4 +1,4 @@
-package com.example.nsl_app.pages.schedule.scheduleAdd.tagAddPopup
+package com.example.nsl_app.pages.schedule
 
 import android.os.Bundle
 import android.util.DisplayMetrics
@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nsl_app.R
 import com.example.nsl_app.databinding.FragmentSchduleAddTagDialogBinding
+import com.example.nsl_app.adapters.SchTagAddAdapter
+import com.example.nsl_app.adapters.TagAddClickListener
 
 
 class ScheduleAddTagDialogFragment : DialogFragment() {

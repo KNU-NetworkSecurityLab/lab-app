@@ -28,7 +28,7 @@
             android:name=".pages.schedule.ScheduleFragment"
             android:exported="false" />
         <activity
-            android:name=".pages.schedule.scheduleAdd.ScheduleAddActivity"
+            android:name=".pages.schedule.ScheduleAddActivity"
             android:exported="false" />
         <activity
             android:name=".CommunityActivity"

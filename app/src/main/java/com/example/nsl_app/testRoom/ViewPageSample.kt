@@ -1,4 +1,4 @@
-package com.example.nsl_app.utils.testRoom
+package com.example.nsl_app.testRoom
 
 import android.os.Bundle
 import android.view.LayoutInflater

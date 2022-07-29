@@ -1,14 +1,14 @@
-package com.example.nsl_app.utils.testRoom
+package com.example.nsl_app.testRoom
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.nsl_app.R
 import com.example.nsl_app.utils.notionAPI.NotionAPI
 import com.example.nsl_app.utils.notionAPI.NotionDatabaseQueryResponse
 import com.example.nsl_app.databinding.FragmentScheduleMeetingBinding
+import com.example.nsl_app.utils.SecretConstants
 import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
@@ -41,10 +41,10 @@ class ScheduleMeetingFragment : Fragment() {
 
 
     private fun test_getNotionSchdules() {
-        val token = getString(R.string.secret_notion_key)
+        val token = SecretConstants.SECRET_NOTION_TOKEN
 
         val notionAPI = NotionAPI.create()
-        val call = notionAPI.queryNotionDataBaseAll(NotionAPI.NOTION_DB_SCHEDULE_ID, NotionAPI.notionVersion, token)
+        val call = notionAPI.queryNotionDataBaseAll(NotionAPI.NOTION_SCHEDULE_DB_ID, NotionAPI.NOTION_API_VERSION, token)
 
         call.enqueue(object : Callback<NotionDatabaseQueryResponse> {
             override fun onResponse(

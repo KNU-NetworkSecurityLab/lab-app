@@ -16,12 +16,6 @@
     <string name="glb_finish">완료</string>
     <string name="glb_cancel">취소</string>
 
-    <!-- Global Intent -->
-    <string name="glb_intent_write_edit_mode">WRITE EDIT MODE</string>
-    <string name="glb_intent_write_mode">WRITE MODE</string>
-    <string name="glb_intent_edit_mode">EDIT MODE</string>
-    <string name="glb_intent_page_id">PAGE ID</string>
-
     <!-- Global Sample -->
     <string name="glb_sample_number">201700000</string>
     <string name="glb_sample_permission">연구실 부원</string>
