@@ -10,6 +10,8 @@ object SharedPreferenceHelper {
 
     private const val authorization = "SP_AUTHORIZATION" // String
     private const val autoLogin = "SP_AUTO_LOGIN" // boolean
+    private const val autoLoginID = "SP_AUTO_LOGIN_ID" // String
+    private const val autoLoginPassword = "SP_AUTO_LOGIN_PASSWORD" // String
 
 
     // Authorization
@@ -37,5 +39,31 @@ object SharedPreferenceHelper {
     fun isAutoLoginEnable(context: Context): Boolean {
         val pref: SharedPreferences = context.getSharedPreferences(PREF_APP, MODE_PRIVATE)
         return pref.getBoolean(autoLogin, false)
+    }
+
+    // 자동 로그인 아이디 저장
+    fun setAutoLoginID(context: Context, ID:String?) {
+        val pref: SharedPreferences = context.getSharedPreferences(PREF_APP, MODE_PRIVATE)
+        val editor = pref.edit()
+        editor.putString(autoLoginID, ID)
+        editor.commit()
+    }
+
+    fun getAutoLoginID(context: Context): String? {
+        val pref: SharedPreferences = context.getSharedPreferences(PREF_APP, MODE_PRIVATE)
+        return pref.getString(autoLoginID, "")
+    }
+
+    // 자동 로그인 패스워드 저장
+    fun setAutoLoginPassword(context: Context, pw:String?) {
+        val pref: SharedPreferences = context.getSharedPreferences(PREF_APP, MODE_PRIVATE)
+        val editor = pref.edit()
+        editor.putString(autoLoginPassword, pw)
+        editor.commit()
+    }
+
+    fun getAutoLoginPassword(context: Context): String? {
+        val pref: SharedPreferences = context.getSharedPreferences(PREF_APP, MODE_PRIVATE)
+        return pref.getString(autoLoginPassword, null)
     }
 }

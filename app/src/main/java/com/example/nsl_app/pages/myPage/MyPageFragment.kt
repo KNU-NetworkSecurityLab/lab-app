@@ -1,6 +1,10 @@
 package com.example.nsl_app.pages.myPage
 
+import android.app.AlertDialog
 import android.app.Application
+import android.content.DialogInterface
+import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,6 +14,8 @@ import android.widget.Button
 import android.widget.Toast
 import com.example.nsl_app.R
 import com.example.nsl_app.databinding.FragmentMyPageBinding
+import com.example.nsl_app.pages.loginAndRegister.LoginActivity
+import com.example.nsl_app.utils.SharedPreferenceHelper
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class MyPageFragment : Fragment() {
@@ -53,6 +59,32 @@ class MyPageFragment : Fragment() {
                     Toast.makeText(requireContext(), "탈퇴하였습니다", Toast.LENGTH_SHORT).show()
                     dlWithdrawal.dismiss()
                 }
+            }
+
+            // 로그아웃 클릭 시
+            tvLogout.setOnClickListener {
+                val builder = activity.let { AlertDialog.Builder(it) }
+                builder.setMessage(R.string.msg_logout_content)
+                    .setPositiveButton(R.string.glb_logout,
+                        DialogInterface.OnClickListener { dialogInterface, i ->
+                            startActivity(Intent(requireContext(), LoginActivity::class.java))
+                            SharedPreferenceHelper.setAutoLoginEnable(requireContext(), false)
+                            SharedPreferenceHelper.setAutoLoginID(requireContext(), null)
+                            SharedPreferenceHelper.setAutoLoginPassword(requireContext(), null)
+                            requireActivity().finish()
+                        })
+                    .setNegativeButton(R.string.glb_cancel,
+                        DialogInterface.OnClickListener { dialogInterface, i ->
+
+                        })
+
+                val dialog = builder.create()
+
+                dialog.setOnShowListener {
+                    dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.RED)
+                    dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.BLACK)
+                }
+                dialog.show()
             }
         }
 

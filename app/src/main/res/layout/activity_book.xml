@@ -14,9 +14,9 @@
         android:layout_gravity="bottom|right"
         android:layout_marginRight="@dimen/margin_10"
         android:layout_marginBottom="@dimen/margin_10"
-        android:backgroundTint="@color/main_color_80"
+        app:backgroundTint="@color/white"
         android:src="@drawable/ic_add"
-        android:tint="@color/white" />
+        android:tint="@color/black" />
 
 
     <LinearLayout
