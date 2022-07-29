@@ -9,6 +9,7 @@
     <string name="glb_slider">|</string>
 
     <string name="glb_authorization">Authorization</string>
+    <string name="glb_internet_error">서버 통신에 실패했습니다.\n인터넷 상태를 확인해주세요.</string>
 
     <!-- Global Select -->
     <string name="glb_add_finish">추가 완료</string>
@@ -68,24 +69,24 @@
     <string name="obj_welcome">네트워크 보안 연구실에 오신 것을 환영합니다.</string>
     <string name="obj_home_lab_show">연구실 소개</string>
     <string name="obj_home_books">도서 현황</string>
-    <string name="obj_home_lab_log">연구실 연혁</string>
+    <string name="obj_home_lab_group">연구실 구성원</string>
 
     <string name="obj_home_smart_lab">스마트 랩실</string>
     <string name="obj_home_smart_door">재실 여부</string>
-    <string name="obj_home_smart_door_opened">문이 열려 있어요!</string>
-    <string name="obj_home_smart_door_closed">문이 닫혀 있어요!</string>
+    <string name="obj_home_smart_door_opened">문 열림</string>
+    <string name="obj_home_smart_door_closed">문 닫힘</string>
 
     <string name="obj_home_smart_coffee">커피 용량</string>
-    <string name="obj_home_smart_coffee_enough">여기 커피 있어요!</string>
-    <string name="obj_home_smart_coffee_empty">여기 커피 없어요...</string>
+    <string name="obj_home_smart_coffee_enough">커피 있음</string>
+    <string name="obj_home_smart_coffee_empty">커피 없음</string>
 
     <string name="obj_home_smart_a4">용지 여부</string>
-    <string name="obj_home_smart_a4_enough">충분해요!</string>
-    <string name="obj_home_smart_a4_empty">없어요...</string>
+    <string name="obj_home_smart_a4_enough">종이 있음</string>
+    <string name="obj_home_smart_a4_empty">종이 없음</string>
 
     <string name="obj_home_smart_light">전등</string>
-    <string name="obj_home_smart_light_on">불이 켜져있어요!</string>
-    <string name="obj_home_smart_light_off">불이 꺼져있어요!</string>
+    <string name="obj_home_smart_light_on">불 켜짐</string>
+    <string name="obj_home_smart_light_off">불 꺼짐</string>
 
 
     <!-- BooksActivity -->
@@ -95,7 +96,7 @@
     <!-- BooksAddActivity -->
     <string name="obj_book_add_title">도서 추가하기</string>
     <string name="obj_book_add_picture">사진 추가하기 +</string>
-    <string name="obj_book_title_hint">제목을 입력해주세요</string>
+    <string name="obj_book_title_hint">제목</string>
 
 
     <!-- ScheduleFragment-->
@@ -142,5 +143,9 @@
     <string name="obj_wd_yes">네, 탈퇴하겠습니다</string>
     <string name="msg_logout_content">로그아웃 하시겠습니까?</string>
     <string name="glb_logout">로그아웃</string>
+    <string name="msg_max_image_count_exceed">첨부 가능한 사진 갯수를 초과했어요</string>
+    <string name="obj_book_add_author">저자</string>
+    <string name="obj_book_add_publish">출판사</string>
+    <string name="obj_book_add_finish">도서 추가</string>
 
 </resources>

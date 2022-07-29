@@ -46,22 +46,20 @@ class LoginActivity : AppCompatActivity() {
                         response: Response<ResponseBody>
                     ) {
                         if(response.isSuccessful) {
-                            Toast.makeText(applicationContext,response.body()!!.string(),Toast.LENGTH_SHORT).show()
-
                             val authorizationToken = response.headers()[getString(R.string.glb_authorization)].toString()
                             SharedPreferenceHelper.setAuthorizationToken(applicationContext, authorizationToken)
 
-                            
                             val intent = Intent(this@LoginActivity, MainBaseActivity::class.java)
                             startActivity(intent)
                             overridePendingTransition(0, 0)
+                            finish()
                         } else {
                             Toast.makeText(applicationContext, getString(R.string.msg_login_fail), Toast.LENGTH_SHORT).show()
                         }
                     }
 
                     override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-
+                        Toast.makeText(applicationContext, getString(R.string.glb_internet_error), Toast.LENGTH_SHORT).show()
                     }
                 })
             }

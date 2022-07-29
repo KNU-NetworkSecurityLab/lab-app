@@ -20,6 +20,8 @@
     <color name="secondary_color_30">#D5DCFF</color>
     <color name="secondary_color_70">#6A82FF</color>
 
+    <color name="nsl_blue">#0765FF</color>
+
     <!-- etc Colors -->
     <color name="bright_blue">#DBE1FF</color>
 

@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/gray_10"
     android:orientation="vertical"
     tools:context=".pages.home.HomeFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/round_bottom_main_20"
+        android:background="@drawable/iot_top_background"
         android:orientation="vertical"
         android:paddingHorizontal="@dimen/margin_20"
         android:paddingTop="@dimen/margin_20"
@@ -46,7 +46,7 @@
                 android:layout_height="70dp"
                 android:background="@drawable/round_white_tran_10"
                 android:foreground="?attr/selectableItemBackground"
-                android:src="@drawable/icon_group"
+                android:src="@drawable/icon_history"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.1"
@@ -91,12 +91,12 @@
                 app:layout_constraintTop_toBottomOf="@+id/btn_home_books" />
 
             <ImageButton
-                android:id="@+id/btn_home_lab_log"
+                android:id="@+id/btn_home_lab_member"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:background="@drawable/round_white_tran_10"
                 android:foreground="?attr/selectableItemBackground"
-                android:src="@drawable/icon_history"
+                android:src="@drawable/icon_group"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.9"
@@ -108,12 +108,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="@string/obj_home_lab_log"
+                android:text="@string/obj_home_lab_group"
                 android:textColor="@color/white"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/btn_home_lab_log"
-                app:layout_constraintStart_toStartOf="@+id/btn_home_lab_log"
-                app:layout_constraintTop_toBottomOf="@+id/btn_home_lab_log" />
+                app:layout_constraintEnd_toEndOf="@+id/btn_home_lab_member"
+                app:layout_constraintStart_toStartOf="@+id/btn_home_lab_member"
+                app:layout_constraintTop_toBottomOf="@+id/btn_home_lab_member" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
@@ -128,6 +128,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap_vertical"
             android:text="@string/obj_home_smart_lab"
             android:textColor="@color/black"
             android:textSize="20sp"
@@ -150,33 +151,28 @@
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:layout_marginRight="10dp"
-                    android:background="@drawable/round_main_light_10"
+                    android:background="@drawable/iot_item_background"
                     android:orientation="vertical"
                     android:padding="10dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/obj_home_smart_door"
-                        android:textColor="@color/white"
-                        android:textStyle="bold" />
 
                     <ImageView
                         android:id="@+id/img_home_smart_door"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:padding="10dp"
-                        android:src="@drawable/icon_door_open"
-                        app:tint="@color/white" />
+                        android:padding="20dp"
+                        android:src="@drawable/ic_door_open"
+                        app:tint="@color/nsl_blue" />
 
                     <TextView
                         android:id="@+id/tv_home_smart_door"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:layout_marginBottom="10dp"
                         android:text="@string/obj_home_smart_door_opened"
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -185,33 +181,27 @@
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:layout_marginLeft="10dp"
-                    android:background="@drawable/round_main_light_10"
+                    android:background="@drawable/iot_item_background"
                     android:orientation="vertical"
                     android:padding="10dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/obj_home_smart_coffee"
-                        android:textColor="@color/white"
-                        android:textStyle="bold" />
 
                     <ImageView
                         android:id="@+id/img_home_smart_coffee"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:padding="10dp"
-                        android:src="@drawable/icon_coffee"
-                        app:tint="@color/white" />
+                        android:padding="20dp"
+                        android:src="@drawable/ic_coffee"
+                        app:tint="@color/gray_30" />
 
                     <TextView
                         android:id="@+id/tv_home_smart_coffee"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:layout_marginBottom="10dp"
                         android:text="@string/obj_home_smart_coffee_empty"
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
                         android:textStyle="bold" />
                 </LinearLayout>
             </LinearLayout>
@@ -228,33 +218,27 @@
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:layout_marginRight="10dp"
-                    android:background="@drawable/round_main_light_10"
+                    android:background="@drawable/iot_item_background"
                     android:orientation="vertical"
                     android:padding="10dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/obj_home_smart_a4"
-                        android:textColor="@color/white"
-                        android:textStyle="bold" />
 
                     <ImageView
                         android:id="@+id/img_home_smart_paper"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:padding="10dp"
-                        android:src="@drawable/icon_paper"
-                        app:tint="@color/white" />
+                        android:padding="20dp"
+                        android:src="@drawable/ic_document"
+                        app:tint="@color/nsl_blue" />
 
                     <TextView
                         android:id="@+id/tv_home_smart_paper"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:layout_marginBottom="10dp"
                         android:text="@string/obj_home_smart_a4_enough"
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -263,38 +247,30 @@
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:layout_marginLeft="10dp"
-                    android:background="@drawable/round_main_light_10"
+                    android:background="@drawable/iot_item_background"
                     android:orientation="vertical"
                     android:padding="10dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/obj_home_smart_door"
-                        android:textColor="@color/white"
-                        android:textStyle="bold" />
 
                     <ImageView
                         android:id="@+id/img_home_smart_light"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:padding="10dp"
-                        android:src="@drawable/icon_light_off"
-                        app:tint="@color/white" />
+                        android:padding="20dp"
+                        android:src="@drawable/ic_light"
+                        app:tint="@color/gray_30" />
 
                     <TextView
                         android:id="@+id/tv_home_smart_light"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:layout_marginBottom="10dp"
                         android:text="@string/obj_home_smart_light_off"
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
                         android:textStyle="bold" />
                 </LinearLayout>
-
             </LinearLayout>
-
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
