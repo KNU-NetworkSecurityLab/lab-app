@@ -251,6 +251,42 @@ class ScheduleFragment : Fragment() {
                         }
                     }
                     addEventOnCalendar()
+
+
+
+                    targetEventList.clear()
+
+
+                    // 데이터 필터링
+
+                    // 1일 일정 (끝나는 날이 없을때) -> 같은날인것만 필터링
+                    val filteredData1 = scheduleDataList.filter { scheduleData ->
+                        (scheduleData.endDate == null) && Utils.isEqualDate(scheduleData.startDate!!.time, binding.cvLabSchedule.selectedDate.timeInMillis)
+                    }
+
+                    val filteredData2 = scheduleDataList.filter { scheduleData ->
+                        if(scheduleData.endDate != null) {
+                            val startDate = Calendar.getInstance().apply {
+                                timeInMillis = scheduleData.startDate!!.time
+                                set(Calendar.HOUR, 0)
+                                set(Calendar.MINUTE, 0)
+                                set(Calendar.SECOND, 0)
+                                set(Calendar.MILLISECOND, 0)
+                            }
+                            val endDate = Calendar.getInstance().apply {
+                                timeInMillis = scheduleData.endDate!!.time
+                                set(Calendar.HOUR, 23)
+                                set(Calendar.MINUTE, 59)
+                                set(Calendar.SECOND, 59)
+                            }
+                            startDate.timeInMillis <= binding.cvLabSchedule.selectedDate.timeInMillis && binding.cvLabSchedule.selectedDate.timeInMillis <= endDate.timeInMillis
+                        } else false
+                    }
+                    // 2일 이상 일정
+                    targetEventList.addAll(filteredData1)
+                    targetEventList.addAll(filteredData2)
+
+                    scheduleAdapter.notifyDataSetChanged()
                 }
             }
 
