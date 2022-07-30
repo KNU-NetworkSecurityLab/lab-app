@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.nsl_app.adapters.RepoCardAdapter
 import com.example.nsl_app.databinding.FragmentCommunityBinding
 import com.example.nsl_app.models.RepoCardItem
+import com.example.nsl_app.utils.Utils
 import com.example.nsl_app.utils.githubAPI.GithubAPI
 import com.example.nsl_app.utils.githubAPI.responseDTO.RepoListDTO
 import retrofit2.Call
@@ -34,9 +35,9 @@ class CommunityFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding.rvRepos.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        binding.rvRepos.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
 
-        repoAdapter = RepoCardAdapter(requireContext(), repoCardItemList)
+        repoAdapter = RepoCardAdapter(requireContext(), Utils.getDisplayWidthHeight(requireActivity())[0], repoCardItemList)
         binding.rvRepos.adapter = repoAdapter
         repoAdapter.notifyDataSetChanged()
 
@@ -49,7 +50,7 @@ class CommunityFragment : Fragment() {
 
                     body.forEach {
                         val tags = ArrayList<String>()
-                        if(it.language != null) tags.add(it.language) else tags.add("")
+                        if (it.language != null) tags.add(it.language) else tags.add("")
                         val description = it.description ?: ""
                         // TODO API 가 가장 많이 쓰인 언어 1개만 보여주므로, 모든 언어를 표시하려면 별도의 API 요청 필요.
                         repoCardItemList.add(RepoCardItem(it.name, tags, description))

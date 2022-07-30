@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray_10"
+    android:background="@color/background_gray"
     android:orientation="vertical"
     tools:context=".pages.home.HomeFragment">
 
@@ -128,7 +128,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/gap_vertical"
             android:text="@string/obj_home_smart_lab"
             android:textColor="@color/black"
             android:textSize="20sp"

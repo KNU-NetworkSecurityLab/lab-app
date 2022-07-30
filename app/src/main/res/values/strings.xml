@@ -147,5 +147,7 @@
     <string name="obj_book_add_author">저자</string>
     <string name="obj_book_add_publish">출판사</string>
     <string name="obj_book_add_finish">도서 추가</string>
+    <string name="lab_name">Network Security Lab</string>
+    <string name="obj_prj_github_repo">Gihhub 저장소</string>
 
 </resources>
