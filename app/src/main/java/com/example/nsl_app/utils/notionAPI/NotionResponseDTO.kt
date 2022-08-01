@@ -44,3 +44,12 @@ data class NotionScheduleCreateResponse(
     val properties: com.example.nsl_app.utils.notionAPI.responseDTO.scheduleCreate.Properties,
     val url: String
 )
+
+data class NotionMemberResponse(
+    val has_more: Boolean,
+    val next_cursor: Any,
+    val `object`: String,
+    val page: com.example.nsl_app.utils.notionAPI.responseDTO.memberQuery.Page,
+    val results: List<com.example.nsl_app.utils.notionAPI.responseDTO.memberQuery.Result>,
+    val type: String
+)

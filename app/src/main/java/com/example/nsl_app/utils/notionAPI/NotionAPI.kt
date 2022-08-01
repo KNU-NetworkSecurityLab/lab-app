@@ -13,6 +13,7 @@ interface NotionAPI {
         private const val baseNotionUri = "https://api.notion.com/"
         const val NOTION_API_VERSION = "2022-02-22"
         const val NOTION_SCHEDULE_DB_ID = "9ef40c5d64c84229b876b801b1c19a15"
+        const val NOTION_MEMBER_DB_ID = "806e637102eb45a58392b19a04051489"
 
         fun create(): NotionAPI {
             return Retrofit.Builder()
@@ -77,4 +78,12 @@ interface NotionAPI {
         @Header("Notion-Version") notionVersion: String,
         @Header("Authorization") token: String,
     ): Call<ResponseBody>
+
+    // 구성원 받아오기
+    @POST("v1/databases/{DATABASE_ID}/query")
+    fun getMember(
+        @Path("DATABASE_ID") databaseID: String,
+        @Header("Notion-Version") notionVersion: String,
+        @Header("Authorization") token: String
+    ): Call<NotionMemberResponse>
 }
