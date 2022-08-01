@@ -19,6 +19,9 @@
             android:name="com.example.nsl_app.pages.book.BookActivity"
             android:exported="false" />
         <activity
+            android:name="com.example.nsl_app.pages.member.MemberActivity"
+            android:exported="false" />
+        <activity
             android:name=".pages.myPage.MyPageActivity"
             android:exported="false" />
         <activity

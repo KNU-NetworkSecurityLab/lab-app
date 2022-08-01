@@ -5,6 +5,7 @@
     <!-- Global -->
     <string name="glb_title_kor">네트워크 보안 연구실</string>
     <string name="glb_title_eng">Network Security Lab.</string>
+    <string name="lab_name">Network Security Lab</string>
     <string name="glb_slogan">미래를 향한 꿈 세계를 향한 도전</string>
     <string name="glb_slider">|</string>
 
@@ -97,7 +98,10 @@
     <string name="obj_book_add_title">도서 추가하기</string>
     <string name="obj_book_add_picture">사진 추가하기 +</string>
     <string name="obj_book_title_hint">제목</string>
-
+    <string name="obj_book_add_author">저자</string>
+    <string name="obj_book_add_publish">출판사</string>
+    <string name="obj_book_add_finish">도서 추가</string>
+    <string name="msg_max_image_count_exceed">첨부 가능한 사진 갯수를 초과했어요</string>
 
     <!-- ScheduleFragment-->
     <string name="obj_sch_tab0">랩실 일정</string>
@@ -135,19 +139,22 @@
     <string name="obj_my_page_withdrawal">회원탈퇴</string>
     <string name="obj_my_page_app_version">앱 버전</string>
     <string name="obj_logout">로그아웃</string>
+    <string name="msg_logout_content">로그아웃 하시겠습니까?</string>
+    <string name="glb_logout">로그아웃</string>
 
     <!-- dialog_withdrawal -->
     <string name="obj_wd_title">연구실 회원을 탈퇴하시겠습니까?</string>
     <string name="obj_wd_content">탈퇴 시 정보는 즉시 삭제되며,\n삭제된 정보는 복구할 수 없습니다.</string>
     <string name="obj_wd_no">아니요. 탈퇴하지 않겠습니다.</string>
     <string name="obj_wd_yes">네, 탈퇴하겠습니다</string>
-    <string name="msg_logout_content">로그아웃 하시겠습니까?</string>
-    <string name="glb_logout">로그아웃</string>
-    <string name="msg_max_image_count_exceed">첨부 가능한 사진 갯수를 초과했어요</string>
-    <string name="obj_book_add_author">저자</string>
-    <string name="obj_book_add_publish">출판사</string>
-    <string name="obj_book_add_finish">도서 추가</string>
-    <string name="lab_name">Network Security Lab</string>
-    <string name="obj_prj_github_repo">Gihhub 저장소</string>
+
+
+    <!-- ProjectActivity -->
+    <string name="obj_prj_github_repo">Github 저장소</string>
+    <string name="obj_member_title">연구실 구성원</string>
+
+    <!-- MemberActivity -->
+
+
 
 </resources>
