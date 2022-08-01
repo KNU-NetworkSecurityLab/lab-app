@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tv_item_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/gap_line"
+        android:layout_marginRight="@dimen/gap_line"
+        android:background="@drawable/round_bright_blue_10"
+        android:padding="7dp"
+        android:textColor="#0029FF"
+        android:textStyle="bold"
+        tools:text="태그1" />
+
+</FrameLayout>
