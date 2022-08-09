@@ -13,6 +13,9 @@
         android:theme="@style/Theme.NSL_app"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".pages.introduce.IntroduceActivity"
+            android:exported="false" />
+        <activity
             android:name="com.example.nsl_app.pages.book.BookAddActivity"
             android:exported="false" />
         <activity

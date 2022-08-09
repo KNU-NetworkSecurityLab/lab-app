@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.nsl_app.databinding.FragmentHomeBinding
 import com.example.nsl_app.pages.book.BookActivity
+import com.example.nsl_app.pages.introduce.IntroduceActivity
 import com.example.nsl_app.pages.member.MemberActivity
 
 class HomeFragment : Fragment() {
@@ -53,6 +54,10 @@ class HomeFragment : Fragment() {
 
             btnHomeLabMember.setOnClickListener {
                 startActivity(Intent(requireActivity(), MemberActivity::class.java))
+            }
+
+            btnHomeLabShow.setOnClickListener {
+                startActivity(Intent(requireActivity(), IntroduceActivity::class.java))
             }
         }
 
