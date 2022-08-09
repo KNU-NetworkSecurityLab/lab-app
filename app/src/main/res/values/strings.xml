@@ -153,7 +153,7 @@
     <string name="obj_prj_github_repo">Github 저장소</string>
     <string name="obj_member_title">연구실 구성원</string>
     <string name="obj_introduce_title">연구실 소개</string>
-    <string name="obj_intro_content">네트워크 보안 연구실(NSL, Network Security Lab.)은 20XX년, 네트워크 보안 분야의 연구를 목적으로 창설되었습니다.\n\n 네트워크 보안 분야 이외에도 여러 분야에 연구를 진행하고 있으며, 여러 학회에 학술대회에 참가하거나, 프로젝트를 진행합니다.\n\n\n찾아오시는 길\n\n충청남도 천안시 서북구 천안대로 1223-24\n제 8공학관 915호</string>
+    <string name="obj_intro_content">네트워크 보안 연구실(NSL, Network Security Lab.)은 20XX년, 네트워크 보안 분야의 연구를 목적으로 창설되었습니다.\n\n네트워크 보안 분야 이외에도 여러 분야에 연구를 진행하고 있으며, 여러 학회에 학술대회에 참가하거나, 프로젝트를 진행합니다.\n\n\n찾아오시는 길\n\n충청남도 천안시 서북구 천안대로 1223-24\n제 8공학관 915호</string>
 
     <!-- MemberActivity -->
 
