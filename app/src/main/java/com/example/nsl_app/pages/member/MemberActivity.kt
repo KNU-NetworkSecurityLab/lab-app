@@ -6,9 +6,11 @@ import android.util.Log
 import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.nsl_app.R
 import com.example.nsl_app.adapters.MemberAdapter
 import com.example.nsl_app.databinding.ActivityMemberBinding
 import com.example.nsl_app.models.MemberItem
+import com.example.nsl_app.utils.ParentActivity
 import com.example.nsl_app.utils.SecretConstants
 import com.example.nsl_app.utils.notionAPI.NotionAPI
 import com.example.nsl_app.utils.notionAPI.NotionMemberResponse
@@ -16,7 +18,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MemberActivity : AppCompatActivity() {
+class MemberActivity : ParentActivity() {
     private val binding by lazy { ActivityMemberBinding.inflate(layoutInflater) }
     private val notionAPI by lazy { NotionAPI.create() }
     private val notionToken by lazy { SecretConstants.SECRET_NOTION_TOKEN }
@@ -35,6 +37,8 @@ class MemberActivity : AppCompatActivity() {
         }
 
         val getMemberCall = notionAPI.getMember(NotionAPI.NOTION_MEMBER_DB_ID, NotionAPI.NOTION_API_VERSION, notionToken)
+
+        showProgress(this@MemberActivity, getString(R.string.msg_wait))
 
         getMemberCall.enqueue(object : Callback<NotionMemberResponse> {
             override fun onResponse(

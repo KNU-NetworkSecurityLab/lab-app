@@ -1,5 +1,6 @@
 package com.example.nsl_app.pages.community
 
+import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater

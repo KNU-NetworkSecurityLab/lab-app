@@ -7,6 +7,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import com.example.nsl_app.R
 import com.example.nsl_app.databinding.ActivityRegisterBinding
+import com.example.nsl_app.utils.ParentActivity
 import com.example.nsl_app.utils.nslAPI.NSLAPI
 import com.example.nsl_app.utils.nslAPI.SignUpRequestDTO
 import okhttp3.ResponseBody
@@ -14,7 +15,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class RegisterActivity : AppCompatActivity() {
+class RegisterActivity : ParentActivity() {
     private val binding by lazy { ActivityRegisterBinding.inflate(layoutInflater) }
     private val nslAPI by lazy { NSLAPI.create() }
 
@@ -55,29 +56,36 @@ class RegisterActivity : AppCompatActivity() {
 
                 val signCall = nslAPI.signUpCall(signUpRequestDTO)
 
+                showProgress(this@RegisterActivity, getString(R.string.msg_wait))
+
                 signCall.enqueue(object : Callback<ResponseBody> {
                     override fun onResponse(
                         call: Call<ResponseBody>,
                         response: Response<ResponseBody>
                     ) {
+                        hideProgress()
                         if (response.isSuccessful) {
                             val str = response.body()!!.string()
 
                             if (str == "SignUp Success") {
-                                Toast.makeText(applicationContext, getString(R.string.msg_sign_up_success), Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    applicationContext,
+                                    getString(R.string.msg_sign_up_success),
+                                    Toast.LENGTH_SHORT
+                                ).show()
                                 finish()
                             } else {
                                 Toast.makeText(applicationContext, str, Toast.LENGTH_SHORT).show()
                             }
                         } else {
                             val str = response.errorBody()!!.string()
-                            Log.d("dev",str)
-                            Toast.makeText(applicationContext,str,Toast.LENGTH_SHORT).show()
+                            Log.d("dev", str)
+                            Toast.makeText(applicationContext, str, Toast.LENGTH_SHORT).show()
                         }
                     }
 
                     override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-
+                        hideProgress()
                     }
                 })
             }
