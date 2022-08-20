@@ -10,20 +10,19 @@ import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nsl_app.R
-import com.example.nsl_app.databinding.FragmentSchduleAddTagDialogBinding
 import com.example.nsl_app.adapters.SchTagAddAdapter
+import com.example.nsl_app.databinding.FragmentScheduleAddPersonDialogBinding
 
-
-class ScheduleAddTagDialogFragment : DialogFragment() {
-    private lateinit var binding:FragmentSchduleAddTagDialogBinding
-    lateinit var tagAddClickListener: SchTagAddAdapter.TagClickListener
+class ScheduleAddPersonDialogFragment : DialogFragment() {
+    private lateinit var binding: FragmentScheduleAddPersonDialogBinding
+    lateinit var personAddClickListener: SchTagAddAdapter.TagClickListener
     lateinit var tags: ArrayList<String>
 
-    fun newInstance(tags: ArrayList<String>, tagAddClickListener: SchTagAddAdapter.TagClickListener) : ScheduleAddTagDialogFragment {
-        val scheduleAddTagDialogFragment = ScheduleAddTagDialogFragment()
+    fun newInstance(tags: ArrayList<String>, personAddClickListener: SchTagAddAdapter.TagClickListener) : ScheduleAddPersonDialogFragment {
+        val scheduleAddPersonDialogFragment = ScheduleAddPersonDialogFragment()
         this.tags = tags
-        this.tagAddClickListener = tagAddClickListener
-        return scheduleAddTagDialogFragment
+        this.personAddClickListener = personAddClickListener
+        return scheduleAddPersonDialogFragment
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,22 +53,22 @@ class ScheduleAddTagDialogFragment : DialogFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentSchduleAddTagDialogBinding.inflate(inflater, container, false)
+        binding = FragmentScheduleAddPersonDialogBinding.inflate(inflater, container, false)
 
         val adapter = SchTagAddAdapter(requireContext(), tags)
 
-        adapter.tagAddClickListener = tagAddClickListener
+        adapter.tagAddClickListener = personAddClickListener
 
         binding.run {
 
-            listSchTagsAdd.adapter = adapter
-            listSchTagsAdd.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
+            listSchPersonAdd.adapter = adapter
+            listSchPersonAdd.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
             adapter.notifyDataSetChanged()
 
 
             if(tags.isEmpty()) {
-                listSchTagsAdd.visibility = View.GONE
-                tvSchAddNoTags.visibility = View.VISIBLE
+                listSchPersonAdd.visibility = View.GONE
+                tvSchAddNoPerson.visibility = View.VISIBLE
             }
         }
 

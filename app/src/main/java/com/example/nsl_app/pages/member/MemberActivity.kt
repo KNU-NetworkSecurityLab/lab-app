@@ -65,13 +65,15 @@ class MemberActivity : ParentActivity() {
                             email,
                             skills))
                     }
-
+                    hideProgress()
                     memberAdapter.notifyDataSetChanged()
+                } else {
+                    hideProgress()
                 }
             }
 
             override fun onFailure(call: Call<NotionMemberResponse>, t: Throwable) {
-
+                hideProgress()
             }
         })
 

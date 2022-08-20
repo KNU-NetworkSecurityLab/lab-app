@@ -11,7 +11,11 @@ import com.example.nsl_app.R
 class SchTagAddAdapter(val context: Context, private val tags: ArrayList<String>) :
     RecyclerView.Adapter<SchTagAddAdapter.Holder>() {
 
-    var tagAddClickListener: TagAddClickListener? = null
+    interface TagClickListener {
+        fun onTagClick(tag:String)
+    }
+
+    var tagAddClickListener: TagClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater

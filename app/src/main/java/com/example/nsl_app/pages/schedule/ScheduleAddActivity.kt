@@ -12,8 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nsl_app.R
 import com.example.nsl_app.adapters.SchTagAdapter
+import com.example.nsl_app.adapters.SchTagAddAdapter
 import com.example.nsl_app.databinding.ActivityScheduleAddBinding
-import com.example.nsl_app.adapters.TagAddClickListener
+import com.example.nsl_app.models.NotionMemberItem
 import com.example.nsl_app.utils.Constants
 import com.example.nsl_app.utils.SecretConstants
 import com.example.nsl_app.utils.Utils
@@ -26,17 +27,24 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 class ScheduleAddActivity : AppCompatActivity() {
     private lateinit var binding: ActivityScheduleAddBinding
     private lateinit var tagAdapter: SchTagAdapter
+    private lateinit var personAdapter: SchTagAdapter
     private val tags = ArrayList<String>()
+    private val people = ArrayList<String>()
     private val selectedTags = ArrayList<String>()
+    private val selectedPeople = ArrayList<String>()
     private val scheduleAddTagDialogFragment = ScheduleAddTagDialogFragment()
+    private val scheduleAddPersonDialogFragment = ScheduleAddPersonDialogFragment()
 
     private val dateFormat = SimpleDateFormat("yyyy년 M월 d일")
     private val dateSliderFormat = SimpleDateFormat("yyyy-MM-dd")
     private val timeFormat = SimpleDateFormat("a hh:mm")
+
+    private val members = ArrayList<NotionMemberItem>()
 
     private val startDay = Calendar.getInstance()
     private val endDay = Calendar.getInstance()
@@ -44,7 +52,7 @@ class ScheduleAddActivity : AppCompatActivity() {
     val notionAPI by lazy { NotionAPI.create() }
     val editPageID by lazy { intent.getStringExtra(Constants.INTENT_EXTRA_PAGE_ID) }
 
-    private val tagClickListener = object : TagAddClickListener {
+    private val tagClickListener = object : SchTagAddAdapter.TagClickListener {
         override fun onTagClick(tag: String) {
             scheduleAddTagDialogFragment.dismiss()
 
@@ -65,6 +73,27 @@ class ScheduleAddActivity : AppCompatActivity() {
         }
     }
 
+    private val personClickListener = object : SchTagAddAdapter.TagClickListener {
+        override fun onTagClick(tag: String) {
+            scheduleAddPersonDialogFragment.dismiss()
+
+            selectedPeople.add(tag)
+            personAdapter.notifyDataSetChanged()
+
+            people.remove(tag)
+        }
+    }
+
+    private val personRemoveClickListener = object : SchTagAdapter.TagRemoveClickListener {
+        override fun onRemoveClick(tag: String) {
+            people.add(tag)
+            tags.sort()
+
+            selectedPeople.remove(tag)
+            personAdapter.notifyDataSetChanged()
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -77,6 +106,7 @@ class ScheduleAddActivity : AppCompatActivity() {
             setDisplayHomeAsUpEnabled(true)
         }
 
+        getPeople()
         getTags()
 
         startDay[Calendar.MINUTE] = 0
@@ -87,6 +117,9 @@ class ScheduleAddActivity : AppCompatActivity() {
         tagAdapter = SchTagAdapter(applicationContext, selectedTags)
         tagAdapter.tagRemoveClickListener = tagRemoveClickListener
 
+        personAdapter = SchTagAdapter(applicationContext, selectedPeople)
+        personAdapter.tagRemoveClickListener = personRemoveClickListener
+
         binding.run {
             tvCalTagAdd.setOnClickListener {
                 scheduleAddTagDialogFragment.tags = tags
@@ -94,9 +127,19 @@ class ScheduleAddActivity : AppCompatActivity() {
                 scheduleAddTagDialogFragment.show(supportFragmentManager, "NewCalendarTagAdd")
             }
 
+            tvCalPersonAdd.setOnClickListener {
+                scheduleAddPersonDialogFragment.tags = people
+                scheduleAddPersonDialogFragment.personAddClickListener = personClickListener
+                scheduleAddPersonDialogFragment.show(supportFragmentManager, "NewCalendarPersonAdd")
+            }
+
             listSchTags.adapter = tagAdapter
             listSchTags.layoutManager = LinearLayoutManager(applicationContext, RecyclerView.VERTICAL, false)
             tagAdapter.notifyDataSetChanged()
+
+            listSchPerson.adapter = personAdapter
+            listSchPerson.layoutManager = LinearLayoutManager(applicationContext, RecyclerView.VERTICAL, false)
+            personAdapter.notifyDataSetChanged()
 
 
             ckIncludeTime.setOnCheckedChangeListener { compoundButton, isChecked ->
@@ -206,47 +249,8 @@ class ScheduleAddActivity : AppCompatActivity() {
                         }
                         tagAdapter.notifyDataSetChanged()
 
-
                         binding.run {
                             etSchAddTitle.setText(body.properties.이름.title[0].text.content)
-//                            val responseStartTime = body.properties.날짜.date.start
-//                            val responseEndTime = body.properties.날짜.date.end
-//
-//                            if(responseStartTime.length == 10) {
-//                                ckIncludeTime.isChecked = false
-//
-//                                startDay.timeInMillis = dateFormat.parse(body.properties.날짜.date.start).time
-//                                etSchAddTitle.setText(body.properties.이름.title[0].text.content)
-//                                tvCalAddStartDay.text = dateFormat.format(startDay.timeInMillis)
-//                            } else {
-//                                ckIncludeTime.isChecked = true
-//
-//                                startDay.timeInMillis = Utils.notionDateTimeFormat.parse(body.properties.날짜.date.start).time
-//                                etSchAddTitle.setText(body.properties.이름.title[0].text.content)
-//                                tvCalAddStartDay.text = dateFormat.format(startDay.timeInMillis)
-//                                tvCalAddStartTime.text = timeFormat.format(startDay.timeInMillis)
-//                            }
-//
-//                            if(responseEndTime != null) {
-//                                if(responseEndTime.length == 10) {
-//                                    startDay.timeInMillis = dateFormat.parse(body.properties.날짜.date.start).time
-//                                    etSchAddTitle.setText(body.properties.이름.title[0].text.content)
-//                                    tvCalAddStartDay.text = dateFormat.format(startDay.timeInMillis)
-//                                } else {
-//                                    startDay.timeInMillis = Utils.notionDateTimeFormat.parse(body.properties.날짜.date.start).time
-//                                    etSchAddTitle.setText(body.properties.이름.title[0].text.content)
-//                                    tvCalAddStartDay.text = dateFormat.format(startDay.timeInMillis)
-//                                    tvCalAddStartTime.text = timeFormat.format(startDay.timeInMillis)
-//                                }
-//
-//                                endDay.timeInMillis = Utils.notionDateTimeFormat.parse(body.properties.날짜.date.end).time
-//                                tvCalAddEndDay.text = dateFormat.format(endDay.timeInMillis)
-//                                tvCalAddEndTime.text = timeFormat.format(endDay.timeInMillis)
-//                            } else {
-//                                endDay.timeInMillis = startDay.timeInMillis
-//                                tvCalAddEndTime.text = tvCalAddStartTime.text
-//                                tvCalAddEndDay.text = tvCalAddStartDay.text
-//                            }
                         }
                     }
                 }
@@ -284,6 +288,7 @@ class ScheduleAddActivity : AppCompatActivity() {
             Properties(
                 title = title,
                 날짜 = date,
+                참석자 = getNotionMember(),
                 태그 = tags
             )
         )
@@ -346,6 +351,7 @@ class ScheduleAddActivity : AppCompatActivity() {
             Properties(
                 title = title,
                 날짜 = date,
+                참석자 = getNotionMember(),
                 태그 = tags
             ),
             children
@@ -375,6 +381,14 @@ class ScheduleAddActivity : AppCompatActivity() {
             })
     }
 
+    private fun getNotionMember():List<참석자>{
+        val member = ArrayList<참석자>()
+
+        selectedPeople.forEach {  selected ->
+            member.add(참석자(members.find { it.name ==  selected}!!.notionID))
+        }
+        return member
+    }
 
     private fun getTags() {
         val tagCall = notionAPI.getNotionRetrieveData(
@@ -404,6 +418,39 @@ class ScheduleAddActivity : AppCompatActivity() {
         })
     }
 
+    private fun getPeople() {
+        val personCall = notionAPI.getMember(
+            NotionAPI.NOTION_MEMBER_DB_ID,
+            NotionAPI.NOTION_API_VERSION,
+            SecretConstants.SECRET_NOTION_TOKEN
+        )
+
+        personCall.enqueue(object : Callback<NotionMemberResponse> {
+            override fun onResponse(
+                call: Call<NotionMemberResponse>,
+                response: Response<NotionMemberResponse>
+            ) {
+                if(response.isSuccessful) {
+                    val body = response.body() as NotionMemberResponse
+                    body.results.forEach {
+                        if(it.properties.Mention.people.isNotEmpty()) {
+                            people.add(it.properties.Mention.people[0].name)
+                            members.add(
+                                NotionMemberItem(
+                                    it.properties.Mention.people[0].name,
+                                    it.properties.Mention.people[0].id
+                                )
+                            )
+                        }
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<NotionMemberResponse>, t: Throwable) {
+
+            }
+        })
+    }
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

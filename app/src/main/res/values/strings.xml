@@ -123,6 +123,8 @@
     <string name="obj_sch_add_tag_title">태그 추가하기</string>
     <string name="obj_sch_add_no_tags">추가 가능한 태그가 없어요</string>
     <string name="obj_sch_add_include_time">시간 포함</string>
+    <string name="obj_sch_add_person">참석자</string>
+    <string name="obj_sch_add_tag_person">+ 참석자 추가하기</string>
 
     <string name="msg_sch_add_finish">일정 등록이 완료되었어요</string>
 
@@ -155,6 +157,9 @@
     <string name="obj_introduce_title">연구실 소개</string>
     <string name="obj_intro_content">네트워크 보안 연구실(NSL, Network Security Lab.)은 20XX년, 네트워크 보안 분야의 연구를 목적으로 창설되었습니다.\n\n네트워크 보안 분야 이외에도 여러 분야에 연구를 진행하고 있으며, 여러 학회에 학술대회에 참가하거나, 프로젝트를 진행합니다.\n\n\n찾아오시는 길\n\n충청남도 천안시 서북구 천안대로 1223-24\n제 8공학관 915호</string>
     <string name="msg_wait">잠시만 기다려주세요</string>
+    <string name="obj_sch_add_person_title">참석자 추가하기</string>
+    <string name="obj_sch_add_no_person">추가 가능한 사람이 없어요</string>
+
 
     <!-- MemberActivity -->
 
