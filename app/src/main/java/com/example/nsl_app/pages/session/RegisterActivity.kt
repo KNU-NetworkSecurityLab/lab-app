@@ -1,6 +1,5 @@
-package com.example.nsl_app.pages.loginAndRegister
+package com.example.nsl_app.pages.session
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem

@@ -11,10 +11,10 @@
 
     <!-- Main Colors -->
     <color name="main_color_110">#370060</color>
-    <color name="main_color_100">#4B0082</color>
-    <color name="main_color_80">#9300FF</color>
-    <color name="main_color_60">#C779FF</color>
-    <color name="main_color_10">#F4E6FF</color>
+    <color name="main_color_100">#9747FF</color>
+    <color name="main_color_80">#AA9747FF</color>
+    <color name="main_color_60">#609747FF</color>
+    <color name="main_color_10">#209747FF</color>
 
     <!-- Secondary Colors -->
     <color name="secondary_color_30">#D5DCFF</color>

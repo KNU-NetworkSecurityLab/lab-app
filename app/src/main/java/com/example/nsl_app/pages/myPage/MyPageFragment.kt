@@ -1,7 +1,6 @@
 package com.example.nsl_app.pages.myPage
 
 import android.app.AlertDialog
-import android.app.Application
 import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
@@ -14,7 +13,7 @@ import android.widget.Button
 import android.widget.Toast
 import com.example.nsl_app.R
 import com.example.nsl_app.databinding.FragmentMyPageBinding
-import com.example.nsl_app.pages.loginAndRegister.LoginActivity
+import com.example.nsl_app.pages.session.LoginActivity
 import com.example.nsl_app.utils.SharedPreferenceHelper
 import com.google.android.material.bottomsheet.BottomSheetDialog
 

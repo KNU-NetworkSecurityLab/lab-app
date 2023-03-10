@@ -13,7 +13,7 @@
         android:theme="@style/Theme.NSL_app"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".ParentActivity"
+            android:name=".utils.ParentActivity"
             android:exported="false" />
         <activity
             android:name=".pages.introduce.IntroduceActivity"
@@ -31,7 +31,7 @@
             android:name=".pages.myPage.MyPageActivity"
             android:exported="false" />
         <activity
-            android:name=".pages.loginAndRegister.RegisterActivity"
+            android:name=".pages.session.RegisterActivity"
             android:exported="false" />
         <activity
             android:name=".pages.schedule.ScheduleFragment"
@@ -49,7 +49,7 @@
             android:name=".pages.MainBaseActivity"
             android:exported="false" />
         <activity
-            android:name=".pages.loginAndRegister.LoginActivity"
+            android:name=".pages.session.LoginActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
