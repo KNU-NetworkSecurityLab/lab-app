@@ -26,11 +26,11 @@ interface NSLAPI {
      */
 
     // 로그인
-    @POST("login")
+    @POST("/api/v1/users/sign-in")
     fun loginCall(@Body body: LoginRequestDTO): Call<ResponseBody>
 
     // 회원가입
-    @POST("api/v1/signup")
+    @POST("/api/v1/users/sign-up")
     fun signUpCall(@Body body: SignUpRequestDTO): Call<ResponseBody>
 
 

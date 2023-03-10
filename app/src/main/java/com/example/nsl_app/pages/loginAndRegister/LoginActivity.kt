@@ -35,10 +35,8 @@ class LoginActivity : ParentActivity() {
         setContentView(binding.root)
 
 
-
         binding.run {
             btnLogin.setOnClickListener {
-
 
                 if(binding.etLoginNumber.text.toString().isEmpty()) {
                     Toast.makeText(applicationContext,getString(R.string.msg_login_need_id),Toast.LENGTH_SHORT).show()
