@@ -34,15 +34,6 @@ class RegisterActivity : ParentActivity() {
             etRegPhone.transformationMethod = null
 
             btnRegFinish.setOnClickListener {
-//                if (binding.etRegPw.text.toString() != binding.etRegPwCheck.text.toString()) {
-//                    Toast.makeText(
-//                        applicationContext,
-//                        getString(R.string.msg_sign_up_pw_not_checked),
-//                        Toast.LENGTH_SHORT
-//                    ).show()
-//                    return@setOnClickListener
-//                }
-
                 val signUpRequestDTO = SignUpRequestDTO(
                     studentId = binding.etRegNumber.text.toString(), // id
                     name = binding.etRegName.text.toString(), // name
@@ -62,18 +53,12 @@ class RegisterActivity : ParentActivity() {
                     ) {
                         hideProgress()
                         if (response.isSuccessful) {
-                            val str = response.body()!!.string()
-
-                            if (str == "SignUp Success") {
-                                Toast.makeText(
-                                    applicationContext,
-                                    getString(R.string.msg_sign_up_success),
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                                finish()
-                            } else {
-                                Toast.makeText(applicationContext, str, Toast.LENGTH_SHORT).show()
-                            }
+                            Toast.makeText(
+                                applicationContext,
+                                getString(R.string.msg_sign_up_success),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            finish()
                         } else {
                             val str = response.errorBody()!!.string()
                             Log.d("dev", str)

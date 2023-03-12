@@ -19,7 +19,7 @@ object SharedPreferenceHelper {
         val pref: SharedPreferences = context.getSharedPreferences(PREF_APP, MODE_PRIVATE)
         val editor = pref.edit()
         editor.putString(authorization, token)
-        editor.commit()
+        editor.apply()
     }
 
     fun getAuthorizationToken(context: Context): String? {
@@ -33,7 +33,7 @@ object SharedPreferenceHelper {
         val pref: SharedPreferences = context.getSharedPreferences(PREF_APP, MODE_PRIVATE)
         val editor = pref.edit()
         editor.putBoolean(autoLogin, isEnable)
-        editor.commit()
+        editor.apply()
     }
 
     fun isAutoLoginEnable(context: Context): Boolean {
@@ -46,7 +46,7 @@ object SharedPreferenceHelper {
         val pref: SharedPreferences = context.getSharedPreferences(PREF_APP, MODE_PRIVATE)
         val editor = pref.edit()
         editor.putString(autoLoginID, ID)
-        editor.commit()
+        editor.apply()
     }
 
     fun getAutoLoginID(context: Context): String? {
@@ -59,7 +59,7 @@ object SharedPreferenceHelper {
         val pref: SharedPreferences = context.getSharedPreferences(PREF_APP, MODE_PRIVATE)
         val editor = pref.edit()
         editor.putString(autoLoginPassword, pw)
-        editor.commit()
+        editor.apply()
     }
 
     fun getAutoLoginPassword(context: Context): String? {
