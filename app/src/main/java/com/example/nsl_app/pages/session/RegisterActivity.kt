@@ -53,15 +53,10 @@ class RegisterActivity : ParentActivity() {
                     ) {
                         hideProgress()
                         if (response.isSuccessful) {
-                            Toast.makeText(
-                                applicationContext,
-                                getString(R.string.msg_sign_up_success),
-                                Toast.LENGTH_SHORT
-                            ).show()
+                            showShortToast(getString(R.string.msg_sign_up_success))
                             finish()
                         } else {
                             val str = response.errorBody()!!.string()
-                            Log.d("dev", str)
                             Toast.makeText(applicationContext, str, Toast.LENGTH_SHORT).show()
                         }
                     }

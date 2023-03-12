@@ -41,7 +41,6 @@ class LoginActivity : ParentActivity() {
                 }
             }
 
-
             tvSignUp.setOnClickListener {
                 val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
                 startActivity(intent)
@@ -52,8 +51,6 @@ class LoginActivity : ParentActivity() {
 
 
     private suspend fun login(studentID: String, password: String): Boolean {
-
-        // 코루틴
         val loginRequestDTO = LoginRequestDTO(studentID, password)
         val loginCall = nslAPI.loginCall(loginRequestDTO)
 
@@ -63,8 +60,7 @@ class LoginActivity : ParentActivity() {
 
         return if (response.isSuccessful) {
             // 토큰
-            val authorizationToken =
-                response.headers()[getString(R.string.glb_authorization)].toString()
+            val authorizationToken = response.body()!!.string()
 
             // 토큰 저장
             SharedPreferenceHelper.setAuthorizationToken(applicationContext, authorizationToken)

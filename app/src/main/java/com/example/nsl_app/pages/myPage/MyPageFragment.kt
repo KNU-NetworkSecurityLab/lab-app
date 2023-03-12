@@ -5,20 +5,29 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.example.nsl_app.R
 import com.example.nsl_app.databinding.FragmentMyPageBinding
+import com.example.nsl_app.models.UserInfo
 import com.example.nsl_app.pages.session.LoginActivity
 import com.example.nsl_app.utils.SharedPreferenceHelper
+import com.example.nsl_app.utils.nslAPI.NSLAPI
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import retrofit2.awaitResponse
 
 class MyPageFragment : Fragment() {
     private lateinit var binding: FragmentMyPageBinding
+    private val nslAPI by lazy { NSLAPI.create() }
+    private lateinit var userInfo: UserInfo
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,11 +41,12 @@ class MyPageFragment : Fragment() {
     ): View? {
         binding = FragmentMyPageBinding.inflate(inflater, container, false)
 
-        binding.run {
-            tvMyPageTheme.setOnClickListener {
-                Toast.makeText(requireContext(), "지원 예정 기능입니다.", Toast.LENGTH_SHORT).show()
-            }
 
+        CoroutineScope(Dispatchers.Main).launch {
+            userInfoSet()
+        }
+
+        binding.run {
             tvMyPageWithdrawal.setOnClickListener {
                 val dlWithdrawal = BottomSheetDialog(requireContext())
 
@@ -88,5 +98,18 @@ class MyPageFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    private suspend fun userInfoSet() {
+        CoroutineScope(Dispatchers.Main).launch {
+            userInfo = nslAPI.getUserInfoCall(SharedPreferenceHelper.getAuthorizationToken(requireContext())!!).awaitResponse().body()!!
+
+            binding.run {
+                tvMyPageStudentId.text = userInfo.studentId
+                tvMyPagePosition.text = userInfo.position
+                tvMyPageName.text = userInfo.name
+                tvMyPageEmail.text = userInfo.email
+            }
+        }
     }
 }

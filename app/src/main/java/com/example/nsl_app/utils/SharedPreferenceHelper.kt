@@ -42,7 +42,7 @@ object SharedPreferenceHelper {
     }
 
     // 자동 로그인 아이디 저장
-    fun setAutoLoginID(context: Context, ID:String?) {
+    fun setAutoLoginID(context: Context, ID: String?) {
         val pref: SharedPreferences = context.getSharedPreferences(PREF_APP, MODE_PRIVATE)
         val editor = pref.edit()
         editor.putString(autoLoginID, ID)
@@ -55,7 +55,7 @@ object SharedPreferenceHelper {
     }
 
     // 자동 로그인 패스워드 저장
-    fun setAutoLoginPassword(context: Context, pw:String?) {
+    fun setAutoLoginPassword(context: Context, pw: String?) {
         val pref: SharedPreferences = context.getSharedPreferences(PREF_APP, MODE_PRIVATE)
         val editor = pref.edit()
         editor.putString(autoLoginPassword, pw)

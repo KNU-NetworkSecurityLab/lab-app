@@ -1,5 +1,6 @@
 package com.example.nsl_app.utils.nslAPI
 
+import com.example.nsl_app.models.UserInfo
 import com.example.nsl_app.utils.SecretConstants
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -33,5 +34,7 @@ interface NSLAPI {
     @POST("/api/v1/users/sign-up")
     fun signUpCall(@Body body: SignUpRequestDTO): Call<ResponseBody>
 
-
+    // 회원정보 받기
+    @GET("/api/v1/users")
+    fun getUserInfoCall(@Header("Authorization") token: String): Call<UserInfo>
 }
