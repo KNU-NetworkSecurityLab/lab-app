@@ -135,141 +135,51 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:divider="@drawable/gap_for_vertical"
+            android:orientation="vertical"
+            android:showDividers="beginning|middle">
 
-            <LinearLayout
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:gravity="center"
-                android:orientation="horizontal">
+                android:background="@drawable/round_white_10"
+                android:drawableStart="@drawable/ic_door_open"
+                android:drawablePadding="@dimen/margin_10"
+                android:gravity="center_vertical"
+                android:padding="@dimen/gap_line_double"
+                android:text="@string/obj_home_smart_door_opened" />
 
-                <LinearLayout
-                    android:id="@+id/container_smart_door"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/iot_item_background"
-                    android:orientation="vertical"
-                    android:padding="10dp">
-
-
-                    <ImageView
-                        android:id="@+id/img_home_smart_door"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:padding="20dp"
-                        android:src="@drawable/ic_door_open"
-                        app:tint="@color/nsl_blue" />
-
-                    <TextView
-                        android:id="@+id/tv_home_smart_door"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginBottom="10dp"
-                        android:text="@string/obj_home_smart_door_opened"
-                        android:textColor="@color/black"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/container_smart_coffee"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:layout_marginLeft="10dp"
-                    android:background="@drawable/iot_item_background"
-                    android:orientation="vertical"
-                    android:padding="10dp">
-
-                    <ImageView
-                        android:id="@+id/img_home_smart_coffee"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:padding="20dp"
-                        android:src="@drawable/ic_coffee"
-                        app:tint="@color/gray_30" />
-
-                    <TextView
-                        android:id="@+id/tv_home_smart_coffee"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginBottom="10dp"
-                        android:text="@string/obj_home_smart_coffee_empty"
-                        android:textColor="@color/black"
-                        android:textStyle="bold" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:gravity="center"
-                android:orientation="horizontal">
+                android:background="@drawable/round_white_10"
+                android:drawableStart="@drawable/ic_coffee"
+                android:drawablePadding="@dimen/margin_10"
+                android:gravity="center_vertical"
+                android:padding="@dimen/gap_line_double"
+                android:text="@string/obj_home_smart_coffee_empty" />
 
-                <LinearLayout
-                    android:id="@+id/container_smart_paper"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/iot_item_background"
-                    android:orientation="vertical"
-                    android:padding="10dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/round_white_10"
+                android:drawableStart="@drawable/ic_document"
+                android:drawablePadding="@dimen/margin_10"
+                android:gravity="center_vertical"
+                android:padding="@dimen/gap_line_double"
+                android:text="@string/obj_home_smart_a4_enough" />
 
-                    <ImageView
-                        android:id="@+id/img_home_smart_paper"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:padding="20dp"
-                        android:src="@drawable/ic_document"
-                        app:tint="@color/nsl_blue" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/round_white_10"
+                android:drawableStart="@drawable/ic_light"
+                android:drawablePadding="@dimen/margin_10"
+                android:gravity="center_vertical"
+                android:padding="@dimen/gap_line_double"
+                android:text="@string/obj_home_smart_light_on" />
 
-                    <TextView
-                        android:id="@+id/tv_home_smart_paper"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginBottom="10dp"
-                        android:text="@string/obj_home_smart_a4_enough"
-                        android:textColor="@color/black"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/container_smart_light"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:layout_marginLeft="10dp"
-                    android:background="@drawable/iot_item_background"
-                    android:orientation="vertical"
-                    android:padding="10dp">
-
-                    <ImageView
-                        android:id="@+id/img_home_smart_light"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:padding="20dp"
-                        android:src="@drawable/ic_light"
-                        app:tint="@color/gray_30" />
-
-                    <TextView
-                        android:id="@+id/tv_home_smart_light"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginBottom="10dp"
-                        android:text="@string/obj_home_smart_light_off"
-                        android:textColor="@color/black"
-                        android:textStyle="bold" />
-                </LinearLayout>
-            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

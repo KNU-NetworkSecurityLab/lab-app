@@ -30,22 +30,6 @@ class HomeFragment : Fragment() {
         val containerSize = (deviceWidth * 0.4).toInt()
 
         binding.run {
-            containerSmartDoor.layoutParams.run {
-                height = containerSize
-                width = containerSize
-            }
-            containerSmartCoffee.layoutParams.run {
-                height = containerSize
-                width = containerSize
-            }
-            containerSmartLight.layoutParams.run {
-                height = containerSize
-                width = containerSize
-            }
-            containerSmartPaper.layoutParams.run {
-                height = containerSize
-                width = containerSize
-            }
 
             btnHomeBooks.setOnClickListener {
                 val intent = Intent(requireActivity(), BookActivity::class.java)
