@@ -2,7 +2,6 @@ package com.example.nsl_app.pages.session
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import com.example.nsl_app.R
 import com.example.nsl_app.databinding.ActivityLoginBinding
 import com.example.nsl_app.pages.MainBaseActivity
@@ -10,10 +9,10 @@ import com.example.nsl_app.utils.ParentActivity
 import com.example.nsl_app.utils.SharedPreferenceHelper
 import com.example.nsl_app.utils.nslAPI.LoginRequestDTO
 import com.example.nsl_app.utils.nslAPI.NSLAPI
-import okhttp3.ResponseBody
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import retrofit2.awaitResponse
 
 class LoginActivity : ParentActivity() {
     private val nslAPI by lazy { NSLAPI.create() }
@@ -28,24 +27,18 @@ class LoginActivity : ParentActivity() {
         binding.run {
             btnLogin.setOnClickListener {
                 if (binding.etLoginNumber.text.toString().isEmpty()) {
-                    Toast.makeText(
-                        applicationContext,
-                        getString(R.string.msg_login_need_id),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    showShortToast(getString(R.string.msg_login_need_id))
                     return@setOnClickListener
                 }
 
                 if (binding.etLoginPw.text.toString().isEmpty()) {
-                    Toast.makeText(
-                        applicationContext,
-                        getString(R.string.msg_login_need_pw),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    showShortToast(getString(R.string.msg_login_need_pw))
                     return@setOnClickListener
                 }
 
-                login(binding.etLoginNumber.text.toString(), binding.etLoginPw.text.toString())
+                CoroutineScope(Dispatchers.Main).launch {
+                    login(binding.etLoginNumber.text.toString(), binding.etLoginPw.text.toString())
+                }
             }
 
 
@@ -58,51 +51,31 @@ class LoginActivity : ParentActivity() {
     }
 
 
-    private fun login(studentID: String, password: String) {
-        val loginRequestDTO = LoginRequestDTO(
-            binding.etLoginNumber.text.toString(),
-            binding.etLoginPw.text.toString()
-        )
+    private suspend fun login(studentID: String, password: String): Boolean {
+
+        // 코루틴
+        val loginRequestDTO = LoginRequestDTO(studentID, password)
         val loginCall = nslAPI.loginCall(loginRequestDTO)
 
         showProgress(this@LoginActivity, getString(R.string.msg_wait))
+        val response = loginCall.awaitResponse()
+        hideProgress()
 
-        loginCall.enqueue(object : Callback<ResponseBody> {
-            override fun onResponse(
-                call: Call<ResponseBody>,
-                response: Response<ResponseBody>
-            ) {
-                hideProgress()
+        return if (response.isSuccessful) {
+            // 토큰
+            val authorizationToken =
+                response.headers()[getString(R.string.glb_authorization)].toString()
 
-                if (response.isSuccessful) {
-                    val authorizationToken =
-                        response.headers()[getString(R.string.glb_authorization)].toString()
-                    SharedPreferenceHelper.setAuthorizationToken(
-                        applicationContext,
-                        authorizationToken
-                    )
+            // 토큰 저장
+            SharedPreferenceHelper.setAuthorizationToken(applicationContext, authorizationToken)
 
-                    val intent = Intent(this@LoginActivity, MainBaseActivity::class.java)
-                    startActivity(intent)
-                    overridePendingTransition(0, 0)
-                    finish()
-                } else {
-                    Toast.makeText(
-                        applicationContext,
-                        getString(R.string.msg_login_fail),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
-
-            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                Toast.makeText(
-                    applicationContext,
-                    getString(R.string.glb_internet_error),
-                    Toast.LENGTH_SHORT
-                ).show()
-                hideProgress()
-            }
-        })
+            val intent = Intent(this@LoginActivity, MainBaseActivity::class.java)
+            startActivity(intent)
+            finish()
+            true
+        } else {
+            showShortToast(getString(R.string.msg_login_fail))
+            false
+        }
     }
 }
