@@ -17,10 +17,10 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:textColor="@color/nsl_blue"
+            android:textColor="@color/main_color_100"
             android:textSize="30sp"
             android:textStyle="bold"
-            tools:text="강수민" />
+            tools:text="홍길동" />
 
         <TextView
             android:id="@+id/tv_item_member_degree"

@@ -1,7 +1,8 @@
 package com.example.nsl_app.pages
 
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.Color
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.example.nsl_app.R
 import com.example.nsl_app.databinding.ActivityMainBaseBinding
 import com.example.nsl_app.pages.community.CommunityFragment
@@ -24,11 +25,14 @@ class MainBaseActivity : AppCompatActivity() {
             navMain.setOnItemSelectedListener {
                 when(it.itemId) {
                     R.id.nav_home -> {
+                        // status bar color
+                        setStatusBarColor(Color.WHITE)
                         supportFragmentManager.beginTransaction().replace(R.id.container_main, HomeFragment()).commit()
                         return@setOnItemSelectedListener true
                     }
 
                     R.id.nav_community -> {
+                        setStatusBarColor(Color.WHITE)
                         supportFragmentManager.beginTransaction().replace(R.id.container_main, CommunityFragment()).commit()
                         return@setOnItemSelectedListener true
                     }
@@ -39,6 +43,7 @@ class MainBaseActivity : AppCompatActivity() {
                     }
 
                     R.id.nav_my_page -> {
+                        setStatusBarColor(Color.WHITE)
                         supportFragmentManager.beginTransaction().replace(R.id.container_main, MyPageFragment()).commit()
                         return@setOnItemSelectedListener true
                     }
@@ -47,5 +52,9 @@ class MainBaseActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+    private fun setStatusBarColor(color: Int) {
+        window.statusBarColor = color
     }
 }

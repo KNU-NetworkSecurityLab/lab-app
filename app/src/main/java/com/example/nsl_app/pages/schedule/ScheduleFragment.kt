@@ -57,6 +57,8 @@ class ScheduleFragment : Fragment() {
     ): View? {
         binding = FragmentScheduleBinding.inflate(inflater, container, false)
 
+        requireActivity().window.statusBarColor =(requireActivity().getColor(R.color.main_color_100))
+
         scheduleAdapter = ScheduleAdapter(requireContext(), targetEventList)
 
         binding.run {
