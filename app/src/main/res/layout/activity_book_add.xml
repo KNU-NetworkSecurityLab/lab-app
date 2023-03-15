@@ -78,6 +78,47 @@
             </com.google.android.material.textfield.TextInputLayout>
 
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/gap_line_double"
+                android:layout_marginBottom="@dimen/gap_line_double"
+                android:text="태그"
+                android:textSize="@dimen/text_size_20"
+                android:textStyle="bold" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_book_tags"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:itemCount="3"
+                tools:listitem="@layout/item_sch_tag" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/gap_vertical"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/et_book_add_tag"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="@dimen/gap_line"
+                    android:layout_weight="1"
+                    android:background="@drawable/et_gray_10" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_book_add_tag"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/btn_black_10"
+                    android:paddingVertical="@dimen/gap_line"
+                    android:text="태그 추가" />
+            </LinearLayout>
+
 
         </LinearLayout>
     </ScrollView>
