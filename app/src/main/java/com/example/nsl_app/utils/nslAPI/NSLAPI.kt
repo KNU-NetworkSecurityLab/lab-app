@@ -37,4 +37,17 @@ interface NSLAPI {
     // 회원정보 받기
     @GET("/api/v1/users")
     fun getUserInfoCall(@Header("Authorization") token: String): Call<UserInfo>
+
+
+    /*
+        Book
+     */
+    @Multipart
+    @POST("/api/v1/books")
+    fun bookRegisterCall(
+        @Header("Authorization") token: String,
+        @PartMap book: Map<String, BookRequestDTO>,
+    ): Call<ResponseBody>
+
+
 }

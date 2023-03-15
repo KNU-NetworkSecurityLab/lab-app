@@ -76,6 +76,9 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/obj_book_add_publish" />
             </com.google.android.material.textfield.TextInputLayout>
+
+
+
         </LinearLayout>
     </ScrollView>
 

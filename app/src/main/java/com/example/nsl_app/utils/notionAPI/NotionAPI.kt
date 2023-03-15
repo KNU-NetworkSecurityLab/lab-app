@@ -12,8 +12,8 @@ interface NotionAPI {
     companion object {
         private const val baseNotionUri = "https://api.notion.com/"
         const val NOTION_API_VERSION = "2022-02-22"
-        const val NOTION_SCHEDULE_DB_ID = "9ef40c5d64c84229b876b801b1c19a15"
-        const val NOTION_MEMBER_DB_ID = "806e637102eb45a58392b19a04051489"
+        const val NOTION_SCHEDULE_DB_ID = "30ac3457537744b69abb66cbe6be134a"
+        const val NOTION_MEMBER_DB_ID = "5d519222a4ea4084be38df311b236487"
 
         fun create(): NotionAPI {
             return Retrofit.Builder()

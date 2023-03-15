@@ -15,6 +15,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.nsl_app.R
 import com.example.nsl_app.adapters.BookImageAdapter
 import com.example.nsl_app.databinding.ActivityBookAddBinding
+import com.example.nsl_app.utils.SharedPreferenceHelper
+import com.example.nsl_app.utils.nslAPI.BookRequestDTO
+import com.example.nsl_app.utils.nslAPI.NSLAPI
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import retrofit2.awaitResponse
 
 class BookAddActivity : AppCompatActivity() {
 
@@ -27,6 +34,7 @@ class BookAddActivity : AppCompatActivity() {
     private lateinit var activityResultLauncher: ActivityResultLauncher<Intent>
     private var imageUriList = ArrayList<Uri>()
     private val imageAdapter by lazy { BookImageAdapter(applicationContext, imageUriList) }
+    private val nslAPI by lazy { NSLAPI.create() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,8 +78,33 @@ class BookAddActivity : AppCompatActivity() {
 
 
             btnBookAddFinish.setOnClickListener {
-                finish()
+                CoroutineScope(Dispatchers.Main).launch {
+                    bookUpload()
+                }
             }
+        }
+    }
+
+    private suspend fun bookUpload() {
+        val tags = ArrayList<String>()
+        val bookRequestDTO = BookRequestDTO(
+            binding.etBookTitle.text.toString(),
+            binding.etBookAuthor.text.toString(),
+            binding.etBookPublish.text.toString(),
+            tags
+        )
+
+
+        val bookRegisterCall = nslAPI.bookRegisterCall(
+            SharedPreferenceHelper.getAuthorizationToken(applicationContext)!!,
+            mapOf(Pair("book", bookRequestDTO)),
+        ).awaitResponse()
+
+        if (bookRegisterCall.isSuccessful) {
+            Toast.makeText(applicationContext, "책 등록 성공", Toast.LENGTH_SHORT).show()
+            finish()
+        } else {
+            Toast.makeText(applicationContext, "책 등록 실패", Toast.LENGTH_SHORT).show()
         }
     }
 
