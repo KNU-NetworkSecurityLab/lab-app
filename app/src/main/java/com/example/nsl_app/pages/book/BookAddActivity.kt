@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nsl_app.R
 import com.example.nsl_app.adapters.BookImageAdapter
+import com.example.nsl_app.adapters.RemovableLabelAdapter
 import com.example.nsl_app.databinding.ActivityBookAddBinding
 import com.example.nsl_app.utils.SharedPreferenceHelper
 import com.example.nsl_app.utils.nslAPI.BookRequestDTO
@@ -35,6 +36,8 @@ class BookAddActivity : AppCompatActivity() {
     private var imageUriList = ArrayList<Uri>()
     private val imageAdapter by lazy { BookImageAdapter(applicationContext, imageUriList) }
     private val nslAPI by lazy { NSLAPI.create() }
+    private val tagsList = ArrayList<String>()
+    private val tagsAdapter by lazy { RemovableLabelAdapter(applicationContext, tagsList) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +45,7 @@ class BookAddActivity : AppCompatActivity() {
 
         toolbarSetUp()
         initGetImage()
+        initTagsList()
 
         binding.run {
             rvBookPhotos.run {
@@ -85,15 +89,25 @@ class BookAddActivity : AppCompatActivity() {
         }
     }
 
+    private fun initTagsList() {
+        binding.run {
+            rvBookTags.adapter = tagsAdapter
+
+            btnBookAddTag.setOnClickListener {
+                tagsList.add(etBookAddTag.text.toString())
+                etBookAddTag.setText("")
+                tagsAdapter.notifyDataSetChanged()
+            }
+        }
+    }
+
     private suspend fun bookUpload() {
-        val tags = ArrayList<String>()
         val bookRequestDTO = BookRequestDTO(
             binding.etBookTitle.text.toString(),
             binding.etBookAuthor.text.toString(),
             binding.etBookPublish.text.toString(),
-            tags
+            tagsList
         )
-
 
         val bookRegisterCall = nslAPI.bookRegisterCall(
             SharedPreferenceHelper.getAuthorizationToken(applicationContext)!!,

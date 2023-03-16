@@ -19,7 +19,7 @@ class SchTagAdapter(val context: Context, private val selectedTags: ArrayList<St
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val view: View = inflater.inflate(R.layout.item_sch_tag, parent, false)
+        val view: View = inflater.inflate(R.layout.item_removable_label, parent, false)
 
         return Holder(view)
     }
