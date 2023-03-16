@@ -1,5 +1,3 @@
 package com.example.nsl_app.models
 
-class BookItemList {
-    val bookList = ArrayList<BookItem>()
-}
+class BookItemList : ArrayList<BookItemListItem>()

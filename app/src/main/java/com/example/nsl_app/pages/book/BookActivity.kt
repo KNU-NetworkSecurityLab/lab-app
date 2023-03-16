@@ -1,9 +1,7 @@
 package com.example.nsl_app.pages.book
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -34,16 +32,6 @@ class BookActivity : ParentActivity() {
             setDisplayHomeAsUpEnabled(true)
         }
 
-        val bookList = ArrayList<BookItem>()
-        val tempTags = ArrayList<String>()
-
-        tempTags.add("Java")
-        tempTags.add("안드로이드")
-
-        bookList.add(BookItem(1, "Do it! 안드로이드", "강XX", tempTags))
-        bookList.add(BookItem(2, "월급 두배로 받는 법", "전XX", tempTags))
-        bookList.add(BookItem(3, "학점 All A+ 받는 법", "성XX", tempTags))
-
         val bookAdapter = BookAdapter(this, bookList)
 
         binding.run {
@@ -72,9 +60,8 @@ class BookActivity : ParentActivity() {
         val response = nslAPI.getBookListCall(token).awaitResponse()
 
         if (response.isSuccessful) {
-            response.body()?.bookList?.forEach {
-                val bookTagsSample = arrayListOf("자바", "코틀린", "안드로이드")
-                val bookItem = BookItem(it.bookId, it.bookName, it.bookAuthor, bookTagsSample)
+            response.body()?.forEach {
+                val bookItem = BookItem(it.id, it.bookName, it.bookAuthor, it.bookTagList)
                 bookList.add(bookItem)
             }
             binding.listBook.adapter?.notifyDataSetChanged()

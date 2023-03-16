@@ -26,6 +26,8 @@ class BookAdapter (val context: Context, private val bookItem : ArrayList<BookIt
             tv_item_book_author!!.text = bookItem[position].bookAuthor
 
             val bookTagsAdapter = BookTagsAdapter(context, bookItem[position].bookTags!!)
+//            val sampleTags = arrayListOf("자바", "코틀린")
+//            val bookTagsAdapter = BookTagsAdapter(context, sampleTags)
             list_book_tag.adapter = bookTagsAdapter
 
             list_book_tag.layoutManager = FlexboxLayoutManager(context).apply {
