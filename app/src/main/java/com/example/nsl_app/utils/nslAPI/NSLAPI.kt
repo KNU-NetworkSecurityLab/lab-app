@@ -4,6 +4,7 @@ import com.example.nsl_app.models.BookDetailItem
 import com.example.nsl_app.models.BookItemList
 import com.example.nsl_app.models.UserInfo
 import com.example.nsl_app.utils.SecretConstants
+import okhttp3.MultipartBody
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Retrofit
@@ -46,9 +47,11 @@ interface NSLAPI {
      */
     @Multipart
     @POST("/api/v1/books")
+    @JvmSuppressWildcards
     fun bookRegisterCall(
         @Header("Authorization") token: String,
         @PartMap book: Map<String, BookRequestDTO>,
+        @PartMap bookImages: Map<String, List<MultipartBody.Part>>
     ): Call<ResponseBody>
 
     @GET("/api/v1/books")
@@ -59,6 +62,12 @@ interface NSLAPI {
         @Header("Authorization") token: String,
         @Path("bookId") bookId: Int
     ): Call<BookDetailItem>
+
+    @GET("/api/v1/books/images/{imageId}")
+    fun getBookImageCall(
+        @Header("Authorization") token: String,
+        @Path("imageId") imageId: Int
+    ): Call<ResponseBody>
 
 
 }

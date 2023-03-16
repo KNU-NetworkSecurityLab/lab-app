@@ -42,50 +42,54 @@
                 android:text="@string/obj_book_add_picture"
                 android:textColor="@color/black" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/gap_vertical">
+                android:layout_marginTop="@dimen/gap_vertical"
+                android:text="제목"
+                android:textStyle="bold" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_book_title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/obj_book_title_hint" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
+            <EditText
+                android:id="@+id/et_book_title"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/gap_vertical">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_book_author"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/obj_book_add_author" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/gap_vertical">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_book_publish"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/obj_book_add_publish" />
-            </com.google.android.material.textfield.TextInputLayout>
-
+                android:layout_height="@dimen/btn_full_height"
+                android:layout_marginTop="@dimen/gap_line"
+                android:background="@drawable/et_gray_10" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/gap_line_double"
+                android:text="저자"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/et_book_author"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/btn_full_height"
+                android:layout_marginTop="@dimen/gap_line"
+                android:background="@drawable/et_gray_10" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/gap_vertical"
+                android:text="출판사"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/et_book_publish"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/btn_full_height"
+                android:layout_marginTop="@dimen/gap_line"
+                android:background="@drawable/et_gray_10" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/gap_vertical"
                 android:layout_marginBottom="@dimen/gap_line_double"
                 android:text="태그"
-                android:textSize="@dimen/text_size_20"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView

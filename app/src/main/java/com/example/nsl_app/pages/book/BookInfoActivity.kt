@@ -1,7 +1,9 @@
 package com.example.nsl_app.pages.book
 
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import com.example.nsl_app.R
 import com.example.nsl_app.adapters.LabelAdapter
 import com.example.nsl_app.databinding.ActivityBookInfoBinding
@@ -58,11 +60,37 @@ class BookInfoActivity : ParentActivity() {
                 tvBookPublisher.text = bookDetailItem.bookPublisher
                 tvBookTitle.text = bookDetailItem.bookName
 
+                if (bookDetailItem.bookImageList.size > 0) {
+                    bookDetailItem.bookImageList.forEach {
+                        loadImage(it)
+                    }
+                } else {
+                    ivItemBookImage.visibility = View.GONE
+                }
+
                 tags.addAll(bookDetailItem.bookTagList)
                 tagsAdapter.notifyDataSetChanged()
             }
         } else {
             showShortToast("책 정보를 불러올 수 없습니다 2")
+        }
+
+    }
+
+
+    private suspend fun loadImage(imageId: Int) {
+
+        val response = nslAPI.getBookImageCall(token, imageId).awaitResponse()
+
+        if (response.isSuccessful) {
+            binding.run {
+                val image = response.body()!!
+                ivItemBookImage.setImageBitmap(BitmapFactory.decodeStream(image.byteStream()))
+
+//                Glide.with(applicationContext).load(image).into(ivItemBookImage)
+            }
+        } else {
+            showShortToast("책 이미지를 불러올 수 없습니다")
         }
 
     }

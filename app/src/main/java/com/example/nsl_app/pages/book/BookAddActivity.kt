@@ -22,7 +22,14 @@ import com.example.nsl_app.utils.nslAPI.NSLAPI
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.ResponseBody
 import retrofit2.awaitResponse
+import java.io.File
 
 class BookAddActivity : AppCompatActivity() {
 
@@ -111,9 +118,24 @@ class BookAddActivity : AppCompatActivity() {
             tagsList
         )
 
+        // retrofit2 multipart image upload
+        ResponseBody.create(MultipartBody.FORM, "image")
+
+        val imageFile = File(imageUriList[0].path!!)
+        val requestFile = RequestBody.create("image/*".toMediaType(), imageFile)
+        val body = MultipartBody.Part.createFormData("bookImages", imageFile.name, requestFile)
+
+
+//        val imageFile = File(imageUriList[0].path!!)
+//        val requestFile = RequestBody.create("image/*".toMediaType(), imageFile)
+//
+//        val imagePart = MultipartBody.Part.createFormData("image", imageFile.name, requestFile)
+
+
         val bookRegisterCall = nslAPI.bookRegisterCall(
             SharedPreferenceHelper.getAuthorizationToken(applicationContext)!!,
             mapOf(Pair("book", bookRequestDTO)),
+            mapOf(Pair("bookImages", listOf(body)))
         ).awaitResponse()
 
         if (bookRegisterCall.isSuccessful) {
