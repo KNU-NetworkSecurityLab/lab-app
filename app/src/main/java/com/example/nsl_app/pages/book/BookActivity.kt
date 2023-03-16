@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.nsl_app.adapters.BookAdapter
 import com.example.nsl_app.databinding.ActivityBookBinding
 import com.example.nsl_app.models.BookItem
+import com.example.nsl_app.utils.Constants
 import com.example.nsl_app.utils.ParentActivity
 import com.example.nsl_app.utils.SharedPreferenceHelper
 import com.example.nsl_app.utils.nslAPI.NSLAPI
@@ -33,6 +34,13 @@ class BookActivity : ParentActivity() {
         }
 
         val bookAdapter = BookAdapter(this, bookList)
+        bookAdapter.itemSelectListener = object : BookAdapter.ItemSelectListener {
+            override fun onItemClick(position: Int) {
+                val intent = Intent(this@BookActivity, BookInfoActivity::class.java)
+                intent.putExtra(Constants.INTENT_EXTRA_BOOK_ID, bookList[position].bookId)
+                startActivity(intent)
+            }
+        }
 
         binding.run {
             listBook.adapter = bookAdapter

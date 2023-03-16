@@ -6,4 +6,5 @@ object Constants {
     const val INTENT_EXTRA_WRITE_MODE = "WRITE_MODE"
     const val INTENT_EXTRA_EDIT_MODE = "EDIT_MODE"
     const val INTENT_EXTRA_PAGE_ID = "PAGE_ID"
+    const val INTENT_EXTRA_BOOK_ID = "BOOK_ID"
 }

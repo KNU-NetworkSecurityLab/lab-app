@@ -1,5 +1,6 @@
 package com.example.nsl_app.utils.nslAPI
 
+import com.example.nsl_app.models.BookDetailItem
 import com.example.nsl_app.models.BookItemList
 import com.example.nsl_app.models.UserInfo
 import com.example.nsl_app.utils.SecretConstants
@@ -50,9 +51,14 @@ interface NSLAPI {
         @PartMap book: Map<String, BookRequestDTO>,
     ): Call<ResponseBody>
 
-
     @GET("/api/v1/books")
     fun getBookListCall(@Header("Authorization") token: String): Call<BookItemList>
+
+    @GET("/api/v1/books/{bookId}")
+    fun getBookDetailCall(
+        @Header("Authorization") token: String,
+        @Path("bookId") bookId: Int
+    ): Call<BookDetailItem>
 
 
 }

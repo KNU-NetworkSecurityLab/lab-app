@@ -8,10 +8,19 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nsl_app.R
 import com.example.nsl_app.models.BookItem
-import com.google.android.flexbox.*
+import com.google.android.flexbox.FlexDirection
+import com.google.android.flexbox.FlexWrap
+import com.google.android.flexbox.FlexboxLayoutManager
+import com.google.android.flexbox.JustifyContent
 
-class BookAdapter (val context: Context, private val bookItem : ArrayList<BookItem>) :
+class BookAdapter(val context: Context, private val bookItem: ArrayList<BookItem>) :
     RecyclerView.Adapter<BookAdapter.Holder>() {
+
+    interface ItemSelectListener {
+        fun onItemClick(position: Int)
+    }
+
+    var itemSelectListener: ItemSelectListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -49,5 +58,9 @@ class BookAdapter (val context: Context, private val bookItem : ArrayList<BookIt
         var tv_item_book_name = itemView.findViewById<TextView>(R.id.tv_item_book_name)
         var tv_item_book_author = itemView.findViewById<TextView>(R.id.tv_item_book_author)
         var list_book_tag = itemView.findViewById<RecyclerView>(R.id.list_book_tag)
+
+        init {
+            itemView.setOnClickListener { itemSelectListener?.onItemClick(adapterPosition) }
+        }
     }
 }

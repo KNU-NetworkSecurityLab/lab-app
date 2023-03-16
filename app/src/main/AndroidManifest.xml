@@ -13,16 +13,19 @@
         android:theme="@style/Theme.NSL_app"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".pages.book.BookInfoActivity"
+            android:exported="false" />
+        <activity
             android:name=".utils.ParentActivity"
             android:exported="false" />
         <activity
             android:name=".pages.introduce.IntroduceActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.nsl_app.pages.book.BookAddActivity"
+            android:name=".pages.book.BookAddActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.nsl_app.pages.book.BookActivity"
+            android:name=".pages.book.BookActivity"
             android:exported="false" />
         <activity
             android:name="com.example.nsl_app.pages.member.MemberActivity"
