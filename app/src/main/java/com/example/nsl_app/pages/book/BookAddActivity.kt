@@ -97,6 +97,8 @@ class BookAddActivity : AppCompatActivity() {
                 tagsList.add(etBookAddTag.text.toString())
                 etBookAddTag.setText("")
                 tagsAdapter.notifyDataSetChanged()
+
+                svBookAdd.smoothScrollTo(0, svBookAdd.bottom)
             }
         }
     }

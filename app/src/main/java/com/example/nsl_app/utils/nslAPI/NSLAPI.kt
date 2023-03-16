@@ -1,5 +1,6 @@
 package com.example.nsl_app.utils.nslAPI
 
+import com.example.nsl_app.models.BookItemList
 import com.example.nsl_app.models.UserInfo
 import com.example.nsl_app.utils.SecretConstants
 import okhttp3.ResponseBody
@@ -48,6 +49,10 @@ interface NSLAPI {
         @Header("Authorization") token: String,
         @PartMap book: Map<String, BookRequestDTO>,
     ): Call<ResponseBody>
+
+
+    @GET("/api/v1/books")
+    fun getBookListCall(@Header("Authorization") token: String): Call<BookItemList>
 
 
 }

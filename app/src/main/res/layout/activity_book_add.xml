@@ -14,6 +14,7 @@
         app:title="@string/obj_book_add_title" />
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/sv_book_add"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
@@ -88,10 +89,10 @@
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:nestedScrollingEnabled="false"
                 android:id="@+id/rv_book_tags"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:itemCount="3"
                 tools:listitem="@layout/item_removable_label" />

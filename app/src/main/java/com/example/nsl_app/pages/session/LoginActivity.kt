@@ -2,6 +2,7 @@ package com.example.nsl_app.pages.session
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import com.example.nsl_app.R
 import com.example.nsl_app.databinding.ActivityLoginBinding
 import com.example.nsl_app.pages.MainBaseActivity
