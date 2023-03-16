@@ -117,12 +117,11 @@
                     android:layout_width="80dp"
                     android:layout_height="@dimen/btn_full_height"
                     android:layout_gravity="center_vertical"
-                    android:background="@drawable/btn_black_10"
+                    android:background="@drawable/btn_light_10"
                     android:paddingVertical="@dimen/gap_line"
-                    android:text="태그 추가" />
+                    android:text="태그 추가"
+                    android:textColor="@color/main_color_100" />
             </LinearLayout>
-
-
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
@@ -130,6 +129,6 @@
         android:id="@+id/btn_book_add_finish"
         android:layout_width="match_parent"
         android:layout_height="@dimen/btn_full_height"
-        android:background="@drawable/btn_default_square"
+        android:background="@drawable/btn_black_square"
         android:text="@string/obj_book_add_finish" />
 </LinearLayout>
