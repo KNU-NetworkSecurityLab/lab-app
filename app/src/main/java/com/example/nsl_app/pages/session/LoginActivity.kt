@@ -2,7 +2,6 @@ package com.example.nsl_app.pages.session
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import com.example.nsl_app.R
 import com.example.nsl_app.databinding.ActivityLoginBinding
 import com.example.nsl_app.pages.MainBaseActivity
@@ -48,6 +47,25 @@ class LoginActivity : ParentActivity() {
                 overridePendingTransition(0, 0)
             }
         }
+
+
+        autoLogin()
+    }
+
+    private fun autoLogin() {
+        if (SharedPreferenceHelper.isAutoLoginEnable(applicationContext)) {
+            CoroutineScope(Dispatchers.Main).launch {
+                val autoLoginResult = login(
+                    SharedPreferenceHelper.getAutoLoginID(applicationContext)!!,
+                    SharedPreferenceHelper.getAutoLoginPassword(applicationContext)!!
+                )
+
+                if (!autoLoginResult) {
+                    showShortToast("자동 로그인 실패")
+                    SharedPreferenceHelper.setAutoLoginEnable(applicationContext, false)
+                }
+            }
+        }
     }
 
 
@@ -60,6 +78,13 @@ class LoginActivity : ParentActivity() {
         hideProgress()
 
         return if (response.isSuccessful) {
+            // 자동로그인 체크
+            if (!SharedPreferenceHelper.isAutoLoginEnable(applicationContext) && binding.ckLoginAuto.isChecked) {
+                SharedPreferenceHelper.setAutoLoginEnable(applicationContext, true)
+                SharedPreferenceHelper.setAutoLoginID(applicationContext, studentID)
+                SharedPreferenceHelper.setAutoLoginPassword(applicationContext, password)
+            }
+
             // 토큰
             val authorizationToken = response.body()!!.string()
 
