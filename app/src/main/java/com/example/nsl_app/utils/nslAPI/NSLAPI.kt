@@ -45,13 +45,14 @@ interface NSLAPI {
     /*
         Book
      */
+
     @Multipart
     @POST("/api/v1/books")
     @JvmSuppressWildcards
     fun bookRegisterCall(
         @Header("Authorization") token: String,
-        @PartMap book: Map<String, BookRequestDTO>,
-        @PartMap bookImages: Map<String, List<MultipartBody.Part>>
+        @Part("book") book: BookRequestDTO,
+        @Part bookImages: MultipartBody.Part
     ): Call<ResponseBody>
 
     @GET("/api/v1/books")

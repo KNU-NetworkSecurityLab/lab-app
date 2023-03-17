@@ -2,7 +2,10 @@ package com.example.nsl_app.utils
 
 import android.app.Activity
 import android.content.Context
+import android.database.Cursor
 import android.graphics.Point
+import android.net.Uri
+import android.provider.MediaStore
 import android.util.Base64
 import java.text.SimpleDateFormat
 import java.util.*
@@ -29,5 +32,15 @@ object Utils {
         val width = size.x
         val height = size.y
         return arrayOf(width, height)
+    }
+
+    fun getRealPathFromURI(context:Context, contentURI: Uri): String? {
+        val result: String?
+        val cursor: Cursor? = context.contentResolver.query(contentURI, null, null, null, null)
+        cursor?.moveToFirst()
+        val idx: Int? = cursor?.getColumnIndex(MediaStore.Images.ImageColumns.DATA)
+        result = cursor?.getString(idx!!)
+        cursor?.close()
+        return result
     }
 }

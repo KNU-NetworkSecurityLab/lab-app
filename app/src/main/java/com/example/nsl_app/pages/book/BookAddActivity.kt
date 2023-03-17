@@ -3,6 +3,7 @@ package com.example.nsl_app.pages.book
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
@@ -17,6 +18,7 @@ import com.example.nsl_app.adapters.BookImageAdapter
 import com.example.nsl_app.adapters.RemovableLabelAdapter
 import com.example.nsl_app.databinding.ActivityBookAddBinding
 import com.example.nsl_app.utils.SharedPreferenceHelper
+import com.example.nsl_app.utils.Utils
 import com.example.nsl_app.utils.nslAPI.BookRequestDTO
 import com.example.nsl_app.utils.nslAPI.NSLAPI
 import kotlinx.coroutines.CoroutineScope
@@ -27,7 +29,6 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import okhttp3.ResponseBody
 import retrofit2.awaitResponse
 import java.io.File
 
@@ -38,6 +39,7 @@ class BookAddActivity : AppCompatActivity() {
         const val MAX_IMAGE_COUNT = 5
     }
 
+    private val TAG = "BookAddActivity"
     private val binding by lazy { ActivityBookAddBinding.inflate(layoutInflater) }
     private lateinit var activityResultLauncher: ActivityResultLauncher<Intent>
     private var imageUriList = ArrayList<Uri>()
@@ -82,8 +84,8 @@ class BookAddActivity : AppCompatActivity() {
                     return@setOnClickListener
                 }
 
-                val intent = Intent(Intent.ACTION_GET_CONTENT)
-                intent.type = "image/*"
+                val intent = Intent(Intent.ACTION_PICK)
+                intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*")
                 activityResultLauncher.launch(intent)
             }
 
@@ -119,29 +121,28 @@ class BookAddActivity : AppCompatActivity() {
         )
 
         // retrofit2 multipart image upload
-        ResponseBody.create(MultipartBody.FORM, "image")
+        val imageFile = File(Utils.getRealPathFromURI(applicationContext, imageUriList[0]))
+   
 
-        val imageFile = File(imageUriList[0].path!!)
-        val requestFile = RequestBody.create("image/*".toMediaType(), imageFile)
-        val body = MultipartBody.Part.createFormData("bookImages", imageFile.name, requestFile)
+        val requestFile = RequestBody.create(
+            contentResolver.getType(imageUriList[0])!!.toMediaTypeOrNull(), imageFile)
 
-
-//        val imageFile = File(imageUriList[0].path!!)
-//        val requestFile = RequestBody.create("image/*".toMediaType(), imageFile)
-//
-//        val imagePart = MultipartBody.Part.createFormData("image", imageFile.name, requestFile)
+        val body =
+            MultipartBody.Part.createFormData("bookImages", imageFile.name + "adfa.jpg", requestFile)
 
 
         val bookRegisterCall = nslAPI.bookRegisterCall(
             SharedPreferenceHelper.getAuthorizationToken(applicationContext)!!,
-            mapOf(Pair("book", bookRequestDTO)),
-            mapOf(Pair("bookImages", listOf(body)))
+            bookRequestDTO,
+            body
         ).awaitResponse()
 
         if (bookRegisterCall.isSuccessful) {
+            Log.d(TAG, "bookUpload: ${bookRegisterCall.body()!!.string()}")
             Toast.makeText(applicationContext, "책 등록 성공", Toast.LENGTH_SHORT).show()
             finish()
         } else {
+            bookRegisterCall.body()?.toString()?.let { Log.d(TAG, "bookUpload: $it") }
             Toast.makeText(applicationContext, "책 등록 실패", Toast.LENGTH_SHORT).show()
         }
     }
@@ -161,6 +162,7 @@ class BookAddActivity : AppCompatActivity() {
         activityResultLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
                 if (it.resultCode == RESULT_OK && it.data != null) {
+                    // get image uri from intent
                     val currentImageUri = it.data?.data
                     try {
                         imageUriList.add(currentImageUri!!)
