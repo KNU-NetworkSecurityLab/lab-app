@@ -25,10 +25,10 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/btn_full_height"
         android:layout_marginTop="@dimen/gap_vertical"
-        android:background="@drawable/btn_negative_10"
+        android:background="@drawable/btn_light_10"
         android:elevation="0dp"
         android:text="@string/obj_wd_no"
-        android:textColor="@color/black"
+        android:textColor="@color/main_color_100"
         android:textStyle="bold" />
 
     <androidx.appcompat.widget.AppCompatButton
