@@ -11,6 +11,8 @@
         android:id="@+id/toolbar_book_add"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
+        android:background="@color/white"
+        android:elevation="1dp"
         app:title="@string/obj_book_add_title" />
 
     <androidx.core.widget.NestedScrollView

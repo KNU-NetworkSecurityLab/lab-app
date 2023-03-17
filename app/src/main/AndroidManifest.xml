@@ -29,7 +29,7 @@
             android:name=".pages.book.BookAddActivity"
             android:exported="false" />
         <activity
-            android:name=".pages.book.BookActivity"
+            android:name=".pages.book.BookListActivity"
             android:exported="false" />
         <activity
             android:name="com.example.nsl_app.pages.member.MemberActivity"

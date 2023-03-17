@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.nsl_app.databinding.FragmentHomeBinding
-import com.example.nsl_app.pages.book.BookActivity
+import com.example.nsl_app.pages.book.BookListActivity
 import com.example.nsl_app.pages.introduce.IntroduceActivity
 import com.example.nsl_app.pages.member.MemberActivity
 
@@ -32,7 +32,7 @@ class HomeFragment : Fragment() {
         binding.run {
 
             btnHomeBooks.setOnClickListener {
-                val intent = Intent(requireActivity(), BookActivity::class.java)
+                val intent = Intent(requireActivity(), BookListActivity::class.java)
                 startActivity(intent)
             }
 

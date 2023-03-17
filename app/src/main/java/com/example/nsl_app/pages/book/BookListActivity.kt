@@ -6,7 +6,7 @@ import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nsl_app.adapters.BookAdapter
-import com.example.nsl_app.databinding.ActivityBookBinding
+import com.example.nsl_app.databinding.ActivityBookListBinding
 import com.example.nsl_app.models.BookItem
 import com.example.nsl_app.utils.Constants
 import com.example.nsl_app.utils.ParentActivity
@@ -17,10 +17,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.awaitResponse
 
-class BookActivity : ParentActivity() {
+class BookListActivity : ParentActivity() {
     private val token by lazy { SharedPreferenceHelper.getAuthorizationToken(applicationContext)!! }
     private val nslAPI by lazy { NSLAPI.create() }
-    private val binding by lazy { ActivityBookBinding.inflate(layoutInflater) }
+    private val binding by lazy { ActivityBookListBinding.inflate(layoutInflater) }
     private val bookList = ArrayList<BookItem>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,7 +36,7 @@ class BookActivity : ParentActivity() {
         val bookAdapter = BookAdapter(this, bookList)
         bookAdapter.itemSelectListener = object : BookAdapter.ItemSelectListener {
             override fun onItemClick(position: Int) {
-                val intent = Intent(this@BookActivity, BookInfoActivity::class.java)
+                val intent = Intent(this@BookListActivity, BookInfoActivity::class.java)
                 intent.putExtra(Constants.INTENT_EXTRA_BOOK_ID, bookList[position].bookId)
                 startActivity(intent)
             }
@@ -49,7 +49,7 @@ class BookActivity : ParentActivity() {
             bookAdapter.notifyDataSetChanged()
 
             btnBookAdd.setOnClickListener {
-                startActivity(Intent(this@BookActivity, BookAddActivity::class.java))
+                startActivity(Intent(this@BookListActivity, BookAddActivity::class.java))
             }
         }
     }
