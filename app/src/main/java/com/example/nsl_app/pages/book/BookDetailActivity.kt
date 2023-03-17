@@ -10,7 +10,7 @@ import android.view.View
 import com.example.nsl_app.R
 import com.example.nsl_app.adapters.BookImageAdapter
 import com.example.nsl_app.adapters.LabelAdapter
-import com.example.nsl_app.databinding.ActivityBookInfoBinding
+import com.example.nsl_app.databinding.ActivityBookDetailBinding
 import com.example.nsl_app.models.BookDetailItem
 import com.example.nsl_app.utils.Constants
 import com.example.nsl_app.utils.ParentActivity
@@ -21,9 +21,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.awaitResponse
 
-class BookInfoActivity : ParentActivity() {
+class BookDetailActivity : ParentActivity() {
     private val nslAPI by lazy { NSLAPI.create() }
-    private val binding by lazy { ActivityBookInfoBinding.inflate(layoutInflater) }
+    private val binding by lazy { ActivityBookDetailBinding.inflate(layoutInflater) }
     private lateinit var bookDetailItem: BookDetailItem
     private var bookId = -1
     private val token by lazy { SharedPreferenceHelper.getAuthorizationToken(applicationContext)!! }
@@ -87,9 +87,7 @@ class BookInfoActivity : ParentActivity() {
         } else {
             showShortToast("책 정보를 불러올 수 없습니다 2")
         }
-
     }
-
 
     private suspend fun loadImage(imageId: Int) {
 
@@ -106,7 +104,6 @@ class BookInfoActivity : ParentActivity() {
         } else {
             showShortToast("책 이미지를 불러올 수 없습니다")
         }
-
     }
 
 
@@ -119,12 +116,15 @@ class BookInfoActivity : ParentActivity() {
                 when (it.itemId) {
                     R.id.menu_post_edit -> {
                         showShortToast("수정")
+//                        val intent = Intent(applicationContext, BookEditActivity::class.java)
+//                        intent.putExtra(Constants.INTENT_EXTRA_BOOK_ID, bookId)
+//                        startActivity(intent)
                         true
                     }
                     R.id.menu_post_delete -> {
                         // 삭제 다이얼로그
 
-                        val dialog = AlertDialog.Builder(this@BookInfoActivity)
+                        val dialog = AlertDialog.Builder(this@BookDetailActivity)
                             .setTitle("도서 삭제")
                             .setMessage("정말로 삭제하시겠습니까?")
                             .setPositiveButton("삭제") { dialog, _ ->
@@ -166,5 +166,4 @@ class BookInfoActivity : ParentActivity() {
             startActivity(intent)
         }
     }
-
 }

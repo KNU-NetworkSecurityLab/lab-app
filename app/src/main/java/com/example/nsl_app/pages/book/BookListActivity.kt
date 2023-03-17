@@ -36,7 +36,7 @@ class BookListActivity : ParentActivity() {
         val bookAdapter = BookAdapter(this, bookList)
         bookAdapter.itemSelectListener = object : BookAdapter.ItemSelectListener {
             override fun onItemClick(position: Int) {
-                val intent = Intent(this@BookListActivity, BookInfoActivity::class.java)
+                val intent = Intent(this@BookListActivity, BookDetailActivity::class.java)
                 intent.putExtra(Constants.INTENT_EXTRA_BOOK_ID, bookList[position].bookId)
                 startActivity(intent)
             }

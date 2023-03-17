@@ -50,6 +50,16 @@ open class BookAddActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        commonInit()
+
+        binding.btnBookAddFinish.setOnClickListener {
+            CoroutineScope(Dispatchers.Main).launch {
+                bookUpload()
+            }
+        }
+    }
+
+    protected fun commonInit() {
         toolbarSetUp()
         initGetImage()
         initTagsList()
@@ -85,13 +95,6 @@ open class BookAddActivity : AppCompatActivity() {
                 val intent = Intent(Intent.ACTION_PICK)
                 intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*")
                 activityResultLauncher.launch(intent)
-            }
-
-
-            btnBookAddFinish.setOnClickListener {
-                CoroutineScope(Dispatchers.Main).launch {
-                    bookUpload()
-                }
             }
         }
     }

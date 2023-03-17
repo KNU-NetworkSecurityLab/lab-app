@@ -14,10 +14,10 @@
         android:theme="@style/Theme.NSL_app"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".BookEditActivity"
+            android:name=".pages.book.BookEditActivity"
             android:exported="false" />
         <activity
-            android:name=".pages.book.BookInfoActivity"
+            android:name=".pages.book.BookDetailActivity"
             android:exported="false" />
         <activity
             android:name=".utils.ParentActivity"
