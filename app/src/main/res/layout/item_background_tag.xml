@@ -10,9 +10,9 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/gap_line"
         android:layout_marginRight="@dimen/gap_line"
-        android:background="@drawable/round_bright_blue_10"
+        android:background="@drawable/round_main_light_5"
         android:padding="7dp"
-        android:textColor="#0029FF"
+        android:textColor="@color/main_color_100"
         android:textStyle="bold"
         tools:text="태그1" />
 

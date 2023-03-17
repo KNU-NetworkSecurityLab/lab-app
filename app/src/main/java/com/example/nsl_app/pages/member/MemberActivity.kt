@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nsl_app.R
@@ -34,6 +35,7 @@ class MemberActivity : ParentActivity() {
         binding.run {
             rvMember.adapter = memberAdapter
             rvMember.layoutManager = LinearLayoutManager(applicationContext, RecyclerView.VERTICAL, false)
+            rvMember.addItemDecoration(DividerItemDecoration(applicationContext, DividerItemDecoration.VERTICAL))
         }
 
         val getMemberCall = notionAPI.getMember(NotionAPI.NOTION_MEMBER_DB_ID, NotionAPI.NOTION_API_VERSION, notionToken)

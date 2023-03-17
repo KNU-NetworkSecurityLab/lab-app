@@ -28,7 +28,7 @@ class MemberAdapter(val context: Context, private val members: ArrayList<MemberI
     override fun onBindViewHolder(holder: Holder, position: Int) {
         holder.binding.run {
             tvItemMemberName.text = members[position].name
-            tvItemMemberDegree.text = "${members[position].studentNumber}학번 | ${members[position].position}"
+            tvItemMemberDegree.text = "학번 ${members[position].studentNumber} | ${members[position].position}"
             tvItemMemberEmail.text = members[position].email
 
             val skills = members[position].skills

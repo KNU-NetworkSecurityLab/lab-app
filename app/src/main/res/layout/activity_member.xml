@@ -19,6 +19,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_member"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:paddingHorizontal="@dimen/gap_line_double"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/item_member" />
 
 </LinearLayout>
