@@ -11,6 +11,9 @@
         android:id="@+id/toolbar_book_info"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
+        android:background="@color/white"
+        android:elevation="1dp"
+        app:menu="@menu/menu_edit_delete"
         app:title="도서 상세 보기" />
 
     <ScrollView

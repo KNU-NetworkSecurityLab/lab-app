@@ -2,7 +2,6 @@ package com.example.nsl_app.pages.book
 
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.view.MenuItem
 import android.view.View
 import com.example.nsl_app.R
 import com.example.nsl_app.adapters.LabelAdapter
@@ -97,21 +96,24 @@ class BookInfoActivity : ParentActivity() {
 
 
     private fun toolbarSetUp() {
-        setSupportActionBar(binding.toolbarBookInfo)
-        supportActionBar?.run {
-            // 앱 바 뒤로가기 버튼 설정
-            setDisplayHomeAsUpEnabled(true)
+        binding.toolbarBookInfo.run {
+            navigationIcon = getDrawable(R.drawable.icon_arrow_tail)
+            setNavigationOnClickListener { finish() }
+
+            setOnMenuItemClickListener {
+                when (it.itemId) {
+                    R.id.menu_post_edit -> {
+                        showShortToast("수정")
+                        true
+                    }
+                    R.id.menu_post_delete -> {
+                        showShortToast("삭제")
+                        true
+                    }
+                    else -> false
+                }
+            }
         }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // 앱 바 클릭 이벤트
-        when (item.itemId) {
-            android.R.id.home -> {
-                finish()
-                return true
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
 }
