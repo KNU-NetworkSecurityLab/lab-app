@@ -52,7 +52,7 @@ interface NSLAPI {
     fun bookRegisterCall(
         @Header("Authorization") token: String,
         @Part("book") book: BookRequestDTO,
-        @Part bookImages: MultipartBody.Part
+        @Part bookImages: List<MultipartBody.Part>
     ): Call<ResponseBody>
 
     @GET("/api/v1/books")

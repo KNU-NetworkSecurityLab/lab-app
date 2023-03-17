@@ -120,21 +120,22 @@ class BookAddActivity : AppCompatActivity() {
             tagsList
         )
 
-        // retrofit2 multipart image upload
-        val imageFile = File(Utils.getRealPathFromURI(applicationContext, imageUriList[0]))
+        val requestImages = ArrayList<MultipartBody.Part>()
 
+        imageUriList.forEach {
+            val imageFile = File(Utils.getRealPathFromURI(applicationContext, it))
+            val requestFile = RequestBody.create(
+                contentResolver.getType(imageUriList[0])!!.toMediaTypeOrNull(), imageFile)
+            val body = MultipartBody.Part.createFormData("bookImages", imageFile.name, requestFile)
 
-        val requestFile = RequestBody.create(
-            contentResolver.getType(imageUriList[0])!!.toMediaTypeOrNull(), imageFile)
-
-        val body =
-            MultipartBody.Part.createFormData("bookImages", imageFile.name, requestFile)
+            requestImages.add(body)
+        }
 
 
         val bookRegisterCall = nslAPI.bookRegisterCall(
             SharedPreferenceHelper.getAuthorizationToken(applicationContext)!!,
             bookRequestDTO,
-            body
+            requestImages
         ).awaitResponse()
 
         if (bookRegisterCall.isSuccessful) {
