@@ -1,6 +1,7 @@
 package com.example.nsl_app.pages.book
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
@@ -160,7 +161,9 @@ class BookInfoActivity : ParentActivity() {
             showShortToast("삭제되었습니다")
             finish()
         } else {
-            showShortToast("삭제에 실패했습니다")
+            val intent = Intent(applicationContext, BookEditActivity::class.java)
+            intent.putExtra(Constants.INTENT_EXTRA_BOOK_ID, bookId)
+            startActivity(intent)
         }
     }
 

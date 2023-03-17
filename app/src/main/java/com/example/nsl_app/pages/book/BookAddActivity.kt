@@ -30,21 +30,21 @@ import okhttp3.RequestBody
 import retrofit2.awaitResponse
 import java.io.File
 
-class BookAddActivity : AppCompatActivity() {
+open class BookAddActivity : AppCompatActivity() {
 
     companion object {
         const val REQUEST_CODE_GALLERY = 1
         const val MAX_IMAGE_COUNT = 5
     }
 
-    private val TAG = "BookAddActivity"
-    private val binding by lazy { ActivityBookAddBinding.inflate(layoutInflater) }
-    private lateinit var activityResultLauncher: ActivityResultLauncher<Intent>
-    private var imageUriList = ArrayList<Uri>()
-    private val imageAdapter by lazy { BookRegisterImageAdapter(applicationContext, imageUriList) }
-    private val nslAPI by lazy { NSLAPI.create() }
-    private val tagsList = ArrayList<String>()
-    private val tagsAdapter by lazy { RemovableLabelAdapter(applicationContext, tagsList) }
+    protected val TAG = "BookAddActivity"
+    protected val binding by lazy { ActivityBookAddBinding.inflate(layoutInflater) }
+    protected lateinit var activityResultLauncher: ActivityResultLauncher<Intent>
+    protected var imageUriList = ArrayList<Uri>()
+    protected val imageAdapter by lazy { BookRegisterImageAdapter(applicationContext, imageUriList) }
+    protected val nslAPI by lazy { NSLAPI.create() }
+    protected val tagsList = ArrayList<String>()
+    protected val tagsAdapter by lazy { RemovableLabelAdapter(applicationContext, tagsList) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
