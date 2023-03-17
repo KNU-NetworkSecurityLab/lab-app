@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nsl_app.R
-import com.example.nsl_app.adapters.BookImageAdapter
+import com.example.nsl_app.adapters.BookRegisterImageAdapter
 import com.example.nsl_app.adapters.RemovableLabelAdapter
 import com.example.nsl_app.databinding.ActivityBookAddBinding
 import com.example.nsl_app.utils.SharedPreferenceHelper
@@ -24,8 +24,6 @@ import com.example.nsl_app.utils.nslAPI.NSLAPI
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import okhttp3.MediaType
-import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -43,7 +41,7 @@ class BookAddActivity : AppCompatActivity() {
     private val binding by lazy { ActivityBookAddBinding.inflate(layoutInflater) }
     private lateinit var activityResultLauncher: ActivityResultLauncher<Intent>
     private var imageUriList = ArrayList<Uri>()
-    private val imageAdapter by lazy { BookImageAdapter(applicationContext, imageUriList) }
+    private val imageAdapter by lazy { BookRegisterImageAdapter(applicationContext, imageUriList) }
     private val nslAPI by lazy { NSLAPI.create() }
     private val tagsList = ArrayList<String>()
     private val tagsAdapter by lazy { RemovableLabelAdapter(applicationContext, tagsList) }
@@ -63,7 +61,7 @@ class BookAddActivity : AppCompatActivity() {
                     LinearLayoutManager(applicationContext, RecyclerView.HORIZONTAL, false)
             }
             imageAdapter.onImageRemoveClickListener =
-                object : BookImageAdapter.OnImageRemoveClickListener {
+                object : BookRegisterImageAdapter.OnImageRemoveClickListener {
                     override fun onRemove(position: Int) {
                         imageUriList.removeAt(position)
                         refreshImage()

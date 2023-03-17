@@ -1,9 +1,13 @@
 package com.example.nsl_app.pages.book
 
+import android.app.AlertDialog
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import com.example.nsl_app.R
+import com.example.nsl_app.adapters.BookImageAdapter
 import com.example.nsl_app.adapters.LabelAdapter
 import com.example.nsl_app.databinding.ActivityBookInfoBinding
 import com.example.nsl_app.models.BookDetailItem
@@ -25,6 +29,9 @@ class BookInfoActivity : ParentActivity() {
     private val tags = ArrayList<String>()
     private val tagsAdapter by lazy { LabelAdapter(applicationContext, tags) }
 
+    private val bitmapList = ArrayList<Bitmap>()
+    private val imageAdapter by lazy { BookImageAdapter(applicationContext, bitmapList) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -41,11 +48,14 @@ class BookInfoActivity : ParentActivity() {
             rvBookTags.adapter = tagsAdapter
             tagsAdapter.textColor = getColor(R.color.nsl_green)
             tagsAdapter.startString = "#"
+            rvItemBookImages.adapter = imageAdapter
+        }
+    }
 
-            CoroutineScope(Dispatchers.Main).launch {
-                bookInit()
-
-            }
+    override fun onStart() {
+        super.onStart()
+        CoroutineScope(Dispatchers.Main).launch {
+            bookInit()
         }
     }
 
@@ -63,8 +73,11 @@ class BookInfoActivity : ParentActivity() {
                     bookDetailItem.bookImageList.forEach {
                         loadImage(it)
                     }
+
+                    imageAdapter.notifyDataSetChanged()
+
                 } else {
-                    ivItemBookImage.visibility = View.GONE
+                    rvItemBookImages.visibility = View.GONE
                 }
 
                 tags.addAll(bookDetailItem.bookTagList)
@@ -83,8 +96,9 @@ class BookInfoActivity : ParentActivity() {
 
         if (response.isSuccessful) {
             binding.run {
-                val image = response.body()!!
-                ivItemBookImage.setImageBitmap(BitmapFactory.decodeStream(image.byteStream()))
+                val responseBody = response.body()!!
+                val bitmap = BitmapFactory.decodeStream(responseBody.byteStream())
+                bitmapList.add(bitmap)
 
 //                Glide.with(applicationContext).load(image).into(ivItemBookImage)
             }
@@ -107,12 +121,46 @@ class BookInfoActivity : ParentActivity() {
                         true
                     }
                     R.id.menu_post_delete -> {
-                        showShortToast("삭제")
+                        // 삭제 다이얼로그
+
+                        val dialog = AlertDialog.Builder(this@BookInfoActivity)
+                            .setTitle("도서 삭제")
+                            .setMessage("정말로 삭제하시겠습니까?")
+                            .setPositiveButton("삭제") { dialog, _ ->
+                                dialog.dismiss()
+
+                                CoroutineScope(Dispatchers.Main).launch {
+                                    deleteBook()
+                                }
+                            }
+                            .setNegativeButton("취소") { dialog, _ ->
+                                dialog.dismiss()
+                            }
+                            .create()
+
+                        dialog.setOnShowListener {
+                            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.RED)
+                            dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.BLACK)
+                        }
+
+                        dialog.show()
+
                         true
                     }
                     else -> false
                 }
             }
+        }
+    }
+
+    private suspend fun deleteBook() {
+        val response = nslAPI.deleteBookCall(token, bookId).awaitResponse()
+
+        if (response.isSuccessful) {
+            showShortToast("삭제되었습니다")
+            finish()
+        } else {
+            showShortToast("삭제에 실패했습니다")
         }
     }
 

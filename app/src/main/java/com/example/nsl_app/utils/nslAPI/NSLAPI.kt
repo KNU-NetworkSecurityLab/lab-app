@@ -71,4 +71,11 @@ interface NSLAPI {
     ): Call<ResponseBody>
 
 
+    @DELETE("/api/v1/books/{bookId}")
+    fun deleteBookCall(
+        @Header("Authorization") token: String,
+        @Path("bookId") bookId: Int
+    ): Call<ResponseBody>
+
+
 }
