@@ -51,7 +51,7 @@ object SharedPreferenceHelper {
 
     fun getAutoLoginID(context: Context): String? {
         val pref: SharedPreferences = context.getSharedPreferences(PREF_APP, MODE_PRIVATE)
-        return pref.getString(autoLoginID, "")
+        return pref.getString(autoLoginID, null)
     }
 
     // 자동 로그인 패스워드 저장
