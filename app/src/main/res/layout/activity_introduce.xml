@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,45 +8,65 @@
     android:orientation="vertical"
     tools:context=".pages.introduce.IntroduceActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar_introduce"
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        app:title="@string/obj_introduce_title" />
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/img_univ1" />
 
-    <ScrollView
+    <View
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#90000000" />
 
-        <LinearLayout
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_marginTop="20dp"
+            android:id="@+id/toolbar_introduce"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/gap_horizontal"
-            android:orientation="vertical">
+            android:layout_height="?attr/actionBarSize"
+            app:title="@string/obj_introduce_title"
+            app:titleTextColor="@color/white" />
 
-            <ImageView
-                android:layout_width="300dp"
-                android:layout_height="300dp"
-                android:layout_gravity="center_horizontal"
-                android:src="@drawable/img_nsl_logo"
-                app:tint="@color/black" />
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/gap_vertical"
-                android:text="@string/glb_title_kor"
-                android:textColor="@color/black"
-                android:textSize="@dimen/title_size"
-                android:textStyle="bold" />
-
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/gap_line"
-                android:text="@string/obj_intro_content"
-                android:textColor="@color/black" />
+                android:layout_marginHorizontal="@dimen/gap_horizontal"
+                android:orientation="vertical">
 
-        </LinearLayout>
-    </ScrollView>
-</LinearLayout>
+                <ImageView
+                    android:layout_width="300dp"
+                    android:layout_height="300dp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/img_nsl_logo"
+                    app:tint="@color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/gap_vertical"
+                    android:text="@string/glb_title_kor"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/title_size"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/gap_line"
+                    android:text="@string/obj_intro_content"
+                    android:textColor="@color/white" />
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+</FrameLayout>

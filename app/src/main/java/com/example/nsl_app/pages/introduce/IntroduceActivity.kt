@@ -1,7 +1,9 @@
 package com.example.nsl_app.pages.introduce
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import com.example.nsl_app.databinding.ActivityIntroduceBinding
 
 class IntroduceActivity : AppCompatActivity() {
@@ -15,5 +17,17 @@ class IntroduceActivity : AppCompatActivity() {
             // 앱 바 뒤로가기 버튼 설정
             setDisplayHomeAsUpEnabled(true)
         }
+
+        // status bar color clear
+        window.statusBarColor = Color.TRANSPARENT
+
+
+        // set full status bar
+        window.decorView.systemUiVisibility = window.decorView.systemUiVisibility or
+                android.view.View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
+                android.view.View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+
+        // app bar background icon color white
+        binding.toolbarIntroduce.navigationIcon?.setTint(Color.WHITE)
     }
 }
