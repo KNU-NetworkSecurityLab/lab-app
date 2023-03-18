@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="15dp"
-    android:background="@drawable/round_green_10"
+    android:foreground="?attr/selectableItemBackground"
+    android:background="@drawable/round_white_outline_10"
     android:orientation="vertical"
     android:padding="@dimen/text_box_padding">
 
@@ -13,21 +15,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Do it! 안드로이드 프로그래밍"
-        android:textColor="@color/mint" />
+        android:textColor="@color/main_color" />
 
     <TextView
         android:id="@+id/tv_item_book_author"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/gray_80"
-        android:textStyle="bold"
         android:layout_marginTop="@dimen/gap_line"
-        android:text="김XX 지음" />
+        android:text="김XX 지음"
+        android:textColor="@color/gray_80"
+        android:textStyle="bold" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_book_tag"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/gap_line" />
+        android:layout_marginTop="@dimen/gap_line"
+        tools:listitem="@layout/item_book_tag" />
 
 </LinearLayout>

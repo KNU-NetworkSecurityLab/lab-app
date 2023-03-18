@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_skylight"
     android:orientation="vertical"
     tools:context=".pages.book.BookListActivity">
 
@@ -29,6 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
+            android:elevation="1dp"
             app:title="@string/obj_books_title" />
 
         <ScrollView
@@ -43,16 +45,18 @@
 
                 <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/btn_full_height">
+                    android:layout_height="@dimen/btn_full_height"
+                    android:layout_marginTop="@dimen/gap_line_double">
 
                     <EditText
                         android:id="@+id/et_book_search"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/btn_full_height"
-                        android:background="@drawable/et_gray_10"
+                        android:background="@drawable/et_white_outline"
                         android:hint="@string/obj_books_search_hint"
                         android:imeOptions="actionSearch"
-                        android:inputType="text" />
+                        android:inputType="text"
+                        android:paddingHorizontal="@dimen/gap_line" />
 
                     <ImageView
                         android:id="@+id/iv_book_search"
@@ -69,7 +73,8 @@
                     android:id="@+id/list_book"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/gap_vertical" />
+                    android:layout_marginTop="@dimen/gap_line_double"
+                    tools:listitem="@layout/item_book" />
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
