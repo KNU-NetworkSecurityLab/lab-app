@@ -81,8 +81,16 @@ class BookDetailActivity : ParentActivity() {
                     rvItemBookImages.visibility = View.GONE
                 }
 
-                tags.addAll(bookDetailItem.bookTagList)
-                tagsAdapter.notifyDataSetChanged()
+                // 태그
+
+
+                if(bookDetailItem.bookTagList.size > 0) {
+                    tvBookTagsEmpty.visibility = View.GONE
+                    tags.addAll(bookDetailItem.bookTagList)
+                    tagsAdapter.notifyDataSetChanged()
+                } else {
+                    tvBookTagsEmpty.visibility = View.VISIBLE
+                }
             }
         } else {
             showShortToast("책 정보를 불러올 수 없습니다 2")

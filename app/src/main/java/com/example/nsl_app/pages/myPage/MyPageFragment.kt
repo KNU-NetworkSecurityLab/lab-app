@@ -41,11 +41,6 @@ class MyPageFragment : Fragment() {
     ): View? {
         binding = FragmentMyPageBinding.inflate(inflater, container, false)
 
-
-        CoroutineScope(Dispatchers.Main).launch {
-            userInfoSet()
-        }
-
         binding.run {
             tvMyPageWithdrawal.setOnClickListener {
                 val dlWithdrawal = BottomSheetDialog(requireContext())
@@ -98,6 +93,13 @@ class MyPageFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    override fun onStart() {
+        super.onStart()
+        CoroutineScope(Dispatchers.Main).launch {
+            userInfoSet()
+        }
     }
 
     private suspend fun userInfoSet() {

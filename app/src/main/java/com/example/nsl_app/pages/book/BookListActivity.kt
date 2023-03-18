@@ -11,6 +11,7 @@ import com.example.nsl_app.models.BookItem
 import com.example.nsl_app.utils.Constants
 import com.example.nsl_app.utils.ParentActivity
 import com.example.nsl_app.utils.SharedPreferenceHelper
+import com.example.nsl_app.utils.Utils
 import com.example.nsl_app.utils.nslAPI.NSLAPI
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -51,8 +52,44 @@ class BookListActivity : ParentActivity() {
             btnBookAdd.setOnClickListener {
                 startActivity(Intent(this@BookListActivity, BookAddActivity::class.java))
             }
+
+            etBookSearch.setOnEditorActionListener { v, actionId, event ->
+                val searchKeyword = etBookSearch.text.toString()
+                CoroutineScope(Dispatchers.Main).launch {
+                    bookSearch(searchKeyword)
+                }
+                true
+            }
+
+            ivBookSearch.setOnClickListener {
+                val searchKeyword = etBookSearch.text.toString()
+                CoroutineScope(Dispatchers.Main).launch {
+                    bookSearch(searchKeyword)
+                }
+            }
         }
     }
+
+    private suspend fun bookSearch(searchKeyword: String) {
+        showProgress(this, Utils.getLoadingMessage())
+        bookList.clear()
+
+        val response = nslAPI.getBookListCall(token).awaitResponse()
+
+        if(response.isSuccessful) {
+            response.body()?.forEach {
+                if (it.bookName.contains(searchKeyword)) {
+                    val bookItem = BookItem(it.id, it.bookName, it.bookAuthor, it.bookTagList)
+                    bookList.add(bookItem)
+                }
+            }
+            binding.listBook.adapter?.notifyDataSetChanged()
+            hideProgress()
+        } else {
+            showShortToast("책 목록을 불러오는데 실패했습니다.")
+        }
+    }
+
 
     override fun onStart() {
         super.onStart()

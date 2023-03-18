@@ -34,7 +34,7 @@ object Utils {
         return arrayOf(width, height)
     }
 
-    fun getRealPathFromURI(context:Context, contentURI: Uri): String? {
+    fun getRealPathFromURI(context: Context, contentURI: Uri): String? {
         val result: String?
         val cursor: Cursor? = context.contentResolver.query(contentURI, null, null, null, null)
         cursor?.moveToFirst()
@@ -42,5 +42,20 @@ object Utils {
         result = cursor?.getString(idx!!)
         cursor?.close()
         return result
+    }
+
+
+    fun getLoadingMessage(): String {
+        val randomMessage = arrayOf(
+            "데이터를 불러오는 중...",
+            "코테 하는 중...",
+            "커피 만드는 중...",
+            "Intellij IDEA 키는 중...",
+            "디버깅 중...",
+            "쇼파에서 누워있는 중...",
+        )
+        val random = Random()
+        val randomIndex = random.nextInt(randomMessage.size)
+        return randomMessage[randomIndex]
     }
 }

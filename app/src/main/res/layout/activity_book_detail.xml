@@ -126,6 +126,13 @@
                         android:text="태그"
                         android:textStyle="bold" />
 
+                    <TextView
+                        android:id="@+id/tv_book_tags_empty"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="등록된 태그가 없습니다"
+                        android:textColor="@color/gray_80" />
+
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_book_tags"
                         android:layout_width="match_parent"

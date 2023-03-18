@@ -21,6 +21,7 @@
     <color name="secondary_color_70">#6A82FF</color>
 
     <color name="nsl_blue">#0765FF</color>
+    <color name="navy">#293462</color>
 
     <!-- etc Colors -->
     <color name="bright_blue">#ebeeff</color>
@@ -38,5 +39,7 @@
 
 
     <color name="background_gray">#EFEFEF</color>
+
+    <color name="background_2">#F4F5F7</color>
 
 </resources>

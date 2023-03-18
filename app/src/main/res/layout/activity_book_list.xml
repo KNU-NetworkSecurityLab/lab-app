@@ -14,9 +14,9 @@
         android:layout_gravity="bottom|right"
         android:layout_marginRight="@dimen/margin_20"
         android:layout_marginBottom="@dimen/margin_20"
-        app:backgroundTint="@color/white"
         android:src="@drawable/ic_add"
-        android:tint="@color/black" />
+        android:tint="@color/black"
+        app:backgroundTint="@color/white" />
 
 
     <LinearLayout
@@ -41,12 +41,29 @@
                 android:orientation="vertical"
                 android:paddingHorizontal="@dimen/gap_horizontal">
 
-                <EditText
-                    android:id="@+id/et_book_search"
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/icon_search"
-                    android:hint="@string/obj_books_search_hint" />
+                    android:layout_height="@dimen/btn_full_height">
+
+                    <EditText
+                        android:id="@+id/et_book_search"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/btn_full_height"
+                        android:background="@drawable/et_gray_10"
+                        android:hint="@string/obj_books_search_hint"
+                        android:imeOptions="actionSearch"
+                        android:inputType="text" />
+
+                    <ImageView
+                        android:id="@+id/iv_book_search"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:layout_gravity="center_vertical|right"
+                        android:layout_marginRight="@dimen/gap_line"
+                        android:src="@drawable/icon_search" />
+
+                </FrameLayout>
+
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/list_book"

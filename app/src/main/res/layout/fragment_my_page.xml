@@ -82,7 +82,7 @@
                             android:id="@+id/tv_my_page_student_id"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/glb_sample_number" />
+                            tools:text="@string/glb_sample_number" />
                     </LinearLayout>
                 </LinearLayout>
 

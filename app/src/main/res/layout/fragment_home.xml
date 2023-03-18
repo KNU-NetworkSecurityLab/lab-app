@@ -135,14 +135,15 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:divider="@drawable/gap_for_vertical"
             android:orientation="vertical"
             android:showDividers="beginning|middle">
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
                 android:background="@drawable/round_white_10"
                 android:drawableStart="@drawable/ic_door_open"
                 android:drawablePadding="@dimen/margin_10"
@@ -152,7 +153,8 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
                 android:background="@drawable/round_white_10"
                 android:drawableStart="@drawable/ic_coffee"
                 android:drawablePadding="@dimen/margin_10"
@@ -162,7 +164,8 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
                 android:background="@drawable/round_white_10"
                 android:drawableStart="@drawable/ic_document"
                 android:drawablePadding="@dimen/margin_10"
@@ -172,7 +175,8 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
                 android:background="@drawable/round_white_10"
                 android:drawableStart="@drawable/ic_light"
                 android:drawablePadding="@dimen/margin_10"

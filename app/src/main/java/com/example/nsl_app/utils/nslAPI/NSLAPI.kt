@@ -58,6 +58,12 @@ interface NSLAPI {
     @GET("/api/v1/books")
     fun getBookListCall(@Header("Authorization") token: String): Call<BookItemList>
 
+    @GET("/api/v1/books/search")
+    fun getBookSearchListCall(
+        @Header("Authorization") token: String,
+        @Part("keyword") keyword: String
+    ): Call<BookItemList>
+
     @GET("/api/v1/books/{bookId}")
     fun getBookDetailCall(
         @Header("Authorization") token: String,
