@@ -47,7 +47,7 @@ class BookDetailActivity : ParentActivity() {
 
         binding.run {
             rvBookTags.adapter = tagsAdapter
-            tagsAdapter.textColor = getColor(R.color.nsl_green)
+            tagsAdapter.textColor = getColor(R.color.mint)
             tagsAdapter.startString = "#"
             rvItemBookImages.adapter = imageAdapter
         }

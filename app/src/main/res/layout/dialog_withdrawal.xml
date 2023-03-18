@@ -28,7 +28,7 @@
         android:background="@drawable/btn_light_10"
         android:elevation="0dp"
         android:text="@string/obj_wd_no"
-        android:textColor="@color/main_color_100"
+        android:textColor="@color/main_color"
         android:textStyle="bold" />
 
     <androidx.appcompat.widget.AppCompatButton

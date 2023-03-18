@@ -22,7 +22,7 @@
             android:autoSizeTextType="uniform"
             android:gravity="center_vertical"
             android:text="BoT"
-            android:textColor="@color/nsl_blue" />
+            android:textColor="@color/blue" />
 
         <TextView
             android:id="@+id/tv_item_repo_tag"

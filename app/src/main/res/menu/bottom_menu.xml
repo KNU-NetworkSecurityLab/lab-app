@@ -5,28 +5,28 @@
         android:id="@+id/nav_home"
         android:enabled="true"
         android:icon="@drawable/icon_home"
-        android:iconTint="@color/main_color_100"
+        android:iconTint="@color/main_color"
         android:title="@string/nav_menu_home"
         app:showAsAction="always" />
     <item
         android:id="@+id/nav_community"
         android:enabled="true"
         android:icon="@drawable/icon_board"
-        android:iconTint="@color/main_color_100"
+        android:iconTint="@color/main_color"
         android:title="@string/nav_menu_board"
         app:showAsAction="always" />
     <item
         android:id="@+id/nav_schedule"
         android:enabled="true"
         android:icon="@drawable/icon_calendar"
-        android:iconTint="@color/main_color_100"
+        android:iconTint="@color/main_color"
         android:title="@string/nav_menu_schedule"
         app:showAsAction="always" />
     <item
         android:id="@+id/nav_my_page"
         android:enabled="true"
         android:icon="@drawable/icon_person"
-        android:iconTint="@color/main_color_100"
+        android:iconTint="@color/main_color"
         android:title="@string/nav_menu_my_page"
         app:showAsAction="always" />
 </menu>

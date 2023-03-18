@@ -10,7 +10,7 @@
     <ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:indeterminateTint="@color/main_color_100" />
+        android:indeterminateTint="@color/main_color" />
 
     <TextView
         android:id="@+id/tv_dialog_progress"

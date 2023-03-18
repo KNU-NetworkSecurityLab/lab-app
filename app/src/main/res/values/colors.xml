@@ -10,21 +10,18 @@
 
 
     <!-- Main Colors -->
-    <color name="main_color_110">#370060</color>
-    <color name="main_color_100">#9747FF</color>
-    <color name="main_color_80">#AA9747FF</color>
-    <color name="main_color_60">#609747FF</color>
-    <color name="main_color_10">#209747FF</color>
-
-    <!-- Secondary Colors -->
-    <color name="secondary_color_30">#D5DCFF</color>
-    <color name="secondary_color_70">#6A82FF</color>
-
-    <color name="nsl_blue">#0765FF</color>
-    <color name="navy">#293462</color>
+    <color name="main_color">#9747FF</color>
+    <color name="main_color_light">#209747FF</color>
 
     <!-- etc Colors -->
-    <color name="bright_blue">#ebeeff</color>
+    <color name="blue">#0765FF</color>
+    <color name="blue_light">#ebeeff</color>
+
+    <color name="mint">#4BD0B2</color>
+    <color name="mint_light">#e4f8f3</color>
+
+    <color name="navy">#293462</color>
+
 
     <!-- Gray Colors -->
     <color name="gray_10">#10000000</color>
@@ -33,13 +30,9 @@
     <color name="gray_50">#50000000</color>
     <color name="gray_80">#80000000</color>
 
-    <!-- Green Color -->
-    <color name="nsl_green_light">#e4f8f3</color>
-    <color name="nsl_green">#4BD0B2</color>
 
-
+    <!-- Background Colors -->
     <color name="background_gray">#EFEFEF</color>
-
-    <color name="background_2">#F4F5F7</color>
+    <color name="background_skylight">#F4F5F7</color>
 
 </resources>

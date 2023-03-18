@@ -27,13 +27,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:eventsEnabled="true"
-                app:headerColor="@color/main_color_100"
+                app:headerColor="@color/main_color"
                 app:headerLabelColor="@color/white"
-                app:highlightedDaysLabelsColor="@color/main_color_100"
+                app:highlightedDaysLabelsColor="@color/main_color"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:selectionColor="@color/main_color_80"
+                app:selectionColor="@color/main_color"
                 app:selectionLabelColor="@color/white"
                 app:type="one_day_picker">
 

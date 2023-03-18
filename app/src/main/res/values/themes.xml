@@ -32,15 +32,15 @@
     </style>
 
     <style name="customCheckBox" parent="Widget.AppCompat.CompoundButton.CheckBox">
-        <item name="android:buttonTint">@color/main_color_100</item>
+        <item name="android:buttonTint">@color/main_color</item>
     </style>
 
     <style name="customDatePickerTheme" parent="Theme.AppCompat.Light.Dialog">
-        <item name="colorAccent">@color/main_color_100</item>
+        <item name="colorAccent">@color/main_color</item>
     </style>
 
     <style name="customTimePickerTheme" parent="android:Widget.Material.Light.TimePicker">
-        <item name="colorAccent">@color/main_color_100</item>
+        <item name="colorAccent">@color/main_color</item>
         <item name="android:timePickerMode">spinner</item>
     </style>
 
@@ -52,7 +52,7 @@
     </style>
 
     <style name="subTitleColorTextStyle">
-        <item name="android:textColor">@color/main_color_100</item>
+        <item name="android:textColor">@color/main_color</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">18sp</item>
     </style>

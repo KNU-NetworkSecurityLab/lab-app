@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Do it! 안드로이드 프로그래밍"
-        android:textColor="@color/nsl_green" />
+        android:textColor="@color/mint" />
 
     <TextView
         android:id="@+id/tv_item_book_author"

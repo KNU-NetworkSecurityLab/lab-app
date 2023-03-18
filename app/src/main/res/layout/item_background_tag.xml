@@ -12,7 +12,7 @@
         android:layout_marginRight="@dimen/gap_line"
         android:background="@drawable/round_main_light_5"
         android:padding="7dp"
-        android:textColor="@color/main_color_100"
+        android:textColor="@color/main_color"
         android:textStyle="bold"
         tools:text="태그1" />
 

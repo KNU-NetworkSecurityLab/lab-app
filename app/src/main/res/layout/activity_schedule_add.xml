@@ -70,7 +70,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
-                        android:buttonTint="@color/main_color_100"
+                        android:buttonTint="@color/main_color"
                         android:layoutDirection="rtl"
                         android:text="@string/obj_sch_add_include_time"
                         android:visibility="gone" />

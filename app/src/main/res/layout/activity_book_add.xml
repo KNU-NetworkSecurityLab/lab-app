@@ -126,7 +126,7 @@
                     android:background="@drawable/btn_light_10"
                     android:paddingVertical="@dimen/gap_line"
                     android:text="태그 추가"
-                    android:textColor="@color/main_color_100" />
+                    android:textColor="@color/main_color" />
             </LinearLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
