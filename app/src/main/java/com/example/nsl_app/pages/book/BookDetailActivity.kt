@@ -82,8 +82,6 @@ class BookDetailActivity : ParentActivity() {
                 }
 
                 // 태그
-
-
                 if(bookDetailItem.bookTagList.size > 0) {
                     tvBookTagsEmpty.visibility = View.GONE
                     tags.addAll(bookDetailItem.bookTagList)
