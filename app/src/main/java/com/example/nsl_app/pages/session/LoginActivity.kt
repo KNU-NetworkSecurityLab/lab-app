@@ -7,6 +7,7 @@ import com.example.nsl_app.databinding.ActivityLoginBinding
 import com.example.nsl_app.pages.MainBaseActivity
 import com.example.nsl_app.utils.ParentActivity
 import com.example.nsl_app.utils.SharedPreferenceHelper
+import com.example.nsl_app.utils.Utils
 import com.example.nsl_app.utils.nslAPI.LoginRequestDTO
 import com.example.nsl_app.utils.nslAPI.NSLAPI
 import kotlinx.coroutines.CoroutineScope
@@ -61,7 +62,7 @@ class LoginActivity : ParentActivity() {
                 )
 
                 if (!autoLoginResult) {
-                    showShortToast("자동 로그인 실패")
+                    showShortToast(Utils.getLoadingMessage())
                     SharedPreferenceHelper.setAutoLoginEnable(applicationContext, false)
                 }
             }

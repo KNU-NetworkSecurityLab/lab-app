@@ -1,14 +1,12 @@
 package com.example.nsl_app.pages.member
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nsl_app.R
 import com.example.nsl_app.adapters.MemberAdapter
+import com.example.nsl_app.adapters.decoration.RecyclerViewVerticalGap
 import com.example.nsl_app.databinding.ActivityMemberBinding
 import com.example.nsl_app.models.MemberItem
 import com.example.nsl_app.utils.ParentActivity
@@ -35,7 +33,7 @@ class MemberActivity : ParentActivity() {
         binding.run {
             rvMember.adapter = memberAdapter
             rvMember.layoutManager = LinearLayoutManager(applicationContext, RecyclerView.VERTICAL, false)
-            rvMember.addItemDecoration(DividerItemDecoration(applicationContext, DividerItemDecoration.VERTICAL))
+            rvMember.addItemDecoration(RecyclerViewVerticalGap(50))
         }
 
         val getMemberCall = notionAPI.getMember(NotionAPI.NOTION_MEMBER_DB_ID, NotionAPI.NOTION_API_VERSION, notionToken)

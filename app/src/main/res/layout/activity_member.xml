@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/background_skylight"
     android:orientation="vertical"
     tools:context=".pages.member.MemberActivity">
 
@@ -19,8 +19,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_member"
         android:layout_width="match_parent"
-        android:paddingHorizontal="@dimen/gap_line_double"
         android:layout_height="match_parent"
+        android:paddingHorizontal="@dimen/gap_line_double"
         tools:listitem="@layout/item_member" />
 
 </LinearLayout>
