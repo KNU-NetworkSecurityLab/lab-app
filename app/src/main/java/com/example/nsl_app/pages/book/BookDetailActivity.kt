@@ -7,6 +7,11 @@ import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.LinearLayout
+import androidx.core.content.ContextCompat
+import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.example.nsl_app.R
 import com.example.nsl_app.adapters.BookImageAdapter
 import com.example.nsl_app.adapters.LabelAdapter
@@ -51,12 +56,65 @@ class BookDetailActivity : ParentActivity() {
             tagsAdapter.startString = "#"
             rvItemBookImages.adapter = imageAdapter
         }
+
+        // set book indicator
+        binding.run {
+            rvItemBookImages.registerOnPageChangeCallback(object : OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+                    setCurrentIndicator(position)
+                }
+            })
+        }
     }
 
     override fun onStart() {
         super.onStart()
         CoroutineScope(Dispatchers.Main).launch {
             bookInit()
+            setupIndicators(bitmapList.size)
+        }
+    }
+
+    private fun setupIndicators(count: Int) {
+        val indicators: Array<ImageView?> = arrayOfNulls<ImageView>(count)
+        val params = LinearLayout.LayoutParams(
+            ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+        params.setMargins(16, 8, 16, 8)
+        for (i in indicators.indices) {
+            indicators[i] = ImageView(applicationContext)
+            indicators[i]!!.setImageDrawable(
+                ContextCompat.getDrawable(
+                    applicationContext,
+                    R.drawable.bg_indicator_inactive
+                )
+            )
+            indicators[i]!!.setLayoutParams(params)
+            binding.layoutIndicators.addView(indicators[i])
+        }
+        setCurrentIndicator(0)
+    }
+
+    private fun setCurrentIndicator(position: Int) {
+        val childCount: Int = binding.layoutIndicators.getChildCount()
+        for (i in 0 until childCount) {
+            val imageView: ImageView = binding.layoutIndicators.getChildAt(i) as ImageView
+            if (i == position) {
+                imageView.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        applicationContext,
+                        R.drawable.bg_indicator_active
+                    )
+                )
+            } else {
+                imageView.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        applicationContext,
+                        R.drawable.bg_indicator_inactive
+                    )
+                )
+            }
         }
     }
 
@@ -82,7 +140,7 @@ class BookDetailActivity : ParentActivity() {
                 }
 
                 // 태그
-                if(bookDetailItem.bookTagList.size > 0) {
+                if (bookDetailItem.bookTagList.size > 0) {
                     tvBookTagsEmpty.visibility = View.GONE
                     tags.addAll(bookDetailItem.bookTagList)
                     tagsAdapter.notifyDataSetChanged()

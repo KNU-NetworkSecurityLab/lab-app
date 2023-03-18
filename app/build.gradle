@@ -51,7 +51,7 @@ dependencies {
     implementation 'com.google.android.flexbox:flexbox:3.0.0'
 
     // View Pager
-    implementation 'androidx.viewpager2:viewpager2:1.0.0-alpha04'
+    implementation "androidx.viewpager2:viewpager2:1.0.0"
 
 
     // Retrofit2, okhttp3
