@@ -11,6 +11,7 @@ import com.example.nsl_app.databinding.ActivityMemberBinding
 import com.example.nsl_app.models.MemberItem
 import com.example.nsl_app.utils.ParentActivity
 import com.example.nsl_app.utils.SecretConstants
+import com.example.nsl_app.utils.Utils
 import com.example.nsl_app.utils.notionAPI.NotionAPI
 import com.example.nsl_app.utils.notionAPI.NotionMemberResponse
 import retrofit2.Call
@@ -38,7 +39,7 @@ class MemberActivity : ParentActivity() {
 
         val getMemberCall = notionAPI.getMember(NotionAPI.NOTION_MEMBER_DB_ID, NotionAPI.NOTION_API_VERSION, notionToken)
 
-        showProgress(this@MemberActivity, getString(R.string.msg_wait))
+        showProgress(this@MemberActivity, Utils.getLoadingMessage())
 
         getMemberCall.enqueue(object : Callback<NotionMemberResponse> {
             override fun onResponse(

@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.nsl_app.R
 import com.example.nsl_app.databinding.ActivityMainBaseBinding
-import com.example.nsl_app.pages.community.CommunityFragment
+import com.example.nsl_app.pages.project.ProjectFragment
 import com.example.nsl_app.pages.home.HomeFragment
 import com.example.nsl_app.pages.myPage.MyPageFragment
 import com.example.nsl_app.pages.schedule.ScheduleFragment
@@ -33,7 +33,7 @@ class MainBaseActivity : AppCompatActivity() {
 
                     R.id.nav_community -> {
                         setStatusBarColor(Color.WHITE)
-                        supportFragmentManager.beginTransaction().replace(R.id.container_main, CommunityFragment()).commit()
+                        supportFragmentManager.beginTransaction().replace(R.id.container_main, ProjectFragment()).commit()
                         return@setOnItemSelectedListener true
                     }
 

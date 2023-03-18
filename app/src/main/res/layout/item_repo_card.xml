@@ -1,48 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/cv_repo_card"
-    android:layout_width="200dp"
-    android:layout_marginVertical="3dp"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="@dimen/margin_20"
-    app:cardCornerRadius="10dp">
+    android:layout_marginHorizontal="@dimen/gap_horizontal"
+    android:background="@drawable/round_white_outline_10"
+    android:orientation="vertical"
+    android:padding="20dp">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/tv_item_repo_name"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:autoSizeTextType="uniform"
+        android:gravity="center_vertical"
+        android:text="BoT"
+        android:textColor="@color/main_color"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_item_repo_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/round_white_5"
+        android:paddingVertical="2dp"
+        android:text="Java | C++"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tv_item_repo_description"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
-        android:orientation="vertical"
-        android:padding="20dp">
-
-        <TextView
-            android:id="@+id/tv_item_repo_name"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:autoSizeTextType="uniform"
-            android:gravity="center_vertical"
-            android:text="BoT"
-            android:textColor="@color/blue" />
-
-        <TextView
-            android:id="@+id/tv_item_repo_tag"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/round_white_5"
-            android:paddingVertical="2dp"
-            android:text="Java | C++"
-            android:textSize="14dp" />
-
-        <TextView
-            android:id="@+id/tv_item_repo_description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_10"
-            android:lineSpacingExtra="5dp"
-            android:lines="2"
-            android:textSize="12sp"
-            android:text="블록체인 기반의 IoT 고도화 시스템"
-            android:textColor="@color/gray_80"
-            android:textStyle="bold" />
-    </LinearLayout>
-</androidx.cardview.widget.CardView>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_10"
+        android:lineSpacingExtra="5dp"
+        android:lines="2"
+        android:text="블록체인 기반의 IoT 고도화 시스템"
+        android:textColor="@color/gray_80"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+</LinearLayout>
