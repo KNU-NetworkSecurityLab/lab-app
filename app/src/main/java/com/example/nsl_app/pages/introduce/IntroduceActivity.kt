@@ -1,9 +1,9 @@
 package com.example.nsl_app.pages.introduce
 
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
+import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import com.example.nsl_app.databinding.ActivityIntroduceBinding
 
 class IntroduceActivity : AppCompatActivity() {
@@ -29,5 +29,15 @@ class IntroduceActivity : AppCompatActivity() {
 
         // app bar background icon color white
         binding.toolbarIntroduce.navigationIcon?.setTint(Color.WHITE)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                finish()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
