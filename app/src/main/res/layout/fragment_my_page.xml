@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray_10"
+    android:background="@color/background_skylight"
     android:orientation="vertical"
     tools:context=".pages.myPage.MyPageFragment">
 
@@ -24,12 +24,13 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:paddingHorizontal="@dimen/gap_line_double"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/gap_vertical"
+                android:layout_marginTop="@dimen/gap_line_double"
                 android:background="@drawable/round_white_10"
                 android:orientation="vertical"
                 android:padding="@dimen/text_box_padding">
@@ -129,7 +130,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/gap_vertical"
+                android:layout_marginTop="@dimen/gap_line_double"
                 android:background="@drawable/round_white_10"
                 android:orientation="vertical"
                 android:padding="@dimen/text_box_padding">
@@ -156,7 +157,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/gap_vertical"
+                android:layout_marginTop="@dimen/gap_line_double"
                 android:background="@drawable/round_white_10"
                 android:orientation="vertical"
                 android:padding="@dimen/text_box_padding">
@@ -184,7 +185,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/gap_vertical"
+                android:layout_marginTop="@dimen/gap_line_double"
                 android:background="@drawable/round_white_10"
                 android:padding="@dimen/text_box_padding">
 
@@ -205,8 +206,7 @@
                 android:id="@+id/tv_logout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/gap_vertical"
-                android:layout_marginBottom="@dimen/gap_vertical"
+                android:layout_marginVertical="@dimen/gap_line_double"
                 android:background="@drawable/round_white_10"
                 android:gravity="right"
                 android:padding="@dimen/margin_20"
