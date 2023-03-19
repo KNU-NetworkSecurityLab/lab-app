@@ -30,13 +30,14 @@ import kotlin.collections.ArrayList
 
 class ScheduleFragment : Fragment() {
 
-    data class ScheduleData (
+    data class ScheduleData(
         val id: String,
         val title: String,
         var startDate: Date?,
         var startIsIncludeTime: Boolean,
         var endDate: Date?,
-        var endIsIncludeTime: Boolean)
+        var endIsIncludeTime: Boolean
+    )
 
     private lateinit var binding: FragmentScheduleBinding
     private val notionAPI by lazy { NotionAPI.create() }
@@ -57,14 +58,26 @@ class ScheduleFragment : Fragment() {
     ): View? {
         binding = FragmentScheduleBinding.inflate(inflater, container, false)
 
-        requireActivity().window.statusBarColor =(requireActivity().getColor(R.color.main_color))
 
         scheduleAdapter = ScheduleAdapter(requireContext(), targetEventList)
+
+        // 캘린더 버튼 세팅
+        val drawablePrev = requireActivity().getDrawable(R.drawable.ic_arrow_left)
+        drawablePrev?.setTint(requireActivity().getColor(R.color.black))
+        val drawableNext = requireActivity().getDrawable(R.drawable.ic_arrow_right)
+        drawableNext?.setTint(requireActivity().getColor(R.color.black))
+
+        binding.cvLabSchedule.setPreviousButtonImage(drawablePrev)
+        binding.cvLabSchedule.setForwardButtonImage(drawableNext)
+
 
         binding.run {
             btnCalAdd.setOnClickListener {
                 val intent = Intent(requireContext(), ScheduleAddActivity::class.java)
-                intent.putExtra(Constants.INTENT_EXTRA_WRITE_OR_EDIT_MODE, Constants.INTENT_EXTRA_WRITE_MODE)
+                intent.putExtra(
+                    Constants.INTENT_EXTRA_WRITE_OR_EDIT_MODE,
+                    Constants.INTENT_EXTRA_WRITE_MODE
+                )
                 startActivity(intent)
             }
 
@@ -76,11 +89,14 @@ class ScheduleFragment : Fragment() {
 
                 // 1일 일정 (끝나는 날이 없을때) -> 같은날인것만 필터링
                 val filteredData1 = scheduleDataList.filter { scheduleData ->
-                    (scheduleData.endDate == null) && Utils.isEqualDate(scheduleData.startDate!!.time, selectedDay.calendar.timeInMillis)
+                    (scheduleData.endDate == null) && Utils.isEqualDate(
+                        scheduleData.startDate!!.time,
+                        selectedDay.calendar.timeInMillis
+                    )
                 }
 
                 val filteredData2 = scheduleDataList.filter { scheduleData ->
-                    if(scheduleData.endDate != null) {
+                    if (scheduleData.endDate != null) {
                         val startDate = Calendar.getInstance().apply {
                             timeInMillis = scheduleData.startDate!!.time
                             set(Calendar.HOUR, 0)
@@ -110,31 +126,47 @@ class ScheduleFragment : Fragment() {
                     val morePopup = PopupMenu(requireContext(), v)
                     requireActivity().menuInflater.inflate(R.menu.schedule_menu, morePopup.menu)
                     morePopup.setOnMenuItemClickListener { menuItem ->
-                        when(menuItem.itemId) {
+                        when (menuItem.itemId) {
                             R.id.menu_sch_edit -> {
-                                val intent = Intent(requireContext(), ScheduleAddActivity::class.java)
-                                intent.putExtra(Constants.INTENT_EXTRA_WRITE_OR_EDIT_MODE, Constants.INTENT_EXTRA_EDIT_MODE)
+                                val intent =
+                                    Intent(requireContext(), ScheduleAddActivity::class.java)
+                                intent.putExtra(
+                                    Constants.INTENT_EXTRA_WRITE_OR_EDIT_MODE,
+                                    Constants.INTENT_EXTRA_EDIT_MODE
+                                )
                                 intent.putExtra(Constants.INTENT_EXTRA_PAGE_ID, scheduleData.id)
                                 startActivity(intent)
                             }
                             R.id.menu_sch_delete -> {
-                                val call = notionAPI.deleteSchedule(scheduleData.id, NotionAPI.NOTION_API_VERSION, SecretConstants.SECRET_NOTION_TOKEN)
+                                val call = notionAPI.deleteSchedule(
+                                    scheduleData.id,
+                                    NotionAPI.NOTION_API_VERSION,
+                                    SecretConstants.SECRET_NOTION_TOKEN
+                                )
                                 call.enqueue(object : Callback<ResponseBody> {
                                     override fun onResponse(
                                         call: Call<ResponseBody>,
                                         response: Response<ResponseBody>
                                     ) {
-                                        if(response.isSuccessful) {
-                                            Toast.makeText(context, getString(R.string.msg_sch_delete_complete),Toast.LENGTH_SHORT).show()
+                                        if (response.isSuccessful) {
+                                            Toast.makeText(
+                                                context,
+                                                getString(R.string.msg_sch_delete_complete),
+                                                Toast.LENGTH_SHORT
+                                            ).show()
                                             scheduleDataList.removeIf { it.id == scheduleData.id }
-                                            scheduleAdapter.scheduleItemList.removeIf { it.id == scheduleData.id}
+                                            scheduleAdapter.scheduleItemList.removeIf { it.id == scheduleData.id }
                                             scheduleAdapter.notifyDataSetChanged()
                                             addEventOnCalendar()
-                                            
+
                                         }
                                     }
 
-                                    override fun onFailure(call: Call<ResponseBody>, t: Throwable) {}
+                                    override fun onFailure(
+                                        call: Call<ResponseBody>,
+                                        t: Throwable
+                                    ) {
+                                    }
                                 })
                             }
                         }
@@ -168,11 +200,11 @@ class ScheduleFragment : Fragment() {
 
         scheduleDataList.forEach { it ->
 
-            if(it.endDate == null) {
+            if (it.endDate == null) {
                 // 종료일이 없을 경우
 
                 val tempCal = Calendar.getInstance().apply { timeInMillis = it.startDate!!.time }
-                events.add(EventDay(tempCal, R.drawable.circle_main_10))
+                events.add(EventDay(tempCal, R.drawable.circle_schedule_event))
 
             } else {
                 // 종료일이 있을 경우
@@ -186,8 +218,9 @@ class ScheduleFragment : Fragment() {
                     set(Calendar.HOUR, 5)
                 }
 
-                while(startCal.timeInMillis < endCal.timeInMillis) {
-                    val tempCal = Calendar.getInstance().apply { timeInMillis = startCal.timeInMillis }
+                while (startCal.timeInMillis < endCal.timeInMillis) {
+                    val tempCal =
+                        Calendar.getInstance().apply { timeInMillis = startCal.timeInMillis }
 
                     events.add(EventDay(tempCal, R.drawable.circle_main_10))
                     startCal.add(Calendar.DAY_OF_MONTH, 1)
@@ -203,8 +236,12 @@ class ScheduleFragment : Fragment() {
 
     }
 
-    private fun getSchedules () {
-        val call = notionAPI.queryNotionDataBaseAll(NotionAPI.NOTION_SCHEDULE_DB_ID, NotionAPI.NOTION_API_VERSION, SecretConstants.SECRET_NOTION_TOKEN)
+    private fun getSchedules() {
+        val call = notionAPI.queryNotionDataBaseAll(
+            NotionAPI.NOTION_SCHEDULE_DB_ID,
+            NotionAPI.NOTION_API_VERSION,
+            SecretConstants.SECRET_NOTION_TOKEN
+        )
 
         call.enqueue(object : Callback<NotionDatabaseQueryResponse> {
             override fun onResponse(
@@ -225,9 +262,9 @@ class ScheduleFragment : Fragment() {
                             val dateStart = it.properties.날짜.date.start
                             val dateEnd = it.properties.날짜.date.end
 
-                            val tempScheduleData = ScheduleData(id ,text, null, false,null, false)
+                            val tempScheduleData = ScheduleData(id, text, null, false, null, false)
 
-                            if(dateStart.trim().length == 10) {
+                            if (dateStart.trim().length == 10) {
                                 // 2022-05-06 (시간 미포함)
                                 tempScheduleData.startDate = dateFormat.parse(dateStart)
                                 tempScheduleData.startIsIncludeTime = false
@@ -237,8 +274,8 @@ class ScheduleFragment : Fragment() {
                                 tempScheduleData.startIsIncludeTime = true
                             }
 
-                            if(dateEnd != null) {
-                                if(dateEnd.trim().length == 10) {
+                            if (dateEnd != null) {
+                                if (dateEnd.trim().length == 10) {
                                     // 2022-05-06 (시간 미포함)
                                     tempScheduleData.endDate = dateFormat.parse(dateEnd)
                                     tempScheduleData.endIsIncludeTime = false
@@ -263,11 +300,14 @@ class ScheduleFragment : Fragment() {
 
                     // 1일 일정 (끝나는 날이 없을때) -> 같은날인것만 필터링
                     val filteredData1 = scheduleDataList.filter { scheduleData ->
-                        (scheduleData.endDate == null) && Utils.isEqualDate(scheduleData.startDate!!.time, binding.cvLabSchedule.selectedDate.timeInMillis)
+                        (scheduleData.endDate == null) && Utils.isEqualDate(
+                            scheduleData.startDate!!.time,
+                            binding.cvLabSchedule.selectedDate.timeInMillis
+                        )
                     }
 
                     val filteredData2 = scheduleDataList.filter { scheduleData ->
-                        if(scheduleData.endDate != null) {
+                        if (scheduleData.endDate != null) {
                             val startDate = Calendar.getInstance().apply {
                                 timeInMillis = scheduleData.startDate!!.time
                                 set(Calendar.HOUR, 0)

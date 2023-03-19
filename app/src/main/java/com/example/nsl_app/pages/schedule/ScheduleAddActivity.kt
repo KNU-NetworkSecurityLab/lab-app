@@ -385,7 +385,7 @@ class ScheduleAddActivity : AppCompatActivity() {
         val member = ArrayList<참석자>()
 
         selectedPeople.forEach {  selected ->
-            member.add(참석자(members.find { it.name ==  selected}!!.notionID))
+            member.add(참석자(members.find { it.name ==  selected}!!.notionID!!))
         }
         return member
     }

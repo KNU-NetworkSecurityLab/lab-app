@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/margin_10"
-    android:background="@drawable/round_green_10"
+    android:background="@drawable/round_white_outline_10"
     android:orientation="horizontal"
     android:padding="@dimen/margin_20">
 
@@ -20,7 +20,7 @@
             android:gravity="center"
             android:lineSpacingExtra="2dp"
             android:text="3월 1일\n오전 7:00"
-            android:textColor="@color/mint"
+            android:textColor="@color/main_color"
             android:textStyle="bold" />
 
         <TextView
@@ -31,7 +31,7 @@
             android:gravity="center"
             android:lineSpacingExtra="2dp"
             android:text="3월 2일\n오전 7:00"
-            android:textColor="@color/mint"
+            android:textColor="@color/main_color"
             android:textStyle="bold" />
 
     </LinearLayout>
@@ -44,7 +44,7 @@
         android:layout_marginLeft="@dimen/margin_20"
         android:layout_weight="1"
         android:text="랩실 회의"
-        android:textColor="@color/mint"
+        android:textColor="@color/black"
         android:textStyle="bold" />
 
     <androidx.appcompat.widget.AppCompatImageButton
@@ -54,6 +54,6 @@
         android:layout_gravity="right"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:src="@drawable/icon_more"
-        android:tint="@color/mint" />
+        android:tint="@color/black" />
 
 </LinearLayout>

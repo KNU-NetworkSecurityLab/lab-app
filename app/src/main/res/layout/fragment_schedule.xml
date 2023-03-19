@@ -26,24 +26,28 @@
                 android:id="@+id/cv_lab_schedule"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:abbreviationsBarColor="@color/main_color_light"
+                app:abbreviationsLabelsColor="@color/main_color"
                 app:eventsEnabled="true"
-                app:headerColor="@color/main_color"
-                app:headerLabelColor="@color/white"
+                app:headerColor="@color/white"
+                app:headerLabelColor="@color/black"
                 app:highlightedDaysLabelsColor="@color/main_color"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:selectionColor="@color/main_color"
                 app:selectionLabelColor="@color/white"
+                app:todayLabelColor="@color/main_color"
                 app:type="one_day_picker">
 
             </com.applandeo.materialcalendarview.CalendarView>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/list_schedule"
-
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:background="@color/background_skylight"
+                tools:listitem="@layout/item_schedule" />
 
         </LinearLayout>
     </ScrollView>
