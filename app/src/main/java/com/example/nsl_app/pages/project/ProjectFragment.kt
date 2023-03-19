@@ -54,7 +54,7 @@ class ProjectFragment : ParentFragment() {
                     val body = response.body() as RepoListDTO
                     repoCardItemList.clear()
 
-                    body.forEach {
+                    body.sortedByDescending { it.created_at }.forEach {
                         val tags = ArrayList<String>()
                         if (it.language != null) tags.add(it.language) else tags.add("")
                         val description = it.description ?: ""

@@ -222,17 +222,13 @@ class ScheduleFragment : Fragment() {
                     val tempCal =
                         Calendar.getInstance().apply { timeInMillis = startCal.timeInMillis }
 
-                    events.add(EventDay(tempCal, R.drawable.circle_main_10))
+                    events.add(EventDay(tempCal, R.drawable.circle_schedule_event))
                     startCal.add(Calendar.DAY_OF_MONTH, 1)
                 }
             }
         }
 
         binding.cvLabSchedule.setEvents(events)
-
-//        events.add(EventDay(c1, R.drawable.circle_main, Color.BLUE))
-//        events.add(EventDay(c2_1, R.drawable.circle_main_10, Color.RED))
-//        events.add(EventDay(c2, CalendarUtils.getDrawableText(requireContext(), "Text",null, android.R.color.black, 8)))
 
     }
 

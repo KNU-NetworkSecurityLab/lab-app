@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.nsl_app.R
 import com.example.nsl_app.adapters.MemberAdapter
 import com.example.nsl_app.adapters.decoration.RecyclerViewVerticalGap
 import com.example.nsl_app.databinding.ActivityMemberBinding
@@ -29,15 +28,20 @@ class MemberActivity : ParentActivity() {
         setContentView(binding.root)
         toolbarSetUp()
 
-        val memberAdapter =  MemberAdapter(this, members)
+        val memberAdapter = MemberAdapter(this, members)
 
         binding.run {
             rvMember.adapter = memberAdapter
-            rvMember.layoutManager = LinearLayoutManager(applicationContext, RecyclerView.VERTICAL, false)
+            rvMember.layoutManager =
+                LinearLayoutManager(applicationContext, RecyclerView.VERTICAL, false)
             rvMember.addItemDecoration(RecyclerViewVerticalGap(50))
         }
 
-        val getMemberCall = notionAPI.getMember(NotionAPI.NOTION_MEMBER_DB_ID, NotionAPI.NOTION_API_VERSION, notionToken)
+        val getMemberCall = notionAPI.getMember(
+            NotionAPI.NOTION_MEMBER_DB_ID,
+            NotionAPI.NOTION_API_VERSION,
+            notionToken
+        )
 
         showProgress(this@MemberActivity, Utils.getLoadingMessage())
 
@@ -50,7 +54,13 @@ class MemberActivity : ParentActivity() {
                     val body = response.body()!!
                     members.clear()
 
-                    body.results.forEach {
+                    val sortCriteria = arrayOf("랩장", "부원", "휴학생", "졸업생")
+
+                    body.results.sortedWith(
+                        compareBy(
+                            { sortCriteria.indexOf(it.properties.구분.select.name) }, // 정렬 기준 1. 랩장 -> 부원 -> 휴학생 -> 졸업생 순으로 정렬
+                            { -it.properties.학번.number }) // 정렬 기준 2. 고학번
+                    ).forEach {
                         val email = it.properties.Email.email ?: ""
 
                         val skills = ArrayList<String>()
@@ -59,12 +69,15 @@ class MemberActivity : ParentActivity() {
                             skills.add(it.name)
                         }
 
-                        members.add(MemberItem(
-                            it.properties.이름.title[0].text.content,
-                            it.properties.학번.number.toString(),
-                            it.properties.구분.select.name,
-                            email,
-                            skills))
+                        members.add(
+                            MemberItem(
+                                it.properties.이름.title[0].text.content,
+                                it.properties.학번.number.toString(),
+                                it.properties.구분.select.name,
+                                email,
+                                skills
+                            )
+                        )
                     }
                     hideProgress()
                     memberAdapter.notifyDataSetChanged()

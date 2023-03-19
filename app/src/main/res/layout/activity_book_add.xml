@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_skylight"
     android:orientation="vertical"
     tools:context=".pages.book.BookAddActivity">
 
@@ -32,7 +33,8 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_book_photos"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/gap_line_double" />
 
             <Button
                 android:id="@+id/btn_book_add_picture"
@@ -56,7 +58,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/btn_full_height"
                 android:layout_marginTop="@dimen/gap_line"
-                android:background="@drawable/et_gray_10" />
+                android:background="@drawable/et_white_outline" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -70,7 +72,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/btn_full_height"
                 android:layout_marginTop="@dimen/gap_line"
-                android:background="@drawable/et_gray_10" />
+                android:background="@drawable/et_white_outline" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -84,7 +86,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/btn_full_height"
                 android:layout_marginTop="@dimen/gap_line"
-                android:background="@drawable/et_gray_10" />
+                android:background="@drawable/et_white_outline" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -116,7 +118,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginRight="@dimen/gap_line"
                     android:layout_weight="1"
-                    android:background="@drawable/et_gray_10" />
+                    android:background="@drawable/et_white_outline" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_book_add_tag"

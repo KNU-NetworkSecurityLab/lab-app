@@ -39,6 +39,18 @@ class RepoCardAdapter(
             tags = tags.trimEnd { it == '|' }
             tags = tags.trimEnd()
             tv_item_repo_tag!!.text = tags
+
+            if (tv_item_repo_tag.text.isEmpty() || tv_item_repo_tag.text == "" || tv_item_repo_tag.text == null) {
+                tv_item_repo_tag!!.visibility = View.GONE
+            } else {
+                tv_item_repo_tag!!.visibility = View.VISIBLE
+            }
+
+            if (repoItem[position].description == "" || repoItem[position].description == null) {
+                tv_item_repo_description!!.visibility = View.GONE
+            } else {
+                tv_item_repo_description!!.visibility = View.VISIBLE
+            }
         }
     }
 

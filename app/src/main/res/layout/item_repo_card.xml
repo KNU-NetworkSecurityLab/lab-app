@@ -15,16 +15,20 @@
         android:gravity="center_vertical"
         android:text="BoT"
         android:textColor="@color/main_color"
-        android:textSize="16sp"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tv_item_repo_tag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/round_white_5"
+        android:layout_marginTop="@dimen/gap_line"
+        android:background="@drawable/round_main_light_5"
+        android:padding="@dimen/gap_line"
         android:paddingVertical="2dp"
+        android:textStyle="bold"
         android:text="Java | C++"
+        android:textColor="@color/main_color"
         android:textSize="14sp" />
 
     <TextView

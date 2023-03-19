@@ -8,7 +8,7 @@
     tools:context=".pages.schedule.ScheduleFragment">
 
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
@@ -47,10 +47,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/background_skylight"
+                android:nestedScrollingEnabled="false"
                 tools:listitem="@layout/item_schedule" />
 
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_cal_add"
