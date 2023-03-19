@@ -20,6 +20,7 @@ import com.example.nsl_app.models.BookDetailItem
 import com.example.nsl_app.utils.Constants
 import com.example.nsl_app.utils.ParentActivity
 import com.example.nsl_app.utils.SharedPreferenceHelper
+import com.example.nsl_app.utils.Utils
 import com.example.nsl_app.utils.nslAPI.NSLAPI
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -42,7 +43,9 @@ class BookDetailActivity : ParentActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+
         toolbarSetUp()
+        showProgress(this@BookDetailActivity, Utils.getLoadingMessage())
 
         bookId = intent.getIntExtra(Constants.INTENT_EXTRA_BOOK_ID, -1)
         if (bookId == -1) {
@@ -66,10 +69,7 @@ class BookDetailActivity : ParentActivity() {
                 }
             })
         }
-    }
 
-    override fun onStart() {
-        super.onStart()
         CoroutineScope(Dispatchers.Main).launch {
             bookInit()
             setupIndicators(bitmapList.size)
@@ -121,14 +121,22 @@ class BookDetailActivity : ParentActivity() {
     private suspend fun bookInit() {
 
         val response = nslAPI.getBookDetailCall(token, bookId).awaitResponse()
+
+        hideProgress()
+
         if (response.isSuccessful) {
             binding.run {
                 bookDetailItem = response.body()!!
                 tvBookAuthor.text = bookDetailItem.bookAuthor
                 tvBookPublisher.text = bookDetailItem.bookPublisher
                 tvBookTitle.text = bookDetailItem.bookName
+                tvBookTitleTop.text = bookDetailItem.bookName
 
                 if (bookDetailItem.bookImageList.size > 0) {
+                    rvItemBookImages.visibility = View.VISIBLE
+                    ivNoBookImage.visibility = View.GONE
+                    layoutIndicators.visibility = View.VISIBLE
+
                     bookDetailItem.bookImageList.forEach {
                         loadImage(it)
                     }
@@ -137,6 +145,8 @@ class BookDetailActivity : ParentActivity() {
 
                 } else {
                     rvItemBookImages.visibility = View.GONE
+                    ivNoBookImage.visibility = View.VISIBLE
+                    layoutIndicators.visibility = View.GONE
                 }
 
                 // 태그
