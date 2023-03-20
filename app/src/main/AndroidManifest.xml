@@ -23,9 +23,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MyPageEditActivity"
-            android:exported="false" />
-        <activity
             android:name=".pages.book.BookEditActivity"
             android:exported="false" />
         <activity
@@ -47,22 +44,10 @@
             android:name=".pages.member.MemberActivity"
             android:exported="false" />
         <activity
-            android:name=".pages.myPage.MyPageActivity"
-            android:exported="false" />
-        <activity
             android:name=".pages.session.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".pages.schedule.ScheduleFragment"
-            android:exported="false" />
-        <activity
             android:name=".pages.schedule.ScheduleAddActivity"
-            android:exported="false" />
-        <activity
-            android:name=".CommunityActivity"
-            android:exported="false" />
-        <activity
-            android:name=".HomeActivity"
             android:exported="false" />
         <activity
             android:name=".pages.MainBaseActivity"

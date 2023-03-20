@@ -244,6 +244,9 @@ class ScheduleFragment : Fragment() {
                 call: Call<NotionDatabaseQueryResponse>,
                 response: Response<NotionDatabaseQueryResponse>
             ) {
+                binding.ivScheduleLoading.visibility = View.GONE
+                binding.listSchedule.visibility = View.VISIBLE
+
                 if (response.isSuccessful) {
                     scheduleDataList.clear()
 

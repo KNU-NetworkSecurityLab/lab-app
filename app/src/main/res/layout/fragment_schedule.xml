@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/background_skylight"
     tools:context=".pages.schedule.ScheduleFragment">
 
 
@@ -42,14 +42,29 @@
 
             </com.applandeo.materialcalendarview.CalendarView>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/list_schedule"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/background_skylight"
-                android:nestedScrollingEnabled="false"
-                tools:listitem="@layout/item_schedule" />
+                android:layout_height="match_parent">
 
+                <ProgressBar
+                    android:id="@+id/iv_schedule_loading"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:background="@color/background_skylight"
+                    android:indeterminate="true"
+                    android:indeterminateTint="@color/strong_blue_gray" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/list_schedule"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/background_skylight"
+                    android:nestedScrollingEnabled="false"
+                    android:visibility="gone"
+                    tools:listitem="@layout/item_schedule"
+                    tools:visibility="visible" />
+            </FrameLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
