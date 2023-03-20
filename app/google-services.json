@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "387219450659",
+    "project_id": "nsl-app-fa838",
+    "storage_bucket": "nsl-app-fa838.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:387219450659:android:7d8b3b70072516feb4fa96",
+        "android_client_info": {
+          "package_name": "lab.nsl.nsl_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "387219450659-urstg7ijfni6n5nhml913m4ag4t3562b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "lab.nsl.nsl_app",
+            "certificate_hash": "0706ff43da636783d9f36c21968d5fd723f9a5e2"
+          }
+        },
+        {
+          "client_id": "387219450659-eugribsn67o2ugfch4tu4ulcffig6j54.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfsf_qtrCnvQ-3Adp5UCHb34e9C0WqOus"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "387219450659-eugribsn67o2ugfch4tu4ulcffig6j54.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
