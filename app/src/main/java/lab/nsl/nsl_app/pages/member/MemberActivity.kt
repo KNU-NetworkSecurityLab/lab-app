@@ -59,7 +59,7 @@ class MemberActivity : ParentActivity() {
                     body.results.sortedWith(
                         compareBy(
                             { sortCriteria.indexOf(it.properties.구분.select.name) }, // 정렬 기준 1. 랩장 -> 부원 -> 휴학생 -> 졸업생 순으로 정렬
-                            { -it.properties.학번.number }) // 정렬 기준 2. 고학번
+                            { -it.properties.학번.number }) // 정렬 기준 2. 저학번 순 (내림차순)
                     ).forEach {
                         val email = it.properties.Email.email ?: ""
 
