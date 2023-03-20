@@ -14,8 +14,8 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="300dp"
-        android:layout_height="150dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/gap_vertical"
         android:src="@drawable/img_nsl_logo_text"
         app:layout_constraintBottom_toTopOf="@+id/btn_login"

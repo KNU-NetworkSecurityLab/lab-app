@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.nsl_app">
+    package="lab.nsl.nsl_app">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -44,7 +44,7 @@
             android:name=".pages.book.BookListActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.nsl_app.pages.member.MemberActivity"
+            android:name=".pages.member.MemberActivity"
             android:exported="false" />
         <activity
             android:name=".pages.myPage.MyPageActivity"
