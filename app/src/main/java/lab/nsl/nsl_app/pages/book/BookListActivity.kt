@@ -74,19 +74,18 @@ class BookListActivity : ParentActivity() {
         showProgress(this, Utils.getLoadingMessage())
         bookList.clear()
 
-        val response = nslAPI.getBookListCall(token).awaitResponse()
+        val response = nslAPI.getBookSearchListCall(token, searchKeyword).awaitResponse()
+        hideProgress()
 
-        if(response.isSuccessful) {
+        if (response.isSuccessful) {
             response.body()?.forEach {
-                if (it.bookName.contains(searchKeyword)) {
-                    val bookItem = BookItem(it.id, it.bookName, it.bookAuthor, it.bookTagList)
-                    bookList.add(bookItem)
-                }
+                val bookItem = BookItem(it.id, it.bookName, it.bookAuthor, it.bookTagList)
+                bookList.add(bookItem)
             }
+
             binding.listBook.adapter?.notifyDataSetChanged()
-            hideProgress()
         } else {
-            showShortToast("책 목록을 불러오는데 실패했습니다.")
+            showShortToast("검색된 책이 없습니다")
         }
     }
 

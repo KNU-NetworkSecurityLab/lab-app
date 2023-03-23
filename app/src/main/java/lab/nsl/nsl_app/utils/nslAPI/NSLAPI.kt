@@ -1,5 +1,6 @@
 package lab.nsl.nsl_app.utils.nslAPI
 
+import com.google.android.gms.common.internal.safeparcel.SafeParcelable
 import lab.nsl.nsl_app.models.BookDetailItem
 import lab.nsl.nsl_app.models.BookItemList
 import lab.nsl.nsl_app.models.UserInfo
@@ -61,7 +62,7 @@ interface NSLAPI {
     @GET("/api/v1/books/search")
     fun getBookSearchListCall(
         @Header("Authorization") token: String,
-        @Part("keyword") keyword: String
+        @Query("keyword") keyword: String
     ): Call<BookItemList>
 
     @GET("/api/v1/books/{bookId}")
