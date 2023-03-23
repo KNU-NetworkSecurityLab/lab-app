@@ -66,6 +66,27 @@
                 tools:itemCount="2"
                 tools:listitem="@layout/item_repo_card" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/gap_horizontal"
+                android:layout_marginTop="50dp"
+                android:text="사용된 언어"
+                android:textSize="@dimen/text_size_20"
+                android:textStyle="bold" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_lang"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/gap_line_double"
+                android:layout_marginTop="@dimen/gap_line_double"
+                android:layout_marginBottom="@dimen/gap_line_double"
+                android:background="@drawable/round_white_outline_10"
+                android:nestedScrollingEnabled="false"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_language" />
 
 
         </LinearLayout>
