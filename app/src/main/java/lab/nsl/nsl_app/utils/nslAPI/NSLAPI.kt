@@ -4,6 +4,8 @@ import lab.nsl.nsl_app.models.BookDetailItem
 import lab.nsl.nsl_app.models.BookItemList
 import lab.nsl.nsl_app.models.UserInfo
 import lab.nsl.nsl_app.models.*
+import lab.nsl.nsl_app.models.iot.DoorState
+import lab.nsl.nsl_app.models.iot.TemperatureHumidity
 import lab.nsl.nsl_app.utils.SecretConstants
 import okhttp3.MultipartBody
 import okhttp3.ResponseBody
@@ -93,4 +95,19 @@ interface NSLAPI {
     fun getOrganizationLanguagesCall(
         @Header("Authorization") token: String
     ): Call<LanguagesListModel>
+
+
+    /*
+        IoT
+     */
+
+    @GET("/api/v1/iot/door")
+    fun getDoorStateCall(
+        @Header("Authorization") token: String
+    ): Call<DoorState>
+
+    @GET("/api/v1/iot/temperature-humidity")
+    fun getTemperatureHumidityCall(
+        @Header("Authorization") token: String
+    ): Call<TemperatureHumidity>
 }
