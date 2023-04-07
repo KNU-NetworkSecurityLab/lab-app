@@ -188,30 +188,8 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:background="@drawable/round_white_10"
-                android:drawableStart="@drawable/ic_coffee"
-                android:drawablePadding="@dimen/margin_10"
-                android:gravity="center_vertical"
-                android:padding="@dimen/gap_line_double"
-                android:text="@string/obj_home_smart_coffee_empty" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:background="@drawable/round_white_10"
-                android:drawableStart="@drawable/ic_document"
-                android:drawablePadding="@dimen/margin_10"
-                android:gravity="center_vertical"
-                android:padding="@dimen/gap_line_double"
-                android:text="@string/obj_home_smart_a4_enough" />
-
-            <TextView
+                android:id="@+id/tv_iot_door"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -222,6 +200,31 @@
                 android:padding="@dimen/gap_line_double"
                 android:text="@string/obj_home_smart_door_opened" />
 
+            <TextView
+                android:id="@+id/tv_iot_temp"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/round_white_10"
+                android:drawableStart="@drawable/ic_temp"
+                android:drawablePadding="@dimen/margin_10"
+                android:gravity="center_vertical"
+                android:padding="@dimen/gap_line_double"
+                app:drawableTint="@color/main_color"
+                tools:text="온도 1234 C" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:id="@+id/tv_iot_humidity"
+                android:background="@drawable/round_white_10"
+                android:drawableStart="@drawable/ic_humidity"
+                android:drawablePadding="@dimen/margin_10"
+                android:gravity="center_vertical"
+                android:padding="@dimen/gap_line_double"
+                android:paddingStart="30dp"
+                tools:text="습도 72.5 %" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

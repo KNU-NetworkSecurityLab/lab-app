@@ -2,18 +2,14 @@ package lab.nsl.nsl_app.pages.home
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothManager
 import android.bluetooth.BluetoothSocket
-import android.content.ContentValues.TAG
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import com.gun0912.tedpermission.PermissionListener
@@ -23,15 +19,19 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import lab.nsl.nsl_app.R
 import lab.nsl.nsl_app.databinding.FragmentHomeBinding
+import lab.nsl.nsl_app.models.iot.DoorState
+import lab.nsl.nsl_app.models.iot.TemperatureHumidity
 import lab.nsl.nsl_app.pages.book.BookListActivity
 import lab.nsl.nsl_app.pages.introduce.IntroduceActivity
 import lab.nsl.nsl_app.pages.member.MemberActivity
 import lab.nsl.nsl_app.utils.ParentFragment
 import lab.nsl.nsl_app.utils.SharedPreferenceHelper
 import lab.nsl.nsl_app.utils.nslAPI.NSLAPI
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import retrofit2.awaitResponse
 import java.io.IOException
-import java.lang.reflect.Method
 import java.util.*
 
 
@@ -58,6 +58,8 @@ class HomeFragment : ParentFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        getIoTinfo()
 
         // 파이어베이스 메시지 토큰
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
@@ -107,9 +109,6 @@ class HomeFragment : ParentFragment() {
         binding.run {
             swHomeSmartLight.setOnCheckedChangeListener { _, isChecked ->
 
-                connectClickLastTime = System.currentTimeMillis()
-
-
                 if (bluetoothSocket == null) {
                     showShortToast("연결된 기기가 없습니다.")
                     swHomeSmartLight.isChecked = !isChecked
@@ -123,6 +122,7 @@ class HomeFragment : ParentFragment() {
                     // 아이콘 색상 변경
                     tvIotLight.compoundDrawableTintList =
                         resources.getColorStateList(R.color.main_color)
+                    tvIotLight.text = "불 켜짐"
 
                 } else {
                     val outputStream = bluetoothSocket?.outputStream
@@ -131,13 +131,17 @@ class HomeFragment : ParentFragment() {
                     // 아이콘 색상 변경
                     tvIotLight.compoundDrawableTintList =
                         resources.getColorStateList(R.color.iot_off_color)
+
+                    tvIotLight.text = "불 꺼짐"
                 }
             }
 
             btnConnectBluetoothSmartLight.setOnClickListener {
                 // 아두이노 연결 버튼은 3초에 한 번씩만 클릭할 수 있게 함
-                if(System.currentTimeMillis() - connectClickLastTime < 3000)
+                if (System.currentTimeMillis() - connectClickLastTime < 3000)
                     return@setOnClickListener
+
+                connectClickLastTime = System.currentTimeMillis()
 
                 if (bluetoothSocket == null) {
                     permissionCheck()
@@ -151,7 +155,6 @@ class HomeFragment : ParentFragment() {
     }
 
     // permission check
-
     private val permissionListener = object : PermissionListener {
         override fun onPermissionGranted() {
             CoroutineScope(Dispatchers.Main).launch {
@@ -164,6 +167,7 @@ class HomeFragment : ParentFragment() {
             showShortToast("권한이 없으면 기능을 사용할 수 없습니다.")
         }
     }
+
     private fun permissionCheck() {
         TedPermission.create()
             .setPermissionListener(permissionListener)
@@ -175,7 +179,7 @@ class HomeFragment : ParentFragment() {
             )
             .check()
     }
-    
+
     // function to connect to the Arduino
     @SuppressLint("MissingPermission")
     private fun connectToArduino() {
@@ -218,9 +222,46 @@ class HomeFragment : ParentFragment() {
     }
 
 
-    private fun changeTextViewLeftIconColor(textView: TextView, color: Int) {
-        textView.compoundDrawableTintList = resources.getColorStateList(color)
+    private fun getIoTinfo() {
+        nslAPI.getDoorStateCall(token).enqueue(object : Callback<DoorState> {
+            override fun onResponse(call: Call<DoorState>, response: Response<DoorState>) {
+                if (response.isSuccessful) {
+                    val doorState = response.body()!!
+                    if (doorState.isDoorOpen) {
+                        binding.tvIotDoor.text = "문 열림"
+                        binding.tvIotDoor.compoundDrawableTintList =
+                            resources.getColorStateList(R.color.main_color)
+                    } else {
+                        binding.tvIotDoor.text = "문 닫힘"
+                        binding.tvIotDoor.compoundDrawableTintList =
+                            resources.getColorStateList(R.color.iot_off_color)
+                    }
+                } else
+                    showShortToast("문 상태를 불러오는데 실패했습니다.")
+            }
+
+            override fun onFailure(call: Call<DoorState>, t: Throwable) {
+                showShortToast("문 상태를 불러오는데 실패했습니다.")
+            }
+        })
+
+
+        nslAPI.getTemperatureHumidityCall(token).enqueue(object : Callback<TemperatureHumidity> {
+            override fun onResponse(
+                call: Call<TemperatureHumidity>,
+                response: Response<TemperatureHumidity>
+            ) {
+                if (response.isSuccessful) {
+                    val temperatureHumidity = response.body()!!
+                    binding.tvIotTemp.text = "온도: ${temperatureHumidity.temperature} ℃"
+                    binding.tvIotHumidity.text = "습도: ${temperatureHumidity.humidity} %"
+                } else
+                    showShortToast("온습도를 불러오는데 실패했습니다.")
+            }
+
+            override fun onFailure(call: Call<TemperatureHumidity>, t: Throwable) {
+                showShortToast("온습도를 불러오는데 실패했습니다.")
+            }
+        })
     }
-
-
 }
