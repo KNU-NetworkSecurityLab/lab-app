@@ -1,8 +1,13 @@
 package lab.nsl.nsl_app.pages.home
 
+import android.Manifest
+import android.annotation.SuppressLint
+import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothManager
 import android.bluetooth.BluetoothSocket
+import android.content.ContentValues.TAG
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,9 +16,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
+import com.gun0912.tedpermission.PermissionListener
+import com.gun0912.tedpermission.normal.TedPermission
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import lab.nsl.nsl_app.R
 import lab.nsl.nsl_app.databinding.FragmentHomeBinding
@@ -25,7 +31,9 @@ import lab.nsl.nsl_app.utils.SharedPreferenceHelper
 import lab.nsl.nsl_app.utils.nslAPI.NSLAPI
 import retrofit2.awaitResponse
 import java.io.IOException
+import java.lang.reflect.Method
 import java.util.*
+
 
 class HomeFragment : ParentFragment() {
     private val nslAPI by lazy { NSLAPI.create() }
@@ -132,10 +140,7 @@ class HomeFragment : ParentFragment() {
                     return@setOnClickListener
 
                 if (bluetoothSocket == null) {
-                    showProgress(requireActivity(), "기기 연결 중...")
-                    CoroutineScope(Dispatchers.Main).launch {
-                        connectToArduino()
-                    }
+                    permissionCheck()
                 } else {
                     showProgress(requireActivity(), "기기 연결 해제 중...")
                     disconnectFromArduino()
@@ -143,17 +148,44 @@ class HomeFragment : ParentFragment() {
                 }
             }
         }
-
     }
 
+    // permission check
 
+    private val permissionListener = object : PermissionListener {
+        override fun onPermissionGranted() {
+            CoroutineScope(Dispatchers.Main).launch {
+                connectToArduino()
+            }
+            showProgress(requireActivity(), "기기 연결 중...")
+        }
+
+        override fun onPermissionDenied(deniedPermissions: MutableList<String>?) {
+            showShortToast("권한이 없으면 기능을 사용할 수 없습니다.")
+        }
+    }
+    private fun permissionCheck() {
+        TedPermission.create()
+            .setPermissionListener(permissionListener)
+            .setDeniedMessage("[설정] > [권한] 에서 권한 허용을 할 수 있습니다")
+            .setPermissions(
+                Manifest.permission.BLUETOOTH,
+                Manifest.permission.BLUETOOTH_ADMIN,
+                Manifest.permission.BLUETOOTH_CONNECT
+            )
+            .check()
+    }
+    
     // function to connect to the Arduino
+    @SuppressLint("MissingPermission")
     private fun connectToArduino() {
         val device = bluetoothAdapter.getRemoteDevice("98:D3:31:FB:42:F4")
 
         // open a Bluetooth socket to the Arduino device
         try {
-            bluetoothSocket = device.createRfcommSocketToServiceRecord(arduinoUUID)
+            //bluetoothSocket = device.createRfcommSocketToServiceRecord(arduinoUUID)
+            bluetoothSocket = device.createInsecureRfcommSocketToServiceRecord(arduinoUUID)
+
             bluetoothSocket?.connect()
             showShortToast("기기 연결됨")
             hideProgress()
