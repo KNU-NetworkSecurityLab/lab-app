@@ -19,6 +19,11 @@ class MainBaseActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
+        val homeFragment = HomeFragment()
+        val scheduleFragment = ScheduleFragment()
+        val myPageFragment = MyPageFragment()
+
+
         binding.run {
 
             supportFragmentManager.beginTransaction().add(R.id.container_main, HomeFragment()).commit()
@@ -27,7 +32,7 @@ class MainBaseActivity : AppCompatActivity() {
                     R.id.nav_home -> {
                         // status bar color
                         setStatusBarColor(Color.WHITE)
-                        supportFragmentManager.beginTransaction().replace(R.id.container_main, HomeFragment()).commit()
+                        supportFragmentManager.beginTransaction().replace(R.id.container_main, homeFragment).commit()
                         return@setOnItemSelectedListener true
                     }
 
@@ -38,13 +43,13 @@ class MainBaseActivity : AppCompatActivity() {
                     }
 
                     R.id.nav_schedule -> {
-                        supportFragmentManager.beginTransaction().replace(R.id.container_main, ScheduleFragment()).commit()
+                        supportFragmentManager.beginTransaction().replace(R.id.container_main, scheduleFragment).commit()
                         return@setOnItemSelectedListener true
                     }
 
                     R.id.nav_my_page -> {
                         setStatusBarColor(Color.WHITE)
-                        supportFragmentManager.beginTransaction().replace(R.id.container_main, MyPageFragment()).commit()
+                        supportFragmentManager.beginTransaction().replace(R.id.container_main, myPageFragment).commit()
                         return@setOnItemSelectedListener true
                     }
                 }

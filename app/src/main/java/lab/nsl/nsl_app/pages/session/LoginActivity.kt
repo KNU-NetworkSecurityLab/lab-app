@@ -1,18 +1,20 @@
 package lab.nsl.nsl_app.pages.session
 
+import android.bluetooth.BluetoothAdapter
 import android.content.Intent
 import android.os.Bundle
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import lab.nsl.nsl_app.R
 import lab.nsl.nsl_app.databinding.ActivityLoginBinding
+import lab.nsl.nsl_app.pages.BluetoothTestActivity
 import lab.nsl.nsl_app.pages.MainBaseActivity
 import lab.nsl.nsl_app.utils.ParentActivity
 import lab.nsl.nsl_app.utils.SharedPreferenceHelper
 import lab.nsl.nsl_app.utils.Utils
 import lab.nsl.nsl_app.utils.nslAPI.LoginRequestDTO
 import lab.nsl.nsl_app.utils.nslAPI.NSLAPI
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import retrofit2.awaitResponse
 
 class LoginActivity : ParentActivity() {

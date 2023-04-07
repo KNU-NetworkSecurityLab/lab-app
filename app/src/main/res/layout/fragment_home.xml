@@ -21,10 +21,10 @@
             android:id="@+id/tv_home_user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="안녕하세요, 전윤호님"
             android:textColor="@color/black"
             android:textSize="30sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:text="안녕하세요, 전윤호님" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -140,16 +140,54 @@
             android:orientation="vertical"
             android:showDividers="beginning|middle">
 
-            <TextView
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/fl_smart_light"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:background="@drawable/round_white_10"
-                android:drawableStart="@drawable/ic_door_open"
-                android:drawablePadding="@dimen/margin_10"
-                android:gravity="center_vertical"
-                android:padding="@dimen/gap_line_double"
-                android:text="@string/obj_home_smart_door_opened" />
+                android:background="@drawable/round_white_10">
+
+                <TextView
+                    android:id="@+id/tv_iot_light"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/round_white_10"
+                    android:drawableStart="@drawable/ic_light"
+                    android:drawablePadding="@dimen/margin_10"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/gap_line_double"
+                    android:text="@string/obj_home_smart_light_on"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/btn_connect_bluetooth_smart_light"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:background="@null"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:src="@drawable/ic_bluetooth"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/iot_off_color" />
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/sw_home_smart_light"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:theme="@style/customSwitch"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_connect_bluetooth_smart_light"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:checked="false" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
 
             <TextView
                 android:layout_width="match_parent"
@@ -178,11 +216,11 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:background="@drawable/round_white_10"
-                android:drawableStart="@drawable/ic_light"
+                android:drawableStart="@drawable/ic_door_open"
                 android:drawablePadding="@dimen/margin_10"
                 android:gravity="center_vertical"
                 android:padding="@dimen/gap_line_double"
-                android:text="@string/obj_home_smart_light_on" />
+                android:text="@string/obj_home_smart_door_opened" />
 
         </LinearLayout>
     </LinearLayout>
