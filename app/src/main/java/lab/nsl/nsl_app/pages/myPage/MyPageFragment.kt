@@ -22,12 +22,15 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import lab.nsl.nsl_app.pages.easteregg.MazeRunnerActivity
 import retrofit2.awaitResponse
 
 class MyPageFragment : Fragment() {
     private lateinit var binding: FragmentMyPageBinding
     private val nslAPI by lazy { NSLAPI.create() }
     private lateinit var userInfo: UserInfo
+
+    var easteregg = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,6 +65,14 @@ class MyPageFragment : Fragment() {
                 btnWithdrawalYes!!.setOnClickListener {
                     Toast.makeText(requireContext(), "탈퇴하였습니다", Toast.LENGTH_SHORT).show()
                     dlWithdrawal.dismiss()
+                }
+            }
+
+            tvMyPageAppVersion.setOnClickListener {
+                easteregg++
+                if (easteregg == 5) {
+                    startActivity(Intent(requireContext(), MazeRunnerActivity::class.java))
+                    easteregg = 0
                 }
             }
 
@@ -104,7 +115,9 @@ class MyPageFragment : Fragment() {
 
     private suspend fun userInfoSet() {
         CoroutineScope(Dispatchers.Main).launch {
-            userInfo = nslAPI.getUserInfoCall(SharedPreferenceHelper.getAuthorizationToken(requireContext())!!).awaitResponse().body()!!
+            userInfo =
+                nslAPI.getUserInfoCall(SharedPreferenceHelper.getAuthorizationToken(requireContext())!!)
+                    .awaitResponse().body()!!
 
             binding.run {
                 tvMyPageStudentId.text = userInfo.studentId

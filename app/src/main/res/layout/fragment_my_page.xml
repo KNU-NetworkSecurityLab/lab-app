@@ -24,8 +24,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingHorizontal="@dimen/gap_line_double"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/gap_line_double">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -196,6 +196,7 @@
                     android:text="@string/obj_my_page_app_version" />
 
                 <TextView
+                    android:id="@+id/tv_my_page_app_version"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="right"

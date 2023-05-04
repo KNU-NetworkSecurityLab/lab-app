@@ -18,6 +18,10 @@
         android:theme="@style/Theme.NSL_app"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".pages.easteregg.MazeRunnerActivity"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+        <activity
             android:name=".pages.BluetoothTestActivity"
             android:exported="false" />
         <activity
