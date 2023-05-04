@@ -5,6 +5,7 @@ import lab.nsl.nsl_app.models.BookItemList
 import lab.nsl.nsl_app.models.UserInfo
 import lab.nsl.nsl_app.models.*
 import lab.nsl.nsl_app.models.iot.DoorState
+import lab.nsl.nsl_app.models.iot.NslLightState
 import lab.nsl.nsl_app.models.iot.TemperatureHumidity
 import lab.nsl.nsl_app.utils.SecretConstants
 import okhttp3.MultipartBody
@@ -105,6 +106,11 @@ interface NSLAPI {
     fun getDoorStateCall(
         @Header("Authorization") token: String
     ): Call<DoorState>
+
+    @GET("/api/v1/iot/light")
+    fun getLightStateCall(
+        @Header("Authorization") token: String
+    ): Call<NslLightState>
 
     @GET("/api/v1/iot/temperature-humidity")
     fun getTemperatureHumidityCall(
